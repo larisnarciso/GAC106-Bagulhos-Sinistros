@@ -1,3 +1,5 @@
+package br.ufla.gac106.s2022_1.bagulhosSinistros;
+
 /**
  * Esta classe é parte da aplicação "World of Zuul".
  * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.

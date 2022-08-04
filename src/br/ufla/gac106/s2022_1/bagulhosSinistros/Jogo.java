@@ -1,3 +1,5 @@
+package br.ufla.gac106.s2022_1.bagulhosSinistros;
+
 /**
  * Essa é a classe principal da aplicacao "World of Zull".
  * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.

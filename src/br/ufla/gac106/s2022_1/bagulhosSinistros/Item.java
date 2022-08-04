@@ -1,3 +1,5 @@
+package br.ufla.gac106.s2022_1.bagulhosSinistros;
+
 public class Item {
     private String nome;
     private int peso;

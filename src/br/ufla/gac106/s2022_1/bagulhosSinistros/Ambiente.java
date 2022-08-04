@@ -1,3 +1,4 @@
+package br.ufla.gac106.s2022_1.bagulhosSinistros;
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
