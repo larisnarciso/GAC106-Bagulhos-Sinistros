@@ -43,47 +43,35 @@ public class Jogo {
      * Cria todos os ambientes e liga as saidas deles
      */
     private void criarAmbientes() {
-        Ambiente laboratorio, joyce, hopper, delegacia, centro, floresta, mundo, cinema;
+        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // cria os itens dos ambientes
         Item itemJoyce = new ItemColetavel("chave", "chave velha e robusta");
         Item itemDelegacia = new ItemColetavel("alicate",  "alicate de corte");
         Item itemCinema = new ItemColetavel("lanterna", "lanterna de bolso");
 
+
         // cria os ambientes
-        laboratorio = new Ambiente("no laboratorio nacional Hawkins");
-        joyce = new Ambiente("na casa com decoração de natal da Joyce Byers", itemJoyce);
-        hopper = new Ambiente("no trailer do Jim Hopper");
-        delegacia = new Ambiente("na delegacia de Polícia de Hawkins", itemDelegacia);
         centro = new Ambiente("no centro da cidade de Hawkins");
-        floresta = new Ambiente("na floresta sombria");
-        mundo = new Ambiente("no mundo invertido");
-        cinema = new Ambiente("no cinema Hawk", itemCinema);
+        delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
+        escritorioDelegacia = new Ambiente ("no seu escritório na delegacia");
+        escola = new Ambiente ("na Escola de Hawkins");
+        ferroVelho = new Ambiente ("no ferro velho ao redor da cidade");
+        casaMike = new Ambiente ("na casa da família Wheeler");
+        poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler");
+        trailerJim = new Ambiente ("no seu trailer");
+        floresta = new Ambiente ("na Floresta Sombria");
+        casaByers = new Ambiente ("na casa da família Byers");
+        casteloByers = new Ambiente ("no Castelo Byers, uma cabana do Will Byers");
+        florestaFundo = new Ambiente ("no fundo da Floresta Sombria");
+        laboratorio = new Ambiente ("no Laboratório Nacional de Hawkins");
+        salaLaboratorio = new Ambiente ("na sala do Laboratório");
+        laboratorioMI = new Ambiente ("no Laboratório do Mundo Invertido");
+        florestaMI = new Ambiente ("na Floresta Sombria do Mundo Invertido");
+        casteloMI = new Ambiente ("no Castelo Byers do Mundo Invertido");
 
         // inicializa as saidas dos ambientes
-        mundo.ajustarSaida("portao", laboratorio);
-        laboratorio.ajustarSaida("portao", mundo);
-
-        laboratorio.ajustarSaida("norte", floresta);
-        floresta.ajustarSaida("sul", laboratorio);
-
-        floresta.ajustarSaida("norte", joyce);
-        joyce.ajustarSaida("sul", floresta);
-
-        floresta.ajustarSaida("leste", hopper);
-        hopper.ajustarSaida("oeste", floresta);
-
-        joyce.ajustarSaida("leste", centro);
-        centro.ajustarSaida("oeste", joyce);
         
-        hopper.ajustarSaida("norte", centro);
-        centro.ajustarSaida("sul", hopper);
-
-        cinema.ajustarSaida("oeste", centro);
-        centro.ajustarSaida("leste", cinema);
-
-        delegacia.ajustarSaida("sul", centro);
-        centro.ajustarSaida("norte", delegacia);
 
         ambienteAtual = centro; // o jogo comeca no centro
     }
