@@ -71,7 +71,53 @@ public class Jogo {
         casteloMI = new Ambiente ("no Castelo Byers do Mundo Invertido");
 
         // inicializa as saidas dos ambientes
-        
+        centro.ajustarSaida("esquerda", ferroVelho);
+        centro.ajustarSaida("frente", escola);
+        centro.ajustarSaida("tras", delegacia);
+
+        delegacia.ajustarSaida("corredor", escritorioDelegacia);
+        delegacia.ajustarSaida("tras", casaMike);
+
+        escritorioDelegacia.ajustarSaida("corredor", delegacia);
+
+        escola.ajustarSaida("tras", centro);
+
+        ferroVelho.ajustarSaida("direita", centro);
+        ferroVelho.ajustarSaida("esquerda", trailerJim);
+
+        casaMike.ajustarSaida("escada", poraoCasaMike);
+
+        poraoCasaMike.ajustarSaida("escada", casaMike);
+
+        trailerJim.ajustarSaida("direita", ferroVelho);
+        trailerJim.ajustarSaida("esquerda", floresta);
+        trailerJim.ajustarSaida("frente", casaByers);
+
+        floresta.ajustarSaida("direita", trailerJim);
+        floresta.ajustarSaida("frente", casteloByers);
+
+        casaByers.ajustarSaida("tras", trailerJim);
+        casaByers.ajustarSaida("esquerda", casteloByers);
+
+        casteloByers.ajustarSaida("tras", floresta);
+        casteloByers.ajustarSaida("direita", casaByers);
+        casteloByers.ajustarSaida("frente", florestaFundo);
+
+        florestaFundo.ajustarSaida("tras", casteloByers);
+        florestaFundo.ajustarSaida("frente", laboratorio);
+
+        laboratorio.ajustarSaida("escada", salaLaboratorio);
+
+        salaLaboratorio.ajustarSaida("escada", laboratorio);
+        salaLaboratorio.ajustarSaida("portal", laboratorioMI);
+
+        laboratorioMI.ajustarSaida("portal", salaLaboratorio);
+        laboratorioMI.ajustarSaida("frente", florestaMI);
+
+        florestaMI.ajustarSaida("tras", laboratorioMI);
+        florestaMI.ajustarSaida("frente", casteloMI);
+
+        casteloMI.ajustarSaida("tras", florestaMI);        
 
         ambienteAtual = centro; // o jogo comeca no centro
     }
