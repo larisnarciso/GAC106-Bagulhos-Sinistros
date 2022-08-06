@@ -6,10 +6,10 @@
 
 <p align=center>
   <a href="#sobre" style="font-weight: 600; color: #D90B0B">Sobre o Jogo</a> • 
-   <a href="#mapa" style="font-weight: 600; color: #D90B0B">Mapa</a> • 
+  <a href="#mapa" style="font-weight: 600; color: #D90B0B">Mapa</a> • 
   <a href="#jogabilidade" style="font-weight: 600; color: #D90B0B">Jogabilidade</a> • 
-  <a href="#tecnologia" style="font-weight: 600; color: #D90B0B">Tecnologia</a> • 
   <a href="#trabalho" style="font-weight: 600; color: #D90B0B">Trabalho</a> • 
+  <a href="#tecnologia" style="font-weight: 600; color: #D90B0B">Tecnologia</a> • 
   <a href="#autores" style="font-weight: 600; color: #D90B0B">Autores</a> • 
   <a href="#licenca" style="font-weight: 600; color: #D90B0B">Licença</a> 
 </p>
@@ -19,7 +19,7 @@
 
 ### História:
 
-Após o sumiço de Will Byers, um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontrá-lo na cidade de Hawkins, e ele irá desvendar mistérios, com criaturas monstruosas e dimensões paralelas.
+Após o sumiço de Will Byers, um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontrá-lo na cidade de Hawkins. Ele irá desvendar mistérios, com criaturas monstruosas e dimensões paralelas.
 
 ### Objetivo:
 
@@ -330,7 +330,7 @@ RPG Investigação Sobrenatural.
 
 Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos da Universidade Federal de Lavras (UFLA), lecionada pelo professor Julio Cesar Alves.
 
-<h1 id="tecnologias" style="font-weight: 600; color: #A60D1A">
+<h1 id="tecnologia" style="font-weight: 600; color: #A60D1A">
 🛠️ Tecnologias
 </h1>
 
