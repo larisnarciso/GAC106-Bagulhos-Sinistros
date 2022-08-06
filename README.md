@@ -5,13 +5,13 @@
 </div>
 
 <p align=center>
-  <a bref="#sobre" style="font-weight: 600; color: #D90B0B">Sobre o Jogo</a> • 
-   <a bref="#mapa" style="font-weight: 600; color: #D90B0B">Mapa</a> • 
-  <a bref="#jogabilidade" style="font-weight: 600; color: #D90B0B">Jogabilidade</a> • 
-  <a bref="#tecnologia" style="font-weight: 600; color: #D90B0B">Tecnologia</a> • 
-  <a bref="#trabalho" style="font-weight: 600; color: #D90B0B">Trabalho</a> • 
-  <a bref="#autores" style="font-weight: 600; color: #D90B0B">Autores</a> • 
-  <a bref="#licenca" style="font-weight: 600; color: #D90B0B">Licença</a> 
+  <a href="#sobre" style="font-weight: 600; color: #D90B0B">Sobre o Jogo</a> • 
+   <a href="#mapa" style="font-weight: 600; color: #D90B0B">Mapa</a> • 
+  <a href="#jogabilidade" style="font-weight: 600; color: #D90B0B">Jogabilidade</a> • 
+  <a href="#tecnologia" style="font-weight: 600; color: #D90B0B">Tecnologia</a> • 
+  <a href="#trabalho" style="font-weight: 600; color: #D90B0B">Trabalho</a> • 
+  <a href="#autores" style="font-weight: 600; color: #D90B0B">Autores</a> • 
+  <a href="#licenca" style="font-weight: 600; color: #D90B0B">Licença</a> 
 </p>
 
 <br>
@@ -35,7 +35,7 @@ Joyce Byers, Will Byers, Eleven, Crianças (Mike, Lucas, Dustin), Adolescentes (
 
 ### Missão:
 
-Na investigação, deverá ser analisado alguns itens para que descubra onde está o Will.
+Na investigação, deverá ser analisado alguns itens para descobrir onde está o Will.
 
 1. O desenho irá ser uma pista de onde o Will está
 2. A bicicleta irá mostrar que o Will estava perto do Laboratório
@@ -324,7 +324,12 @@ RPG Investigação Sobrenatural.
 
 ---
 
-<br>
+<h1 id="trabalho" style="font-weight: 600; color: #A60D1A">
+📚 Trabalho
+</h1>
+
+Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos da Universidade Federal de Lavras (UFLA), lecionada pelo professor Julio Cesar Alves.
+
 <h1 id="tecnologias" style="font-weight: 600; color: #A60D1A">
 🛠️ Tecnologias
 </h1>
@@ -339,13 +344,6 @@ RPG Investigação Sobrenatural.
     <td><a href="https://code.visualstudio.com/" target="_blank">VSCode</a></td>
   </tr>
 </table>
-
-<br>
-<h1 id="trabalho" style="font-weight: 600; color: #A60D1A">
-📚 Trabalho
-</h1>
-
-Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos da Universidade Federal de Lavras (UFLA), lecionada pelo professor Julio Cesar Alves.
 
 <h1 id="autores" style="font-weight: 600; color: #A60D1A">
 👥 Autores
@@ -374,7 +372,6 @@ Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos
   </tr>
 </table>
 
-<br>
 <h1 id="licenca" style="font-weight: 600; color: #A60D1A">
 📜 Licença
 </h1>
