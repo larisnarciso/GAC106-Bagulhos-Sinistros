@@ -1,4 +1,5 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
 
 /**
  * Essa é a classe principal da aplicacao "World of Zull".
@@ -44,9 +45,9 @@ public class Jogo {
         Ambiente laboratorio, joyce, hopper, delegacia, centro, floresta, mundo, cinema;
 
         // cria os itens dos ambientes
-        Item itemJoyce = new Item("chave", 1, "chave velha e robusta");
-        Item itemDelegacia = new Item("alicate", 1, "alicate de corte");
-        Item itemCinema = new Item("lanterna", 1, "lanterna de bolso");
+        Item itemJoyce = new Item("chave", "chave velha e robusta");
+        Item itemDelegacia = new Item("alicate",  "alicate de corte");
+        Item itemCinema = new Item("lanterna", "lanterna de bolso");
 
         // cria os ambientes
         laboratorio = new Ambiente("no laboratorio nacional Hawkins");
