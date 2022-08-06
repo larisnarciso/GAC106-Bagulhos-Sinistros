@@ -9,7 +9,6 @@
    <a bref="#mapa" style="font-weight: 600; color: #D90B0B">Mapa</a> • 
   <a bref="#jogabilidade" style="font-weight: 600; color: #D90B0B">Jogabilidade</a> • 
   <a bref="#tecnologia" style="font-weight: 600; color: #D90B0B">Tecnologia</a> • 
-  <a bref="#funcionalidade" style="font-weight: 600; color: #D90B0B">Funcionalidade</a> • 
   <a bref="#trabalho" style="font-weight: 600; color: #D90B0B">Trabalho</a> • 
   <a bref="#autores" style="font-weight: 600; color: #D90B0B">Autores</a> • 
   <a bref="#licenca" style="font-weight: 600; color: #D90B0B">Licença</a> 
@@ -340,11 +339,6 @@ RPG Investigação Sobrenatural.
     <td><a href="https://code.visualstudio.com/" target="_blank">VSCode</a></td>
   </tr>
 </table>
-
-<br>
-<h1 id="funcionalidades" style="font-weight: 600; color: #A60D1A">
-⚙️ Funcionalidades
-</h1>
 
 <br>
 <h1 id="trabalho" style="font-weight: 600; color: #A60D1A">
