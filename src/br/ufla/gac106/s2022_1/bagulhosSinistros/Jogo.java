@@ -108,10 +108,12 @@ public class Jogo {
      */
     private void imprimirBoasVindas() {
         System.out.println();
-        System.out.println("Bem-vindo a Stranger Things!");
-        System.out.println("Stranger Things e um novo jogo sobrenatural.");
-        System.out.println("Com criaturas monstruosas, agências secretas do governo e dimensões paralelas.");
-        System.out.println("\nSeu objetivo é achar o Will Byers no Mundo Invertido!");
+        System.out.println("Bem-vindo a Bagulhos Sinistros!");
+        System.out.println("Este é um jogo de RPG investigativo sobrenatural.");
+        System.out.println();
+        System.out.println("Após o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins. Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
+        System.out.println();
+        System.out.println("\nSeu objetivo é achar o Will Byers!");
         System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
 
@@ -153,7 +155,7 @@ public class Jogo {
      * Aqui nós imprimimos algo bobo e enigmático e a lista de palavras de comando
      */
     private void imprimirAjuda() {
-        System.out.println("Voce esta perdido e sozinho na cidade de Hawkins");
+        System.out.println("Voce está em Hawkins e seu objetivo é encontrar Will Byers");
         System.out.println();
         System.out.println("Suas palavras de comando sao:");
         System.out.println("  " + analisador.getComandos());
