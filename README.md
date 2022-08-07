@@ -149,11 +149,11 @@ RPG Investigação Sobrenatural.
    <tr>
     <td>Trailer Jim</td>
     <td>
-      Arma <br>
+      Revolver <br>
       Balas
     </td>
     <td>
-      Pegar arma <br>
+      Pegar revolver <br>
       Pegar balas  
     </td>
     <td>-</td>
@@ -308,7 +308,7 @@ RPG Investigação Sobrenatural.
   - Bicicleta
   - Pisca-Pisca
 - Atacar Inimigo
-  - Arma + Bala
+  - Revolver + Bala
 
 ### Palavras de Comando:
 
