@@ -330,6 +330,10 @@ RPG Investigação Sobrenatural.
 
 Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos da Universidade Federal de Lavras (UFLA), lecionada pelo professor Julio Cesar Alves.
 
+Baseado no jogo World of Zuul, um RPG por textos pelo terminal.
+
+Para o gerenciamento do projeto, fluxo de trabalho e monitoramento de tarefas, foi utilizado a ferramenta Trello. 
+
 <h1 id="tecnologia" style="font-weight: 600; color: #A60D1A">
 🛠️ Tecnologias
 </h1>
@@ -342,6 +346,10 @@ Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos
   <tr>
     <td><img alt="VSCode" height="30" widht="40" src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" /></td>
     <td><a href="https://code.visualstudio.com/" target="_blank">VSCode</a></td>
+  </tr>
+  <tr>
+    <td><img alt="Trello" height="30" widht="40" src="https://seeklogo.com/images/T/trello-logo-CE7B690E34-seeklogo.com.png" /></td>
+    <td><a href="https://trello.com/" target="_blank">Trello</a></td>
   </tr>
 </table>
 
