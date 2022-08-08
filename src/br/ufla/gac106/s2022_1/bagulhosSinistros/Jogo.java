@@ -284,13 +284,19 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
+        boolean encontrouItem = ambienteAtual.procuraItem(item);
 
         // Tenta coletar o item
-        if (item.equals(ambienteAtual.getItem())) {
-            Item itemEncontrado = ambienteAtual.coletarItem();
-            jogador.adicionarItem(itemEncontrado);
+        if (encontrouItem) {
+            Item itemEncontrado = ambienteAtual.coletarItem(item);
 
-            System.out.println("Você coletou o item " + item);
+            if (itemEncontrado != null) {
+                jogador.adicionarItem(itemEncontrado);
+    
+                System.out.println("Você coletou o item " + item);
+            } else {
+                System.out.println("Nao eh possivel coletar esse item");
+            }
         } else {
             System.out.println("Não há esse item no ambiente");
         }
