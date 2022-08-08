@@ -165,12 +165,10 @@ public class Jogo {
         System.out.println();
         System.out.println("Bem-vindo a Bagulhos Sinistros!");
         System.out.println("Este é um jogo de RPG investigativo sobrenatural.");
-        System.out.println();
-        System.out.println("Após o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins. Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
-        System.out.println();
+        System.out.println("\nApós o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins.");
+        System.out.println("Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
         System.out.println("\nSeu objetivo é achar o Will Byers!");
         System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
-        System.out.println();
 
         exibirAmbienteAtual();
     }
