@@ -41,44 +41,34 @@ public class Jogo {
     }
 
     /**
-     * Cria todos os ambientes e liga as saidas deles
+     * Cria todos os ambientes, adiciona os itens e liga as saidas deles
      */
     private void criarAmbientes() {
         Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
-        // cria os itens dos ambientes
+        // cria os itens coletaveis dos ambientes
         Item chaveEscritorio = new ItemColetavel("chave", "chave do escritório", "chave");
         Item balasArma = new ItemColetavel("balas", "um par de balas de revolver", "bala");
-        Item desenhoWill = new ItemNaoColetavel("desenho", "desenho infantil aparentemente feito por uma criança");
         Item alicate = new ItemColetavel("alicate", "alicate grande e enferrujado", "alicate");
         Item lanterna = new ItemColetavel("lanterna", "lanterna tática potente", "chave");
-        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 com capacidade para 10 balas", "revolver");
-        Item balasArma2 = new ItemColetavel("balas", "um par de balas de revolver", "bala");
+        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 em bom estado", "revolver");
+
+        // cria os itens não coletaveis dos ambientes
         Item bicicleta = new ItemNaoColetavel("bicicleta", "uma bicicleta vermelha caida");
-        Item pisca = new ItemNaoColetavel("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede com um alfabeto");
+        Item pisca = new ItemNaoColetavel("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
+        Item desenhoWill = new ItemNaoColetavel("desenho", "desenho infantil aparentemente feito por uma criança");
 
         // cria os ambientes
         centro = new Ambiente("no centro da cidade de Hawkins");
-        centro.adicionarItem(chaveEscritorio);
-        centro.adicionarItem(desenhoWill);
         delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
-        delegacia.adicionarItem(chaveEscritorio);
         escritorioDelegacia = new Ambiente ("no seu escritório na delegacia");
-        escritorioDelegacia.adicionarItem(balasArma);
         escola = new Ambiente ("na Escola de Hawkins");
-        escola.adicionarItem(desenhoWill);
         ferroVelho = new Ambiente ("no ferro velho ao redor da cidade");
-        ferroVelho.adicionarItem(alicate);
         casaMike = new Ambiente ("na casa da família Wheeler");
         poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler");
-        poraoCasaMike.adicionarItem(lanterna);
         trailerJim = new Ambiente ("no seu trailer");
-        trailerJim.adicionarItem(revolver);
-        trailerJim.adicionarItem(balasArma);
         floresta = new Ambiente ("na Floresta Sombria");
-        floresta.adicionarItem(bicicleta);
         casaByers = new Ambiente ("na casa da família Byers");
-        casaByers.adicionarItem(pisca);
         casteloByers = new Ambiente ("no Castelo Byers, uma cabana do Will Byers");
         florestaFundo = new Ambiente ("no fundo da Floresta Sombria");
         laboratorio = new Ambiente ("no Laboratório Nacional de Hawkins");
@@ -86,6 +76,18 @@ public class Jogo {
         laboratorioMI = new Ambiente ("no Laboratório do Mundo Invertido");
         florestaMI = new Ambiente ("na Floresta Sombria do Mundo Invertido");
         casteloMI = new Ambiente ("no Castelo Byers do Mundo Invertido");
+        
+        // adiciona os itens nos ambientes
+        centro.adicionarItem(desenhoWill);
+        delegacia.adicionarItem(chaveEscritorio);
+        escritorioDelegacia.adicionarItem(balasArma);
+        escola.adicionarItem(desenhoWill);
+        ferroVelho.adicionarItem(alicate);
+        poraoCasaMike.adicionarItem(lanterna);
+        trailerJim.adicionarItem(revolver);
+        trailerJim.adicionarItem(balasArma);
+        floresta.adicionarItem(bicicleta);
+        casaByers.adicionarItem(pisca);
 
         // inicializa as saidas dos ambientes
         centro.ajustarSaida("esquerda", ferroVelho);
