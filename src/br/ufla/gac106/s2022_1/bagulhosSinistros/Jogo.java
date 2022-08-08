@@ -47,27 +47,38 @@ public class Jogo {
         Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // cria os itens dos ambientes
-        Item chaveEscritorio = new ItemColetavel("chave", "chave do escritório");
-        Item balasArma = new ItemColetavel("balas", "um par de balas de revolver");
+        Item chaveEscritorio = new ItemColetavel("chave", "chave do escritório", "chave");
+        Item balasArma = new ItemColetavel("balas", "um par de balas de revolver", "bala");
         Item desenhoWill = new ItemNaoColetavel("desenho", "desenho infantil aparentemente feito por uma criança");
-        Item alicate = new ItemColetavel("alicate", "alicate grande e enferrujado");
-        Item lanterna = new ItemColetavel("lanterna", "lanterna tática potente");
-        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 com capacidade para 10 balas");
-        Item balasArma2 = new ItemColetavel("balas", "um par de balas de revolver");
+        Item alicate = new ItemColetavel("alicate", "alicate grande e enferrujado", "alicate");
+        Item lanterna = new ItemColetavel("lanterna", "lanterna tática potente", "chave");
+        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 com capacidade para 10 balas", "revolver");
+        Item balasArma2 = new ItemColetavel("balas", "um par de balas de revolver", "bala");
         Item bicicleta = new ItemNaoColetavel("bicicleta", "uma bicicleta vermelha caida");
         Item pisca = new ItemNaoColetavel("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede com um alfabeto");
 
         // cria os ambientes
         centro = new Ambiente("no centro da cidade de Hawkins");
-        delegacia = new Ambiente("na delegacia de Polícia de Hawkins", chaveEscritorio);
-        escritorioDelegacia = new Ambiente ("no seu escritório na delegacia", balasArma);
-        escola = new Ambiente ("na Escola de Hawkins", desenhoWill);
-        ferroVelho = new Ambiente ("no ferro velho ao redor da cidade", alicate);
+        centro.adicionarItem(chaveEscritorio);
+        centro.adicionarItem(desenhoWill);
+        delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
+        delegacia.adicionarItem(chaveEscritorio);
+        escritorioDelegacia = new Ambiente ("no seu escritório na delegacia");
+        escritorioDelegacia.adicionarItem(balasArma);
+        escola = new Ambiente ("na Escola de Hawkins");
+        escola.adicionarItem(desenhoWill);
+        ferroVelho = new Ambiente ("no ferro velho ao redor da cidade");
+        ferroVelho.adicionarItem(alicate);
         casaMike = new Ambiente ("na casa da família Wheeler");
-        poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler", lanterna);
-        trailerJim = new Ambiente ("no seu trailer", revolver, balasArma2);
-        floresta = new Ambiente ("na Floresta Sombria", bicicleta);
-        casaByers = new Ambiente ("na casa da família Byers", pisca);
+        poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler");
+        poraoCasaMike.adicionarItem(lanterna);
+        trailerJim = new Ambiente ("no seu trailer");
+        trailerJim.adicionarItem(revolver);
+        trailerJim.adicionarItem(balasArma);
+        floresta = new Ambiente ("na Floresta Sombria");
+        floresta.adicionarItem(bicicleta);
+        casaByers = new Ambiente ("na casa da família Byers");
+        casaByers.adicionarItem(pisca);
         casteloByers = new Ambiente ("no Castelo Byers, uma cabana do Will Byers");
         florestaFundo = new Ambiente ("no fundo da Floresta Sombria");
         laboratorio = new Ambiente ("no Laboratório Nacional de Hawkins");
@@ -284,13 +295,19 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
+        boolean encontrouItem = ambienteAtual.procuraItem(item);
 
         // Tenta coletar o item
-        if (item.equals(ambienteAtual.getItem())) {
-            Item itemEncontrado = ambienteAtual.coletarItem();
-            jogador.adicionarItem(itemEncontrado);
+        if (encontrouItem) {
+            Item itemEncontrado = ambienteAtual.coletarItem(item);
 
-            System.out.println("Você coletou o item " + item);
+            if (itemEncontrado != null) {
+                jogador.adicionarItem(itemEncontrado);
+    
+                System.out.println("Você coletou o item " + item);
+            } else {
+                System.out.println("Nao eh possivel coletar esse item");
+            }
         } else {
             System.out.println("Não há esse item no ambiente");
         }
