@@ -1,6 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.ItemColetavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.ItemNaoColetavel;
 
 /**
  * Essa é a classe principal da aplicacao "World of Zull".
@@ -46,22 +47,27 @@ public class Jogo {
         Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // cria os itens dos ambientes
-        Item itemJoyce = new ItemColetavel("chave", "chave velha e robusta");
-        Item itemDelegacia = new ItemColetavel("alicate",  "alicate de corte");
-        Item itemCinema = new ItemColetavel("lanterna", "lanterna de bolso");
-
+        Item chaveEscritorio = new ItemColetavel("chave", "chave do escritório");
+        Item balasArma = new ItemColetavel("balas", "um par de balas de revolver");
+        Item desenhoWill = new ItemNaoColetavel("desenho", "desenho infantil aparentemente feito por uma criança");
+        Item alicate = new ItemColetavel("alicate", "alicate grande e enferrujado");
+        Item lanterna = new ItemColetavel("lanterna", "lanterna tática potente");
+        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 com capacidade para 10 balas");
+        Item balasArma2 = new ItemColetavel("balas", "um par de balas de revolver");
+        Item bicicleta = new ItemNaoColetavel("bicicleta", "uma bicicleta vermelha caida");
+        Item pisca = new ItemNaoColetavel("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede com um alfabeto");
 
         // cria os ambientes
         centro = new Ambiente("no centro da cidade de Hawkins");
-        delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
-        escritorioDelegacia = new Ambiente ("no seu escritório na delegacia");
-        escola = new Ambiente ("na Escola de Hawkins");
-        ferroVelho = new Ambiente ("no ferro velho ao redor da cidade");
+        delegacia = new Ambiente("na delegacia de Polícia de Hawkins", chaveEscritorio);
+        escritorioDelegacia = new Ambiente ("no seu escritório na delegacia", balasArma);
+        escola = new Ambiente ("na Escola de Hawkins", desenhoWill);
+        ferroVelho = new Ambiente ("no ferro velho ao redor da cidade", alicate);
         casaMike = new Ambiente ("na casa da família Wheeler");
-        poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler");
-        trailerJim = new Ambiente ("no seu trailer");
-        floresta = new Ambiente ("na Floresta Sombria");
-        casaByers = new Ambiente ("na casa da família Byers");
+        poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler", lanterna);
+        trailerJim = new Ambiente ("no seu trailer", revolver, balasArma2);
+        floresta = new Ambiente ("na Floresta Sombria", bicicleta);
+        casaByers = new Ambiente ("na casa da família Byers", pisca);
         casteloByers = new Ambiente ("no Castelo Byers, uma cabana do Will Byers");
         florestaFundo = new Ambiente ("no fundo da Floresta Sombria");
         laboratorio = new Ambiente ("no Laboratório Nacional de Hawkins");
