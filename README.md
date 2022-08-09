@@ -110,7 +110,8 @@ RPG Investigação Sobrenatural.
     <td>-</td>
     <td>
       Corredor: Escritório <br>
-      Trás: Casa Mike
+      Trás: Casa Mike <br>
+      Frente: Centro
     </td>
   </tr>
   <tr>
@@ -145,7 +146,10 @@ RPG Investigação Sobrenatural.
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Escada: Porão</td>
+    <td>
+      Escada: Porão <br>
+      Frente: Delegacia
+    </td>
   </tr>
    <tr>
     <td>Porão</td>
@@ -217,7 +221,10 @@ RPG Investigação Sobrenatural.
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Escada: Sala</td>
+    <td>
+      Escada: Sala <br>
+      Tras: Floresta
+    </td>
   </tr>
   <tr>
     <td>Sala</td>

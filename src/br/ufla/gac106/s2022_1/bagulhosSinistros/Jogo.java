@@ -1,7 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.ItemColetavel;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.ItemNaoColetavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Coletavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Pista;
 
 /**
  * Essa é a classe principal da aplicacao "World of Zull".
@@ -47,16 +47,20 @@ public class Jogo {
         Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // cria os itens coletaveis dos ambientes
-        Item chaveEscritorio = new ItemColetavel("chave", "chave do escritório", "chave");
-        Item balasArma = new ItemColetavel("balas", "um par de balas de revolver", "bala");
-        Item alicate = new ItemColetavel("alicate", "alicate grande e enferrujado", "alicate");
-        Item lanterna = new ItemColetavel("lanterna", "lanterna tática potente", "chave");
-        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 em bom estado", "revolver");
+        Item chaveEscritorio, balasRevolver, alicate, lanterna, revolver;
+        
+        chaveEscritorio = new Coletavel("chave", "chave do escritório", "abre a porta");
+        balasRevolver = new Coletavel("balas", "um par de balas de revolver", "coloca na arma");
+        alicate = new Coletavel("alicate", "alicate grande e enferrujado", "abre a grade");
+        lanterna = new Coletavel("lanterna", "lanterna tática potente", "ilumina o Mundo Invertido");
+        revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "atira no inimigo");
 
-        // cria os itens não coletaveis dos ambientes
-        Item bicicleta = new ItemNaoColetavel("bicicleta", "uma bicicleta vermelha caida");
-        Item pisca = new ItemNaoColetavel("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
-        Item desenhoWill = new ItemNaoColetavel("desenho", "desenho infantil aparentemente feito por uma criança");
+        // cria as pistas (item não coletaveis dos ambientes)
+        Item desenhoWill, bicicleta, pisca;
+        
+        bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida");
+        pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
+        desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança");
 
         // cria os ambientes
         centro = new Ambiente("no centro da cidade de Hawkins");
@@ -78,14 +82,13 @@ public class Jogo {
         casteloMI = new Ambiente ("no Castelo Byers do Mundo Invertido");
         
         // adiciona os itens nos ambientes
-        centro.adicionarItem(desenhoWill);
         delegacia.adicionarItem(chaveEscritorio);
-        escritorioDelegacia.adicionarItem(balasArma);
+        escritorioDelegacia.adicionarItem(balasRevolver);
         escola.adicionarItem(desenhoWill);
         ferroVelho.adicionarItem(alicate);
         poraoCasaMike.adicionarItem(lanterna);
         trailerJim.adicionarItem(revolver);
-        trailerJim.adicionarItem(balasArma);
+        trailerJim.adicionarItem(balasRevolver);
         floresta.adicionarItem(bicicleta);
         casaByers.adicionarItem(pisca);
 
@@ -96,6 +99,7 @@ public class Jogo {
 
         delegacia.ajustarSaida("corredor", escritorioDelegacia);
         delegacia.ajustarSaida("tras", casaMike);
+        delegacia.ajustarSaida("frente", centro);
 
         escritorioDelegacia.ajustarSaida("corredor", delegacia);
 
@@ -104,6 +108,7 @@ public class Jogo {
         ferroVelho.ajustarSaida("direita", centro);
         ferroVelho.ajustarSaida("esquerda", trailerJim);
 
+        casaMike.ajustarSaida("frente", delegacia);
         casaMike.ajustarSaida("escada", poraoCasaMike);
 
         poraoCasaMike.ajustarSaida("escada", casaMike);
@@ -125,6 +130,7 @@ public class Jogo {
         florestaFundo.ajustarSaida("tras", casteloByers);
         florestaFundo.ajustarSaida("frente", laboratorio);
 
+        laboratorio.ajustarSaida("tras", floresta);
         laboratorio.ajustarSaida("escada", salaLaboratorio);
 
         salaLaboratorio.ajustarSaida("escada", laboratorio);
