@@ -332,25 +332,28 @@ public class Jogo {
             System.out.println("Não há esse item no ambiente");
         }
     }
-    /**
+ /**
      * "Usar" foi digitado.
      * Verifica se tem uma segunda palavra indicando qual item quer usar
-     * se o jogador possuir o item ele é utilizado, senao retorna msg de erro.
+     * e tenta usar o item, removendo do ambiente e adicionando no jogador principal
+     * 
+     * 
      * @param comando O comando digitado.
      */
 
     private void usar(Comando comando){
         
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Qual item você quer utilizar?");
+            System.out.println("Usar o que?");
             return;
         }
 
         String item = comando.getSegundaPalavra();
-        Item itemEncontrado = jogador.getItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
-        if (itemEncontrado != null) {
-            System.out.println(itemEncontrado.getAcao());
+        if (encontrouItem) {
+            String acao = personagemPrincipal.usarItem(item);
+            System.out.println("Voce usa o item " + item + " e " + acao);
         }
         else{
             System.out.println("Voce nao possui esse item");
@@ -360,31 +363,34 @@ public class Jogo {
  /**
      * "Largar" foi digitado.
      * Verifica se tem uma segunda palavra indicando qual item quer descartar
-     * se o jogador possuir o item ele é descartado, senao retorna msg de erro.
+     * e tenta largar o item, removendo do jogador e devolvendo no ambiente
      * @param comando O comando digitado.
      */
 
     private void largar(Comando comando){
         
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Qual item você quer largar?");
+            System.out.println("Largar o que?");
             return;
         }
 
         String item = comando.getSegundaPalavra();
-        Item itemEncontrado = jogador.getItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
-        if (itemEncontrado != null) {
+        if (encontrouItem) {
+            Item itemEncontrado = personagemPrincipal.largarItem(item);
+
+        if (itemEncontrado != null){
             ambienteAtual.adicionarItem(itemEncontrado);
 
-            String nomeitem = itemEncontrado.getNome();
-
-            jogador.removerItem(nomeitem);
-
-            System.out.println("Voce devolveu o item: " + nomeitem);
+            System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
         }
+        else {
+            System.out.println("Nao eh possivel largar esse item");
+        }
+    }
         else{
             System.out.println("Voce nao possui esse item");
         }
-    } 
+    }
 }
