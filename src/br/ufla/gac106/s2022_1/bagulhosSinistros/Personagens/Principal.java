@@ -80,16 +80,37 @@ public class Principal extends Personagem{
     /** 
      * Remove um item do jogador principal e o deixa no ambiente
      * @param nome recebe o nome do item que vai ser largado
-     * @return verdadeiro se o item buscado foi removido
+     * @return o item a ser deixado no ambiente
      */
-    public boolean largarItem(String nome) {
+    public Item largarItem(String nome) {
         for (int i = 0; i < coldre.size(); i++) {
-            if (coldre.get(i).getNome().equals(nome)) {
+            boolean itemEncontrado = coldre.get(i).getNome().equals(nome);
+
+            if (itemEncontrado) {
+                Item meuItem = coldre.get(i);
                 coldre.remove(i);
-                return true;
+                return meuItem;
             }
         }
-        return false;
+        return null;
+    }
+
+        /** 
+     * Usa um item do jogador principal
+     * @param nome recebe o nome do item que vai ser usado
+     * @return acao do item
+     */
+    public String usarItem(String nome) {
+        String acaoItem = "";
+
+        for (Item item : coldre) {
+            boolean itemEncontrado = temItem() && item.getNome().equals(nome);
+
+            if (itemEncontrado) {
+                acaoItem += item.getAcao();
+            }
+        }
+        return acaoItem;
     }
 
     /** 
