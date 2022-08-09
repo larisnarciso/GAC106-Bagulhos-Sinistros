@@ -55,7 +55,7 @@ public class Ambiente {
      * @param direcao  A direção definida.
      * @param ambiente o ambiente definida.
      */
-    public void ajustarSaida(String direcao, Ambiente ambiente) {
+    public void ajustarSaida(String direcao, Ambiente ambiente){
         saidas.put(direcao, ambiente);
     }
 
@@ -90,7 +90,7 @@ public class Ambiente {
     /**
      * @return true se há um item no ambiente.
      */
-    public boolean temItem() {
+    private boolean temItem() {
         for (Item item : itens) {
             if (item != null) {
                 return true;
@@ -103,7 +103,7 @@ public class Ambiente {
      * @param nome O nome do item.
      * @return se tem o item procurado.
      */
-    public boolean procuraItem(String nome) {
+    public boolean procurarItem(String nome) {
         for (Item item : itens) {
             if (temItem() && item.getNome().equals(nome)) {
                 return true;
@@ -115,13 +115,13 @@ public class Ambiente {
     /**
      * @return A lista de itens no ambiente.
      */
-    public String listarItens() {
+    private String listarItens() {
         String listaItens = "";
 
         if (temItem()) {
-            listaItens += "\nItem encontrado!\n";
+            listaItens += "\nItens encontrado!\n";
             for (Item item : itens) {
-                listaItens += item.getNome() + " - " + item.getDescricao() + "\n";
+                listaItens += "\n- " + item.getNome() + " - " + item.getDescricao();
             }
         } else {
             listaItens += "\nNão há nada aqui";
@@ -164,5 +164,4 @@ public class Ambiente {
         }
         return textoSaidas;
     }
-
 }

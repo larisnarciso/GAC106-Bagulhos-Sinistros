@@ -95,6 +95,7 @@ public class Jogo {
 
         // adiciona os itens nos ambientes
         delegacia.adicionarItem(chaveEscritorio);
+        escritorioDelegacia.adicionarItem(balaRevolver);
         escola.adicionarItem(desenhoWill);
         ferroVelho.adicionarItem(alicate);
         poraoCasaMike.adicionarItem(lanterna);
@@ -297,12 +298,12 @@ public class Jogo {
      * itens, eles também são exibidos.
      */
     private void observar() {
+        System.out.println(ambienteAtual.getDescricaoLonga());
+        System.out.println();
         String itensColdre = personagemPrincipal.listarItensColdre();
         if (itensColdre != "") {
             System.out.println(itensColdre);
         }
-        System.out.println();
-        System.out.println(ambienteAtual.getDescricaoLonga());
     }
 
     /**
@@ -321,7 +322,7 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = ambienteAtual.procuraItem(item);
+        boolean encontrouItem = ambienteAtual.procurarItem(item);
 
         // ambiente tenta encontrar o item
         if (encontrouItem) {
@@ -329,17 +330,17 @@ public class Jogo {
 
             // personagem principal tenta coletar o item se encontrado
             if (itemEncontrado != null) {
-                boolean pegouItem = personagemPrincipal.adicionarItem(itemEncontrado);
+                boolean pegouItem = personagemPrincipal.adicionarItemColdre(itemEncontrado);
 
                 // verifica se atingiu o máximo de tipos de itens coletados
                 if (pegouItem) {
                     System.out.println("Você coletou o item " + item);
                 } else {
                     ambienteAtual.adicionarItem(itemEncontrado);
-                    System.out.println("Limite máximo de itens atingido!");
+                    System.out.println("Limite máximo de tipos de itens atingido!");
                 }
             } else {
-                System.out.println("Nao eh possivel coletar esse item");
+                System.out.println("Este item não é coletavel");
             }
         } else {
             System.out.println("Não há esse item no ambiente");
@@ -362,7 +363,7 @@ public class Jogo {
 
         // tenta encontrar o item
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = personagemPrincipal.procurarItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItemColdre(item);
 
         // tenta usar o item se encontrado
         if (encontrouItem) {
@@ -389,7 +390,7 @@ public class Jogo {
 
         // tenta encontrar o item
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = personagemPrincipal.procurarItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItemColdre(item);
 
         // tenta largar o item do personagem principal
         if (encontrouItem) {
