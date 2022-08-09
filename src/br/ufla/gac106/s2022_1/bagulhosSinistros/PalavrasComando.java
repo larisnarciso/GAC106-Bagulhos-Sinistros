@@ -14,7 +14,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
 public class PalavrasComando {
     // um vetor constante que guarda todas as palavras de comandos válidas
     private static final String[] comandosValidos = {
-            "ir", "sair", "ajuda", "observar", "pegar"
+            "ir", "sair", "ajuda", "observar", "pegar", "usar", "largar"
     };
 
     /**

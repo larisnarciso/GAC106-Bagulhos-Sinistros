@@ -204,6 +204,10 @@ public class Jogo {
             observar();
         } else if (palavraDeComando.equals("pegar")) {
             pegar(comando);
+        }else if (palavraDeComando.equals("usar")) {
+            usar(comando);
+        }else if (palavraDeComando.equals("largar")) {
+            largar(comando);
         }
 
         return querSair;
@@ -318,4 +322,54 @@ public class Jogo {
             System.out.println("Não há esse item no ambiente");
         }
     }
+ /**
+     * "Usar" foi digitado.
+     * Verifica se o item foi coletado.
+     * 
+     * @param comando O comando digitado.
+     */
+
+    private void usar(Comando comando){
+        
+        if (!comando.temSegundaPalavra()) {
+            System.out.println("Qual item você quer utilizar?");
+            return;
+        }
+
+        String item = comando.getSegundaPalavra();
+        Item itemEncontrado = jogador.getItem(item);
+
+        // Tenta coletar o item
+        if (itemEncontrado != null) {
+            
+            System.out.println(itemEncontrado.getAcao());
+        }
+        else{
+            System.out.println("Voce nao possui esse item");
+        }
+    }   
+
+    private void largar(Comando comando){
+        
+        if (!comando.temSegundaPalavra()) {
+            System.out.println("Qual item você quer largar?");
+            return;
+        }
+
+        String item = comando.getSegundaPalavra();
+        Item itemEncontrado = jogador.getItem(item);
+
+        if (itemEncontrado != null) {
+            ambienteAtual.adicionarItem(itemEncontrado);
+
+            String nomeitem = itemEncontrado.getNome();
+
+            jogador.removerItem(nomeitem);
+
+            System.out.println("Voce devolveu o item: " + nomeitem);
+        }
+        else{
+            System.out.println("Voce nao possui esse item");
+        }
+    } 
 }

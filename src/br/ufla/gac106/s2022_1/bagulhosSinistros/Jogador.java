@@ -55,4 +55,15 @@ public class Jogador {
         return listagemItens;
     }
 
+    //Verifica se o nome recebido é igual a algum item da lista e se for retorna o item 
+    public Item getItem(String nome){
+
+        for (Item item : carro) {
+            if(item.getNome().equals(nome)){
+                return item;
+            }
+        }
+        return null;
+    }
+
 }
