@@ -1,4 +1,6 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
+
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
@@ -13,13 +15,14 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
  * @author  Michael Kölling and David J. Barnes (traduzido e adaptado por Julio César Alves)
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Ambiente {
     // descrição do ambiente
     private String descricao;
     // itens do ambiente
-    private Item item;
+    private ArrayList<Item> itens;
     // ambientes visinhos de acordo com a direção
     private HashMap<String, Ambiente> saidas;
 
@@ -31,18 +34,8 @@ public class Ambiente {
      */
     public Ambiente(String descricao) {
         this.descricao = descricao;
+        itens = new ArrayList<>();
         saidas = new HashMap<String, Ambiente>();
-    }
-
-    /**
-     * Cria ambiente com um Item.
-     * 
-     * @param descricao A descrição do ambiente.
-     * @param item      O item no ambiente.
-     */
-    public Ambiente(String descricao, Item item) {
-        this(descricao);
-        this.item = item;
     }
 
     /**
@@ -68,35 +61,64 @@ public class Ambiente {
      * @return A descrição completa do ambiente.
      */
     public String getDescricaoLonga() {
-        String textoDescricao = "Você está " + descricao;
+        String textoDescricao = "";
 
-        if (temItem() == true) {
-            textoDescricao += "\nItem encontrado! \nNome: " + item.getNome() + "\nDescricao: " + item.getDescricao();
-        } else {
-            textoDescricao += "\nNão há nada aqui";
-        }
+        textoDescricao += "Você está " + descricao + "\n"; // ambiente atual
+        textoDescricao += listarItens(); // itens no ambiente
 
         return textoDescricao;
+    }
+
+    /**
+     * Adiciona um item para o jogador
+     * 
+     * @param item O item a ser adicionado.
+     */
+    public void adicionarItem(Item item) {
+        itens.add(item);
     }
 
     /**
      * @return true se há um item no ambiente.
      */
     public boolean temItem() {
-        if (item != null) {
-            return true;
+        for (Item item : itens) {
+            if (item != null) {
+                return true;
+            }
         }
         return false;
     }
 
     /**
-     * @return O nome do item coletado.
+     * @param nome O nome do item.
+     * @return se tem o item procurado.
      */
-    public String getItem() {
-        if (temItem()) {
-            return item.getNome();
+    public boolean procuraItem(String nome) {
+        for (Item item : itens) {
+            if (temItem() && item.getNome().equals(nome)) {
+                return true;
+            }
         }
-        return null;
+        return false;
+    }
+
+    /**
+     * @return A lista de itens no ambiente.
+     */
+    public String listarItens() {
+        String listaItens = "";
+
+        if (temItem()) {
+            listaItens += "\nItem encontrado!\n";
+            for (Item item : itens) {
+                listaItens += item.getNome() + " - " + item.getDescricao() + "\n";
+            }
+        } else {
+            listaItens += "\nNão há nada aqui";
+        }
+
+        return listaItens;
     }
 
     /**
@@ -104,10 +126,15 @@ public class Ambiente {
      * 
      * @return O objeto item coletado.
      */
-    public Item coletarItem() {
-        Item meuItem = item;
-        item = null;
-        return meuItem;
+    public Item coletarItem(String nome) {
+        for (int i = 0; i < itens.size(); i++) {
+            if (itens.get(i).getNome().equals(nome) && itens.get(i).getEhColetavel()) {
+                Item meuItem = itens.get(i);
+                itens.remove(i);
+                return meuItem;
+            }
+        }
+        return null;
     }
 
     /**
