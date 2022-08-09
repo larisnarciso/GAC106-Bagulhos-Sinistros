@@ -1,8 +1,8 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Coletavel;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Pista;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
 
 /**
@@ -49,10 +49,10 @@ public class Jogo {
         Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // cria os itens coletaveis dos ambientes
-        Item chaveEscritorio, balasRevolver, alicate, lanterna, revolver;
+        Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
         
         chaveEscritorio = new Coletavel("chave", "chave do escritório", "abre a porta");
-        balasRevolver = new Coletavel("balas", "um par de balas de revolver", "coloca na arma");
+        balaRevolver = new Coletavel("bala", "bala de revolver", "coloca na arma");
         alicate = new Coletavel("alicate", "alicate grande e enferrujado", "abre a grade");
         lanterna = new Coletavel("lanterna", "lanterna tática potente", "ilumina o Mundo Invertido");
         revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "atira no inimigo");
@@ -85,15 +85,11 @@ public class Jogo {
         
         // adiciona os itens nos ambientes
         delegacia.adicionarItem(chaveEscritorio);
-        escritorioDelegacia.adicionarItem(balasRevolver);
-        escritorioDelegacia.adicionarItem(balasRevolver);
-        escritorioDelegacia.adicionarItem(balasRevolver);
-        escritorioDelegacia.adicionarItem(balasRevolver);
         escola.adicionarItem(desenhoWill);
         ferroVelho.adicionarItem(alicate);
         poraoCasaMike.adicionarItem(lanterna);
         trailerJim.adicionarItem(revolver);
-        trailerJim.adicionarItem(balasRevolver);
+        trailerJim.adicionarItem(balaRevolver);
         floresta.adicionarItem(bicicleta);
         casaByers.adicionarItem(pisca);
 
@@ -290,8 +286,8 @@ public class Jogo {
      */
     private void observar() {
         System.out.println(ambienteAtual.getDescricaoLonga());
-        if (personagemPrincipal.getItensArmazenados() != "") {
-            System.out.println(personagemPrincipal.getItensArmazenados());
+        if (personagemPrincipal.listarItensColdre() != "") {
+            System.out.println(personagemPrincipal.listarItensColdre());
         }
     }
 
@@ -317,7 +313,7 @@ public class Jogo {
             Item itemEncontrado = ambienteAtual.coletarItem(item);
 
             if (itemEncontrado != null) {
-                boolean pegouItem = personagemPrincipal.armazenarItem(itemEncontrado);
+                boolean pegouItem = personagemPrincipal.adicionarItem(itemEncontrado);
 
                 if (pegouItem){
                     System.out.println("Você coletou o item " + item);
@@ -332,59 +328,65 @@ public class Jogo {
             System.out.println("Não há esse item no ambiente");
         }
     }
+
     /**
      * "Usar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item quer usar
-     * se o jogador possuir o item ele é utilizado, senao retorna msg de erro.
+     * Verifica se tem uma segunda palavra indicando qual item usar
+     * e tenta usar o item, removendo do ambiente e adicionando no jogador
+     * principal.
+     * 
      * @param comando O comando digitado.
      */
-
-    private void usar(Comando comando){
-        
+    private void usar(Comando comando) {
+        // se não há segunda palavra, não sabemos o que usar...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Qual item você quer utilizar?");
+            System.out.println("Usar o que?");
             return;
         }
 
         String item = comando.getSegundaPalavra();
-        Item itemEncontrado = jogador.getItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
-        if (itemEncontrado != null) {
-            System.out.println(itemEncontrado.getAcao());
-        }
-        else{
+        // Tenta usar o item
+        if (encontrouItem) {
+            String acao = personagemPrincipal.usarItem(item);
+            System.out.println("Voce usa o item " + item + " e " + acao);
+        } else {
             System.out.println("Voce nao possui esse item");
         }
-    }   
-
- /**
+    }
+    
+    /**
      * "Largar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item quer descartar
-     * se o jogador possuir o item ele é descartado, senao retorna msg de erro.
+     * Verifica se tem uma segunda palavra indicando qual item largar
+     * e tenta largar o item, removendo do ambiente e adicionando no jogador
+     * principal.
+     * 
      * @param comando O comando digitado.
      */
-
-    private void largar(Comando comando){
-        
+    private void largar(Comando comando) {
+        // se não há segunda palavra, não sabemos o que largar...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Qual item você quer largar?");
+            System.out.println("Largar o que?");
             return;
         }
 
         String item = comando.getSegundaPalavra();
-        Item itemEncontrado = jogador.getItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
-        if (itemEncontrado != null) {
-            ambienteAtual.adicionarItem(itemEncontrado);
+        // Tenta largar o item
+        if (encontrouItem) {
+            Item itemEncontrado = personagemPrincipal.largarItem(item);
 
-            String nomeitem = itemEncontrado.getNome();
+            if (itemEncontrado != null) {
+                ambienteAtual.adicionarItem(itemEncontrado);
 
-            jogador.removerItem(nomeitem);
-
-            System.out.println("Voce devolveu o item: " + nomeitem);
-        }
-        else{
+                System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
+            } else {
+                System.out.println("Nao eh possivel largar esse item");
+            }
+        } else {
             System.out.println("Voce nao possui esse item");
         }
-    } 
+    }
 }
