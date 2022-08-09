@@ -1,108 +1,135 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens;
 
-import java.util.ArrayList;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
+import java.util.HashMap;
+
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 
 /**
- * Classe principal - Representa o personagem Hooper, personagem principal do jogo
+ * Classe principal - Representa o personagem Hooper, personagem principal do
+ * jogo
  */
 
-public class Principal extends Personagem{
-    //Coldre armazena os itens no coldre do Hooper, máximo de 3 tipos de itens
-    private ArrayList<Item> coldre;
+public class Principal extends Personagem {
+    // Coldre armazena os itens do personagem principal
+    private HashMap<Item, Integer> coldre;
+    // Variavel que armazena o máximo de tipo de itens
     private static int maximoTipoItens = 3;
 
-    // Construtor da classe Principal
-    public Principal(String nome){
+    /*
+     * Cria o personagem principal do jogo.
+     */
+    public Principal(String nome) {
         super(nome, "Principal");
-        this.coldre = new ArrayList<Item>();;
+        this.coldre = new HashMap<Item, Integer>();
+        ;
     }
 
-    /** 
-     * Conta o tipo de itens
-     * @param item o item a ser adicionado 
+    /**
+     * Retorna se há itens no ambiente.
+     * 
+     * @return true se há um item no ambiente.
      */
-    public int contarTipoItens(Item itemEncontrado){
-        int qtdTipos = 0;
-        for (Item item : coldre){
-            if (!item.getNome().equals(itemEncontrado.getNome())){
-                qtdTipos++;
+    public boolean temItem() {
+        for (Item item : coldre.keySet()) {
+            if (item != null) {
+                return true;
             }
-        }
-        System.out.println(qtdTipos);
-        return qtdTipos;
-    }
-    
-    /** 
-     * Insere itens no coldre
-     * @param item recebe um tipo item para ser armazenado
-     */
-    public boolean armazenarItem(Item item){
-        int qtdTipos = contarTipoItens(item);
-        
-        if(qtdTipos + 1 <= maximoTipoItens){
-            coldre.add(item);
-            return true;
         }
         return false;
     }
 
     /**
-     * Retorna se há itens no ambiente.
-     * @return true se há um item no ambiente.
+     * Adiciona itens no coldre se o item ja existe, incrementa na quantidade,
+     * se não, adiciona o item no hashmap a quantidade de itens não pode exceder o máximo
+     * 
+     * @param novoItem recebe um item para ser armazenado
+     * @return true se foi adicionado com sucesso
      */
+    public boolean adicionarItem(Item novoItem) {
+        int qtdItens = 1;
+        boolean jaExiste = procurarItem(novoItem.getNome());
 
-    public boolean temItem(){
-        for (Item item : coldre){
-            if (item != null){
-                return true;
-            }
-        }
-        return false;
+        if (jaExiste)
+            qtdItens = coldre.get(novoItem) + 1;
+        else if (coldre.size() + 1 > maximoTipoItens)
+            return false; // se quantidade for excedida
+
+        coldre.put(novoItem, qtdItens);
+        return true;
     }
 
     /**
      * @param nome O nome do item;
      * @return se tem o item procurado.
      */
-
-    public boolean procurarItem(String nome){
-        for (Item item : coldre){
+    public boolean procurarItem(String nome) {
+        for (Item item : coldre.keySet()) {
             boolean itemEncontrado = temItem() && item.getNome().equals(nome);
 
-            if (itemEncontrado){
+            if (itemEncontrado) {
                 return true;
             }
         }
         return false;
     }
 
-    /** 
-     * Remove um item do jogador principal e o deixa no ambiente
-     * @param nome recebe o nome do item que vai ser largado
-     * @return verdadeiro se o item buscado foi removido
+    /**
+     * Remove um item do jogador
+     * 
+     * @param nome O nome do item a ser removido.
+     * @return o item a ser deixado no ambiente.
      */
-    public boolean largarItem(String nome) {
-        for (int i = 0; i < coldre.size(); i++) {
-            if (coldre.get(i).getNome().equals(nome)) {
-                coldre.remove(i);
-                return true;
+    public Item largarItem(String nome) {
+        for (Item item : coldre.keySet()) {
+            if (item.getNome().equals(nome)) {
+                Item meuItem = item;
+                // se tem mais de uma quantidade do mesmo item
+                if (coldre.get(meuItem) > 1) {
+                    coldre.put(meuItem, coldre.get(meuItem) - 1);
+                } // se tem só uma quantidade do mesmo item
+                else {
+                    coldre.remove(item);
+                }
+                return meuItem;
             }
         }
-        return false;
+        return null;
+
     }
 
-    /** 
-     * Retorna uma lista com todos os itens armazenados
+    /**
+     * Usa um item do jogador
+     * 
+     * @param nome O nome do item a ser usado.
+     * @return a acao do item.
+     */
+    public String usarItem(String nome) {
+        String acaoItem = "";
+
+        for (Item item : coldre.keySet()) {
+            boolean itemEncontrado = temItem() && item.getNome().equals(nome);
+
+            if (itemEncontrado) {
+                acaoItem += item.getAcao();
+            }
+        }
+
+        return acaoItem;
+    }
+
+    /**
+     * Retorna uma lista com todos os itens armazenados e suas respectivas
+     * quantidades
+     * 
      * @return lista dos itens armazenados
      */
-    public String getItensArmazenados() {
+    public String listarItensColdre() {
         String listagemItens = "";
-        if (temItem()){
+        if (temItem()) {
             listagemItens += "Itens no coldre (" + coldre.size() + "/3): ";
-            
-            for (Item item : coldre) {
-                listagemItens += item.getNome() + " ";
+
+            for (Item item : coldre.keySet()) {
+                listagemItens += "\n- " + coldre.get(item) + " " + item.getDescricao();
             }
         }
         return listagemItens;
