@@ -265,27 +265,6 @@ RPG Investigação Sobrenatural.
   </tr>
 </table>
 
-### Ambientes:
-
-- Centro
-  - Delegacia de Polícia de Hawkins
-    Escritório do delagado
-  - Escola de Hawkins
-- Ferro Velho
-- Casa do Mike
-  - Porão da casa
-- Trailer do Hopper
-- Floresta Sombria
-- Casa dos Byers
-- Castelo Byers
-- Floresta Sombria Fundo
-- Laboratório Nacional de Hawkins
-  - Sala com portal par ao Mundo Invertido
-- Mundo Invertido
-  - Laboratório
-  - Floresta
-  - Castelo Byers
-
 ### Direções:
 
 - Direita
@@ -313,7 +292,7 @@ RPG Investigação Sobrenatural.
 - Pisca-Pisca
 
 
-#### Funcionalidades:
+### Funcionalidades:
 
 - Limite de tempo ao jogo.
 - Inimigos e forma de derrota-lo.
@@ -359,6 +338,7 @@ Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos
 Baseado no jogo World of Zuul, um RPG por textos pelo terminal.
 
 Para o gerenciamento do projeto, fluxo de trabalho e monitoramento de tarefas, foi utilizado a ferramenta Trello. 
+
 
 <h1 id="tecnologia" style="font-weight: 600; color: #A60D1A">
 🛠️ Tecnologias
