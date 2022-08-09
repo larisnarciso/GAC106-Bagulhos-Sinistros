@@ -5,8 +5,7 @@ import java.util.HashMap;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 
 /**
- * Classe principal - Representa o personagem Hooper, personagem principal do
- * jogo
+ * Classe principal - Representa o personagem Hooper, personagem principal do jogo
  */
 
 public class Principal extends Personagem {
@@ -70,6 +69,7 @@ public class Principal extends Personagem {
                 return true;
             }
         }
+        
         return false;
     }
 

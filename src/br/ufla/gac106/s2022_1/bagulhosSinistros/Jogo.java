@@ -285,10 +285,12 @@ public class Jogo {
      * itens, eles também são exibidos.
      */
     private void observar() {
-        System.out.println(ambienteAtual.getDescricaoLonga());
-        if (personagemPrincipal.listarItensColdre() != "") {
-            System.out.println(personagemPrincipal.listarItensColdre());
+        String itensColdre = personagemPrincipal.listarItensColdre();
+        if (itensColdre != "") {
+            System.out.println(itensColdre);
         }
+        System.out.println();
+        System.out.println(ambienteAtual.getDescricaoLonga());
     }
 
     /**
@@ -328,12 +330,11 @@ public class Jogo {
             System.out.println("Não há esse item no ambiente");
         }
     }
-
-    /**
+ /**
      * "Usar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item usar
-     * e tenta usar o item, removendo do ambiente e adicionando no jogador
-     * principal.
+     * Verifica se tem uma segunda palavra indicando qual item quer usar
+     * e tenta usar o item, removendo do ambiente e adicionando no jogador principal
+     * 
      * 
      * @param comando O comando digitado.
      */
@@ -347,21 +348,19 @@ public class Jogo {
         String item = comando.getSegundaPalavra();
         boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
-        // Tenta usar o item
         if (encontrouItem) {
             String acao = personagemPrincipal.usarItem(item);
             System.out.println("Voce usa o item " + item + " e " + acao);
-        } else {
+        }
+        else{
             System.out.println("Voce nao possui esse item");
         }
     }
     
     /**
      * "Largar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item largar
-     * e tenta largar o item, removendo do ambiente e adicionando no jogador
-     * principal.
-     * 
+     * Verifica se tem uma segunda palavra indicando qual item quer descartar
+     * e tenta largar o item, removendo do jogador e devolvendo no ambiente
      * @param comando O comando digitado.
      */
     private void largar(Comando comando) {
@@ -374,18 +373,19 @@ public class Jogo {
         String item = comando.getSegundaPalavra();
         boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
-        // Tenta largar o item
         if (encontrouItem) {
             Item itemEncontrado = personagemPrincipal.largarItem(item);
 
-            if (itemEncontrado != null) {
-                ambienteAtual.adicionarItem(itemEncontrado);
+        if (itemEncontrado != null){
+            ambienteAtual.adicionarItem(itemEncontrado);
 
-                System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
-            } else {
-                System.out.println("Nao eh possivel largar esse item");
-            }
-        } else {
+            System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
+        }
+        else {
+            System.out.println("Nao eh possivel largar esse item");
+        }
+    }
+        else{
             System.out.println("Voce nao possui esse item");
         }
     }
