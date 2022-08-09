@@ -1,7 +1,9 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
+
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Pista;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
 
 /**
  * Essa é a classe principal da aplicacao "World of Zull".
@@ -25,7 +27,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Pista;
 
 public class Jogo {
     // dados do jogador
-    private Jogador jogador;
+    private Principal personagemPrincipal;
     // analisador de comandos do jogo
     private Analisador analisador;
     // ambiente onde se encontra o jogador
@@ -37,7 +39,7 @@ public class Jogo {
     public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
-        jogador = new Jogador("Jim Hopper");
+        personagemPrincipal = new Principal("Jim Hopper");
     }
 
     /**
@@ -83,6 +85,9 @@ public class Jogo {
         
         // adiciona os itens nos ambientes
         delegacia.adicionarItem(chaveEscritorio);
+        escritorioDelegacia.adicionarItem(balasRevolver);
+        escritorioDelegacia.adicionarItem(balasRevolver);
+        escritorioDelegacia.adicionarItem(balasRevolver);
         escritorioDelegacia.adicionarItem(balasRevolver);
         escola.adicionarItem(desenhoWill);
         ferroVelho.adicionarItem(alicate);
@@ -284,10 +289,10 @@ public class Jogo {
      * itens, eles também são exibidos.
      */
     private void observar() {
-        if (jogador.getItens() != "") {
-            System.out.println("Itens no carro: " + jogador.getItens());
-        }
         System.out.println(ambienteAtual.getDescricaoLonga());
+        if (personagemPrincipal.getItensArmazenados() != "") {
+            System.out.println(personagemPrincipal.getItensArmazenados());
+        }
     }
 
     /**
@@ -312,9 +317,14 @@ public class Jogo {
             Item itemEncontrado = ambienteAtual.coletarItem(item);
 
             if (itemEncontrado != null) {
-                jogador.adicionarItem(itemEncontrado);
-    
-                System.out.println("Você coletou o item " + item);
+                boolean pegouItem = personagemPrincipal.armazenarItem(itemEncontrado);
+
+                if (pegouItem){
+                    System.out.println("Você coletou o item " + item);
+                } else {
+                    ambienteAtual.adicionarItem(itemEncontrado);
+                    System.out.println("Limite máximo de itens atingido!");
+                }
             } else {
                 System.out.println("Nao eh possivel coletar esse item");
             }
@@ -322,7 +332,7 @@ public class Jogo {
             System.out.println("Não há esse item no ambiente");
         }
     }
- /**
+    /**
      * "Usar" foi digitado.
      * Verifica se tem uma segunda palavra indicando qual item quer usar
      * se o jogador possuir o item ele é utilizado, senao retorna msg de erro.
