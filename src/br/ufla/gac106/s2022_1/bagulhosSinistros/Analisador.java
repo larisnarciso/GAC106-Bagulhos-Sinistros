@@ -3,25 +3,33 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
 import java.util.Scanner;
 
 /**
- * Esta classe é parte da aplicacao "World of Zuul".
- * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
+ * Classe Analisador
+ * 
+ * Essa é uma parte da aplicacao "Bagulhos Sinistros".
+ * "Bagulhos Sinistros" é um jogo de RPG investigação sobrenatural, baseado em
+ * texto.
  * 
  * Esse analisador lê a entrada do usuario e tenta interpretá-la como um comando
  * "Adventure".
  * Cada vez que é chamado, ele lê uma linha do terminal e tenta interpretar a
- * linha como um
- * comando de duas palavras. Ele retorna o comando como um objeto da classe
- * Comando.
+ * linha como um comando de duas palavras. Ele retorna o comando como um objeto
+ * da classe Comando.
  *
  * O analisador tem um conjunto de palavras de comando conhecidas. Ele compara a
- * entrada do
- * usuário com os comandos conhecidos, e se a entrada não é um dos comandos
- * conhecidos, ele
- * retorna um objeto comando que é marcado como um comando desconhecido.
+ * entrada do usuário com os comandos conhecidos, e se a entrada não é um dos
+ * comandos conhecidos, ele retorna um objeto comando que é marcado como um
+ * comando desconhecido.
  * 
+ * @author Ana Beatriz Rodrigues Torres,
+ *         Ingrid de Falchi,
+ *         Larissa Narciso Oliveira e
+ *         Samuel Luiz Freitas Ferreira
+ * 
+ *         Baseado no jogo "World of Zuul", um RPG por textos pelo terminal.
  * @author Michael Kölling and David J. Barnes (traduzido e adaptado por Julio
  *         César Alves)
  */
+
 public class Analisador {
     // guarda todas as palavras de comando validas
     private PalavrasComando palavrasDeComando;

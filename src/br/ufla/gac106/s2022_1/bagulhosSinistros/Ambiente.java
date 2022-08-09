@@ -1,18 +1,27 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+
 /**
- * Classe Ambiente - um ambiente em um jogo adventure.
- *
- * Esta classe é parte da aplicação "World of Zuul".
- * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.  
- *
+ * Classe Ambiente
+ * 
+ * Essa é uma parte da aplicacao "Bagulhos Sinistros".
+ * "Bagulhos Sinistros" é um jogo de RPG investigação sobrenatural, baseado em
+ * texto.
+ * 
  * Um "Ambiente" representa uma localização no cenário do jogo. Ele é conectado aos 
- * outros ambientes através de saídas. As saídas são nomeadas como norte, sul, leste 
- * e oeste. Para cada direção, o ambiente guarda uma referência para o ambiente vizinho, 
+ * outros ambientes através de saídas. As saídas são nomeadas como tras, frente, direita, esquerda,
+ * escada e portal. Para cada direção, o ambiente guarda uma referência para o ambiente vizinho, 
  * ou null se não há saída naquela direção.
  * 
- * @author  Michael Kölling and David J. Barnes (traduzido e adaptado por Julio César Alves)
+ * @author Ana Beatriz Rodrigues Torres,
+ *         Ingrid de Falchi,
+ *         Larissa Narciso Oliveira e
+ *         Samuel Luiz Freitas Ferreira
+ * 
+ *         Baseado no jogo "World of Zuul", um RPG por textos pelo terminal.
+ * @author Michael Kölling and David J. Barnes (traduzido e adaptado por Julio
+ *         César Alves)
  */
 
 import java.util.ArrayList;
