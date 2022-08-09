@@ -6,31 +6,39 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
 
 /**
- * Essa é a classe principal da aplicacao "World of Zull".
- * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
+ * Classe Jogo
  * 
- * Usuários podem caminhar em um cenário. E é tudo! Ele realmente precisa ser
- * estendido para fazer algo interessante!
+ * Essa é a classe principal da aplicacao "Bagulhos Sinistros".
+ * "Bagulhos Sinistros" é um jogo de RPG investigação sobrenatural, baseado em
+ * texto.
+ * 
+ * O personagem principal (Jim Hopper) pode caminhar pela cidade de Hawkins com
+ * o objetivo de encontrar Will Byers.
  * 
  * Para jogar esse jogo, crie uma instancia dessa classe e chame o método
  * "jogar".
  * 
  * Essa classe principal cria e inicializa todas as outras: ela cria os
- * ambientes,
- * cria o analisador e começa o jogo. Ela também avalia e executa os comandos
- * que
- * o analisador retorna.
+ * ambientes - com os itens coletaveis e não coletaveis -, cria o analisador e
+ * começa o jogo. Ela também avalia e executa os comandos que o analisador
+ * retorna.
  * 
+ * @author Ana Beatriz Rodrigues Torres,
+ *         Ingrid de Falchi,
+ *         Larissa Narciso Oliveira e
+ *         Samuel Luiz Freitas Ferreira
+ * 
+ *         Baseado no jogo "World of Zuul", um RPG por textos pelo terminal.
  * @author Michael Kölling and David J. Barnes (traduzido e adaptado por Julio
  *         César Alves)
  */
 
 public class Jogo {
-    // dados do jogador
+    // Personagem principal: Jim Hopper
     private Principal personagemPrincipal;
-    // analisador de comandos do jogo
+    // Analisador de comandos do jogo
     private Analisador analisador;
-    // ambiente onde se encontra o jogador
+    // Ambiente onde se encontra o personagem principal
     private Ambiente ambienteAtual;
 
     /**
@@ -46,20 +54,22 @@ public class Jogo {
      * Cria todos os ambientes, adiciona os itens e liga as saidas deles
      */
     private void criarAmbientes() {
-        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
+        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim,
+                floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI,
+                florestaMI, casteloMI;
 
-        // cria os itens coletaveis dos ambientes
+        // itens coletaveis dos ambientes
         Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
-        
+
         chaveEscritorio = new Coletavel("chave", "chave do escritório", "abre a porta");
         balaRevolver = new Coletavel("bala", "bala de revolver", "coloca na arma");
         alicate = new Coletavel("alicate", "alicate grande e enferrujado", "abre a grade");
         lanterna = new Coletavel("lanterna", "lanterna tática potente", "ilumina o Mundo Invertido");
         revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "atira no inimigo");
 
-        // cria as pistas (item não coletaveis dos ambientes)
+        // pistas (item não coletaveis dos ambientes)
         Item desenhoWill, bicicleta, pisca;
-        
+
         bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida");
         pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
         desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança");
@@ -67,22 +77,22 @@ public class Jogo {
         // cria os ambientes
         centro = new Ambiente("no centro da cidade de Hawkins");
         delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
-        escritorioDelegacia = new Ambiente ("no seu escritório na delegacia");
-        escola = new Ambiente ("na Escola de Hawkins");
-        ferroVelho = new Ambiente ("no ferro velho ao redor da cidade");
-        casaMike = new Ambiente ("na casa da família Wheeler");
-        poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler");
-        trailerJim = new Ambiente ("no seu trailer");
-        floresta = new Ambiente ("na Floresta Sombria");
-        casaByers = new Ambiente ("na casa da família Byers");
-        casteloByers = new Ambiente ("no Castelo Byers, uma cabana do Will Byers");
-        florestaFundo = new Ambiente ("no fundo da Floresta Sombria");
-        laboratorio = new Ambiente ("no Laboratório Nacional de Hawkins");
-        salaLaboratorio = new Ambiente ("na sala do Laboratório");
-        laboratorioMI = new Ambiente ("no Laboratório do Mundo Invertido");
-        florestaMI = new Ambiente ("na Floresta Sombria do Mundo Invertido");
-        casteloMI = new Ambiente ("no Castelo Byers do Mundo Invertido");
-        
+        escritorioDelegacia = new Ambiente("no seu escritório na delegacia");
+        escola = new Ambiente("na Escola de Hawkins");
+        ferroVelho = new Ambiente("no ferro velho ao redor da cidade");
+        casaMike = new Ambiente("na casa da família Wheeler");
+        poraoCasaMike = new Ambiente("no porão da casa da família Wheeler");
+        trailerJim = new Ambiente("no seu trailer");
+        floresta = new Ambiente("na Floresta Sombria");
+        casaByers = new Ambiente("na casa da família Byers");
+        casteloByers = new Ambiente("no Castelo Byers, uma cabana do Will Byers");
+        florestaFundo = new Ambiente("no fundo da Floresta Sombria");
+        laboratorio = new Ambiente("no Laboratório Nacional de Hawkins");
+        salaLaboratorio = new Ambiente("na sala do Laboratório");
+        laboratorioMI = new Ambiente("no Laboratório do Mundo Invertido");
+        florestaMI = new Ambiente("na Floresta Sombria do Mundo Invertido");
+        casteloMI = new Ambiente("no Castelo Byers do Mundo Invertido");
+
         // adiciona os itens nos ambientes
         delegacia.adicionarItem(chaveEscritorio);
         escola.adicionarItem(desenhoWill);
@@ -143,7 +153,7 @@ public class Jogo {
         florestaMI.ajustarSaida("tras", laboratorioMI);
         florestaMI.ajustarSaida("frente", casteloMI);
 
-        casteloMI.ajustarSaida("tras", florestaMI);        
+        casteloMI.ajustarSaida("tras", florestaMI);
 
         ambienteAtual = centro; // o jogo comeca no centro
     }
@@ -166,13 +176,14 @@ public class Jogo {
     }
 
     /**
-     * Imprime a mensagem de abertura para o jogador.
+     * Imprime a mensagem de abertura o usuário.
      */
     private void imprimirBoasVindas() {
         System.out.println();
         System.out.println("Bem-vindo a Bagulhos Sinistros!");
         System.out.println("Este é um jogo de RPG investigativo sobrenatural.");
-        System.out.println("\nApós o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins.");
+        System.out.println(
+                "\nApós o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins.");
         System.out.println("Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
         System.out.println("\nSeu objetivo é achar o Will Byers!");
         System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
@@ -205,9 +216,9 @@ public class Jogo {
             observar();
         } else if (palavraDeComando.equals("pegar")) {
             pegar(comando);
-        }else if (palavraDeComando.equals("usar")) {
+        } else if (palavraDeComando.equals("usar")) {
             usar(comando);
-        }else if (palavraDeComando.equals("largar")) {
+        } else if (palavraDeComando.equals("largar")) {
             largar(comando);
         }
 
@@ -216,7 +227,7 @@ public class Jogo {
 
     /**
      * Exibe informações de ajuda.
-     * Aqui nós imprimimos algo bobo e enigmático e a lista de palavras de comando
+     * Imprime o objetivo do jogo e os possíveis comandos.
      */
     private void imprimirAjuda() {
         System.out.println("Voce está em Hawkins e seu objetivo é encontrar Will Byers");
@@ -240,7 +251,7 @@ public class Jogo {
 
         String direcao = comando.getSegundaPalavra();
 
-        // Tenta sair do ambiente atual
+        // tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
         proximoAmbiente = ambienteAtual.getAmbiente(direcao);
 
@@ -255,7 +266,7 @@ public class Jogo {
 
     /**
      * Exibe informações do ambiente atual.
-     * É indicada a localização atual e as possíveis saídas.
+     * Imprime a localização atual e as possíveis saídas.
      */
     private void exibirAmbienteAtual() {
         System.out.println("\nVoce esta " + ambienteAtual.getDescricao());
@@ -281,7 +292,8 @@ public class Jogo {
 
     /**
      * "Observar" foi digitado.
-     * Exibe a descrição longa do ambiente atual e, se o jogador possuir
+     * Exibe a descrição longa do ambiente atual e, se o personagem principal
+     * possuir
      * itens, eles também são exibidos.
      */
     private void observar() {
@@ -296,7 +308,8 @@ public class Jogo {
     /**
      * "Pegar" foi digitado.
      * Verifica se tem uma segunda palavra indicando qual item coletar
-     * e tenta coletar o item, removendo do ambiente e adicionando no jogador.
+     * e tenta coletar o item, removendo do ambiente e adicionando no personagem
+     * principal.
      * 
      * @param comando O comando digitado.
      */
@@ -310,14 +323,16 @@ public class Jogo {
         String item = comando.getSegundaPalavra();
         boolean encontrouItem = ambienteAtual.procuraItem(item);
 
-        // Tenta coletar o item
+        // ambiente tenta encontrar o item
         if (encontrouItem) {
             Item itemEncontrado = ambienteAtual.coletarItem(item);
 
+            // personagem principal tenta coletar o item se encontrado
             if (itemEncontrado != null) {
                 boolean pegouItem = personagemPrincipal.adicionarItem(itemEncontrado);
 
-                if (pegouItem){
+                // verifica se atingiu o máximo de tipos de itens coletados
+                if (pegouItem) {
                     System.out.println("Você coletou o item " + item);
                 } else {
                     ambienteAtual.adicionarItem(itemEncontrado);
@@ -330,11 +345,11 @@ public class Jogo {
             System.out.println("Não há esse item no ambiente");
         }
     }
- /**
+
+    /**
      * "Usar" foi digitado.
      * Verifica se tem uma segunda palavra indicando qual item quer usar
-     * e tenta usar o item, removendo do ambiente e adicionando no jogador principal
-     * 
+     * e tenta usar o item no ambiente atual.
      * 
      * @param comando O comando digitado.
      */
@@ -345,22 +360,24 @@ public class Jogo {
             return;
         }
 
+        // tenta encontrar o item
         String item = comando.getSegundaPalavra();
         boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
+        // tenta usar o item se encontrado
         if (encontrouItem) {
             String acao = personagemPrincipal.usarItem(item);
             System.out.println("Voce usa o item " + item + " e " + acao);
-        }
-        else{
+        } else {
             System.out.println("Voce nao possui esse item");
         }
     }
-    
+
     /**
      * "Largar" foi digitado.
      * Verifica se tem uma segunda palavra indicando qual item quer descartar
      * e tenta largar o item, removendo do jogador e devolvendo no ambiente
+     * 
      * @param comando O comando digitado.
      */
     private void largar(Comando comando) {
@@ -370,22 +387,23 @@ public class Jogo {
             return;
         }
 
+        // tenta encontrar o item
         String item = comando.getSegundaPalavra();
         boolean encontrouItem = personagemPrincipal.procurarItem(item);
 
+        // tenta largar o item do personagem principal
         if (encontrouItem) {
             Item itemEncontrado = personagemPrincipal.largarItem(item);
 
-        if (itemEncontrado != null){
-            ambienteAtual.adicionarItem(itemEncontrado);
+            // tenta adicionar item no ambiente
+            if (itemEncontrado != null) {
+                ambienteAtual.adicionarItem(itemEncontrado);
 
-            System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
-        }
-        else {
-            System.out.println("Nao eh possivel largar esse item");
-        }
-    }
-        else{
+                System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
+            } else {
+                System.out.println("Nao eh possivel largar esse item");
+            }
+        } else {
             System.out.println("Voce nao possui esse item");
         }
     }

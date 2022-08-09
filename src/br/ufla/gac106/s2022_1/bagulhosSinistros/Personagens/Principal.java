@@ -1,11 +1,26 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens;
 
 import java.util.HashMap;
-
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 
 /**
- * Classe principal - Representa o personagem Hooper, personagem principal do jogo
+ * Classe Principal (Herda de Personagem)
+ * 
+ * Essa é uma parte da aplicacao "Bagulhos Sinistros".
+ * "Bagulhos Sinistros" é um jogo de RPG investigação sobrenatural, baseado em
+ * texto.
+ * 
+ * Essa classe representa o personagem principal do jogo. Nela é
+ * possivel exibir, guardar, largar e usar itens do seu coldre.
+ * 
+ * @author Ana Beatriz Rodrigues Torres,
+ *         Ingrid de Falchi,
+ *         Larissa Narciso Oliveira e
+ *         Samuel Luiz Freitas Ferreira
+ * 
+ *         Baseado no jogo "World of Zuul", um RPG por textos pelo terminal.
+ * @author Michael Kölling and David J. Barnes (traduzido e adaptado por Julio
+ *         César Alves)
  */
 
 public class Principal extends Personagem {
@@ -14,8 +29,12 @@ public class Principal extends Personagem {
     // Variavel que armazena o máximo de tipo de itens
     private static int maximoTipoItens = 3;
 
-    /*
-     * Cria o personagem principal do jogo.
+    /**
+     * Cria o personagem principal com o nome passado.
+     * Inicialmente ele não possui itens no coldre.
+     * "nome" é algo como "Jim Hopper".
+     * 
+     * @param nome O nome do personagem principal.
      */
     public Principal(String nome) {
         super(nome, "Principal");
@@ -24,9 +43,9 @@ public class Principal extends Personagem {
     }
 
     /**
-     * Retorna se há itens no ambiente.
+     * Retorna se há itens no coldre do personagem principal.
      * 
-     * @return true se há um item no ambiente.
+     * @return true se há um item no coldre.
      */
     public boolean temItem() {
         for (Item item : coldre.keySet()) {
@@ -39,7 +58,8 @@ public class Principal extends Personagem {
 
     /**
      * Adiciona itens no coldre se o item ja existe, incrementa na quantidade,
-     * se não, adiciona o item no hashmap a quantidade de itens não pode exceder o máximo
+     * se não, adiciona o item no hashmap a quantidade de itens não pode exceder o
+     * máximo
      * 
      * @param novoItem recebe um item para ser armazenado
      * @return true se foi adicionado com sucesso
@@ -69,12 +89,12 @@ public class Principal extends Personagem {
                 return true;
             }
         }
-        
+
         return false;
     }
 
     /**
-     * Remove um item do jogador
+     * Remove um item do coldre do personagem principal
      * 
      * @param nome O nome do item a ser removido.
      * @return o item a ser deixado no ambiente.
@@ -98,7 +118,7 @@ public class Principal extends Personagem {
     }
 
     /**
-     * Usa um item do jogador
+     * Usa um item do personagem principal
      * 
      * @param nome O nome do item a ser usado.
      * @return a acao do item.
