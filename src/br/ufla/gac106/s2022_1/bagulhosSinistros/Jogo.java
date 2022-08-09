@@ -1,7 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Item;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.ItemColetavel;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.item.ItemNaoColetavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Coletavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.item.Pista;
 
 /**
  * Essa é a classe principal da aplicacao "World of Zull".
@@ -41,44 +41,38 @@ public class Jogo {
     }
 
     /**
-     * Cria todos os ambientes e liga as saidas deles
+     * Cria todos os ambientes, adiciona os itens e liga as saidas deles
      */
     private void criarAmbientes() {
         Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
-        // cria os itens dos ambientes
-        Item chaveEscritorio = new ItemColetavel("chave", "chave do escritório", "chave");
-        Item balasArma = new ItemColetavel("balas", "um par de balas de revolver", "bala");
-        Item desenhoWill = new ItemNaoColetavel("desenho", "desenho infantil aparentemente feito por uma criança");
-        Item alicate = new ItemColetavel("alicate", "alicate grande e enferrujado", "alicate");
-        Item lanterna = new ItemColetavel("lanterna", "lanterna tática potente", "chave");
-        Item revolver = new ItemColetavel("revolver", "revolver modelo 66 com capacidade para 10 balas", "revolver");
-        Item balasArma2 = new ItemColetavel("balas", "um par de balas de revolver", "bala");
-        Item bicicleta = new ItemNaoColetavel("bicicleta", "uma bicicleta vermelha caida");
-        Item pisca = new ItemNaoColetavel("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede com um alfabeto");
+        // cria os itens coletaveis dos ambientes
+        Item chaveEscritorio, balasRevolver, alicate, lanterna, revolver;
+        
+        chaveEscritorio = new Coletavel("chave", "chave do escritório", "abre a porta");
+        balasRevolver = new Coletavel("balas", "um par de balas de revolver", "coloca na arma");
+        alicate = new Coletavel("alicate", "alicate grande e enferrujado", "abre a grade");
+        lanterna = new Coletavel("lanterna", "lanterna tática potente", "ilumina o Mundo Invertido");
+        revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "atira no inimigo");
+
+        // cria as pistas (item não coletaveis dos ambientes)
+        Item desenhoWill, bicicleta, pisca;
+        
+        bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida");
+        pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
+        desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança");
 
         // cria os ambientes
         centro = new Ambiente("no centro da cidade de Hawkins");
-        centro.adicionarItem(chaveEscritorio);
-        centro.adicionarItem(desenhoWill);
         delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
-        delegacia.adicionarItem(chaveEscritorio);
         escritorioDelegacia = new Ambiente ("no seu escritório na delegacia");
-        escritorioDelegacia.adicionarItem(balasArma);
         escola = new Ambiente ("na Escola de Hawkins");
-        escola.adicionarItem(desenhoWill);
         ferroVelho = new Ambiente ("no ferro velho ao redor da cidade");
-        ferroVelho.adicionarItem(alicate);
         casaMike = new Ambiente ("na casa da família Wheeler");
         poraoCasaMike = new Ambiente ("no porão da casa da família Wheeler");
-        poraoCasaMike.adicionarItem(lanterna);
         trailerJim = new Ambiente ("no seu trailer");
-        trailerJim.adicionarItem(revolver);
-        trailerJim.adicionarItem(balasArma);
         floresta = new Ambiente ("na Floresta Sombria");
-        floresta.adicionarItem(bicicleta);
         casaByers = new Ambiente ("na casa da família Byers");
-        casaByers.adicionarItem(pisca);
         casteloByers = new Ambiente ("no Castelo Byers, uma cabana do Will Byers");
         florestaFundo = new Ambiente ("no fundo da Floresta Sombria");
         laboratorio = new Ambiente ("no Laboratório Nacional de Hawkins");
@@ -86,6 +80,17 @@ public class Jogo {
         laboratorioMI = new Ambiente ("no Laboratório do Mundo Invertido");
         florestaMI = new Ambiente ("na Floresta Sombria do Mundo Invertido");
         casteloMI = new Ambiente ("no Castelo Byers do Mundo Invertido");
+        
+        // adiciona os itens nos ambientes
+        delegacia.adicionarItem(chaveEscritorio);
+        escritorioDelegacia.adicionarItem(balasRevolver);
+        escola.adicionarItem(desenhoWill);
+        ferroVelho.adicionarItem(alicate);
+        poraoCasaMike.adicionarItem(lanterna);
+        trailerJim.adicionarItem(revolver);
+        trailerJim.adicionarItem(balasRevolver);
+        floresta.adicionarItem(bicicleta);
+        casaByers.adicionarItem(pisca);
 
         // inicializa as saidas dos ambientes
         centro.ajustarSaida("esquerda", ferroVelho);
@@ -94,6 +99,7 @@ public class Jogo {
 
         delegacia.ajustarSaida("corredor", escritorioDelegacia);
         delegacia.ajustarSaida("tras", casaMike);
+        delegacia.ajustarSaida("frente", centro);
 
         escritorioDelegacia.ajustarSaida("corredor", delegacia);
 
@@ -102,6 +108,7 @@ public class Jogo {
         ferroVelho.ajustarSaida("direita", centro);
         ferroVelho.ajustarSaida("esquerda", trailerJim);
 
+        casaMike.ajustarSaida("frente", delegacia);
         casaMike.ajustarSaida("escada", poraoCasaMike);
 
         poraoCasaMike.ajustarSaida("escada", casaMike);
@@ -123,6 +130,7 @@ public class Jogo {
         florestaFundo.ajustarSaida("tras", casteloByers);
         florestaFundo.ajustarSaida("frente", laboratorio);
 
+        laboratorio.ajustarSaida("tras", floresta);
         laboratorio.ajustarSaida("escada", salaLaboratorio);
 
         salaLaboratorio.ajustarSaida("escada", laboratorio);
@@ -163,12 +171,10 @@ public class Jogo {
         System.out.println();
         System.out.println("Bem-vindo a Bagulhos Sinistros!");
         System.out.println("Este é um jogo de RPG investigativo sobrenatural.");
-        System.out.println();
-        System.out.println("Após o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins. Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
-        System.out.println();
+        System.out.println("\nApós o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins.");
+        System.out.println("Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
         System.out.println("\nSeu objetivo é achar o Will Byers!");
         System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
-        System.out.println();
 
         exibirAmbienteAtual();
     }

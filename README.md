@@ -43,6 +43,14 @@ Na investigação, deverá ser analisado alguns itens para descobrir onde está 
 
 Com a análise dessas 3 pistas, será liberado a passagem para o mundo invertido.
 
+Será necessário alguns itens essenciais no Mundo Invertido:
+
+1. Arma
+2. Balas
+3. Lanterna
+
+No Mundo invertido, o jogador irá encontrar o Demogorgon, ao derrota-lo utilizando o revolver, a passagem para o Castelo Byers será liberada, e lá irá encontar o Will.
+
 ### Game Over:
 
 70 movimentos.
@@ -102,7 +110,8 @@ RPG Investigação Sobrenatural.
     <td>-</td>
     <td>
       Corredor: Escritório <br>
-      Trás: Casa Mike
+      Trás: Casa Mike <br>
+      Frente: Centro
     </td>
   </tr>
   <tr>
@@ -137,7 +146,10 @@ RPG Investigação Sobrenatural.
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Escada: Porão</td>
+    <td>
+      Escada: Porão <br>
+      Frente: Delegacia
+    </td>
   </tr>
    <tr>
     <td>Porão</td>
@@ -209,7 +221,10 @@ RPG Investigação Sobrenatural.
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Escada: Sala</td>
+    <td>
+      Escada: Sala <br>
+      Tras: Floresta
+    </td>
   </tr>
   <tr>
     <td>Sala</td>
@@ -297,18 +312,12 @@ RPG Investigação Sobrenatural.
 - Bicicleta Will
 - Pisca-Pisca
 
-#### Ações:
 
-- Usar
-  - Alicate
-  - Chave
-  - Lanterna
-- Analisar
-  - Desenho
-  - Bicicleta
-  - Pisca-Pisca
-- Atacar Inimigo
-  - Revolver + Bala
+#### Funcionalidades:
+
+- Limite de tempo ao jogo.
+- Inimigos e forma de derrota-lo.
+- Ambientes com mais saídas bloqueadas.
 
 ### Palavras de Comando:
 
@@ -321,6 +330,23 @@ RPG Investigação Sobrenatural.
 - Usar
 - Analisar
 - Atacar Inimigo
+
+#### Ações:
+
+- Pegar
+  - Itens coletáveis
+- Largar
+  - Itens coletáveis
+- Usar
+  - Alicate
+  - Chave
+  - Lanterna
+- Analisar
+  - Desenho
+  - Bicicleta
+  - Pisca-Pisca
+- Atacar Inimigo
+  - Revolver + Bala
 
 ---
 
