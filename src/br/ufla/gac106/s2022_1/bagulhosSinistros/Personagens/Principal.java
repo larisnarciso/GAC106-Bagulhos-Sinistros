@@ -28,7 +28,7 @@ public class Principal extends Personagem {
      * 
      * @return true se há um item no ambiente.
      */
-    public boolean temItem() {
+    private boolean temItem() {
         for (Item item : coldre.keySet()) {
             if (item != null) {
                 return true;
@@ -41,19 +41,19 @@ public class Principal extends Personagem {
      * Adiciona itens no coldre se o item ja existe, incrementa na quantidade,
      * se não, adiciona o item no hashmap a quantidade de itens não pode exceder o máximo
      * 
-     * @param novoItem recebe um item para ser armazenado
+     * @param itemEncontrado recebe um item para ser armazenado
      * @return true se foi adicionado com sucesso
      */
-    public boolean adicionarItem(Item novoItem) {
+    public boolean adicionarItemColdre(Item itemEncontrado) {
         int qtdItens = 1;
-        boolean jaExiste = procurarItem(novoItem.getNome());
+        boolean jaExiste = procurarItemColdre(itemEncontrado.getNome());
 
         if (jaExiste)
-            qtdItens = coldre.get(novoItem) + 1;
+            qtdItens = coldre.get(itemEncontrado) + 1;
         else if (coldre.size() + 1 > maximoTipoItens)
             return false; // se quantidade for excedida
 
-        coldre.put(novoItem, qtdItens);
+        coldre.put(itemEncontrado, qtdItens);
         return true;
     }
 
@@ -61,7 +61,7 @@ public class Principal extends Personagem {
      * @param nome O nome do item;
      * @return se tem o item procurado.
      */
-    public boolean procurarItem(String nome) {
+    public boolean procurarItemColdre(String nome) {
         for (Item item : coldre.keySet()) {
             boolean itemEncontrado = temItem() && item.getNome().equals(nome);
 
@@ -129,7 +129,7 @@ public class Principal extends Personagem {
             listagemItens += "Itens no coldre (" + coldre.size() + "/3): ";
 
             for (Item item : coldre.keySet()) {
-                listagemItens += "\n- " + coldre.get(item) + " " + item.getDescricao();
+                listagemItens += "\n+ " + coldre.get(item) + " " + item.getDescricao();
             }
         }
         return listagemItens;

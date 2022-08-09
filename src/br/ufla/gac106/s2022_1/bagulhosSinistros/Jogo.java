@@ -85,6 +85,7 @@ public class Jogo {
         
         // adiciona os itens nos ambientes
         delegacia.adicionarItem(chaveEscritorio);
+        escritorioDelegacia.adicionarItem(balaRevolver);
         escola.adicionarItem(desenhoWill);
         ferroVelho.adicionarItem(alicate);
         poraoCasaMike.adicionarItem(lanterna);
@@ -285,12 +286,12 @@ public class Jogo {
      * itens, eles também são exibidos.
      */
     private void observar() {
+        System.out.println(ambienteAtual.getDescricaoLonga());
+        System.out.println();
         String itensColdre = personagemPrincipal.listarItensColdre();
         if (itensColdre != "") {
             System.out.println(itensColdre);
         }
-        System.out.println();
-        System.out.println(ambienteAtual.getDescricaoLonga());
     }
 
     /**
@@ -308,23 +309,23 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = ambienteAtual.procuraItem(item);
+        boolean encontrouItem = ambienteAtual.procurarItem(item);
 
         // Tenta coletar o item
         if (encontrouItem) {
             Item itemEncontrado = ambienteAtual.coletarItem(item);
 
             if (itemEncontrado != null) {
-                boolean pegouItem = personagemPrincipal.adicionarItem(itemEncontrado);
+                boolean pegouItem = personagemPrincipal.adicionarItemColdre(itemEncontrado);
 
                 if (pegouItem){
                     System.out.println("Você coletou o item " + item);
                 } else {
                     ambienteAtual.adicionarItem(itemEncontrado);
-                    System.out.println("Limite máximo de itens atingido!");
+                    System.out.println("Limite máximo de tipos de itens atingido!");
                 }
             } else {
-                System.out.println("Nao eh possivel coletar esse item");
+                System.out.println("Este item não é coletavel");
             }
         } else {
             System.out.println("Não há esse item no ambiente");
@@ -346,7 +347,7 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = personagemPrincipal.procurarItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItemColdre(item);
 
         if (encontrouItem) {
             String acao = personagemPrincipal.usarItem(item);
@@ -371,7 +372,7 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = personagemPrincipal.procurarItem(item);
+        boolean encontrouItem = personagemPrincipal.procurarItemColdre(item);
 
         if (encontrouItem) {
             Item itemEncontrado = personagemPrincipal.largarItem(item);
