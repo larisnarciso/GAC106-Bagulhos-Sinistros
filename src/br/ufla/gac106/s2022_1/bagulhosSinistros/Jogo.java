@@ -324,8 +324,8 @@ public class Jogo {
     }
  /**
      * "Usar" foi digitado.
-     * Verifica se o item foi coletado.
-     * 
+     * Verifica se tem uma segunda palavra indicando qual item quer usar
+     * se o jogador possuir o item ele é utilizado, senao retorna msg de erro.
      * @param comando O comando digitado.
      */
 
@@ -339,15 +339,20 @@ public class Jogo {
         String item = comando.getSegundaPalavra();
         Item itemEncontrado = jogador.getItem(item);
 
-        // Tenta coletar o item
         if (itemEncontrado != null) {
-            
             System.out.println(itemEncontrado.getAcao());
         }
         else{
             System.out.println("Voce nao possui esse item");
         }
     }   
+
+ /**
+     * "Largar" foi digitado.
+     * Verifica se tem uma segunda palavra indicando qual item quer descartar
+     * se o jogador possuir o item ele é descartado, senao retorna msg de erro.
+     * @param comando O comando digitado.
+     */
 
     private void largar(Comando comando){
         
