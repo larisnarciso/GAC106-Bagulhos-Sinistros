@@ -79,7 +79,7 @@ public class Ambiente {
     }
 
     /**
-     * Adiciona um item para o jogador
+     * Adiciona um item no ambiente.
      * 
      * @param item O item a ser adicionado.
      */
