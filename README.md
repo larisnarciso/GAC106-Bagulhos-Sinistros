@@ -299,7 +299,7 @@ RPG Investigação Sobrenatural.
 - Trás
 - Portal
 - Corredor
-- Elevador
+- Escada
 
 ### Itens:
 

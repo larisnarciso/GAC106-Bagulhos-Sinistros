@@ -11,7 +11,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
  * 
  * Um "Ambiente" representa uma localização no cenário do jogo. Ele é conectado aos 
  * outros ambientes através de saídas. As saídas são nomeadas como tras, frente, direita, esquerda,
- * escada e portal. Para cada direção, o ambiente guarda uma referência para o ambiente vizinho, 
+ * escada, portal e corredor. Para cada direção, o ambiente guarda uma referência para o ambiente vizinho, 
  * ou null se não há saída naquela direção.
  * 
  * @author Ana Beatriz Rodrigues Torres,
