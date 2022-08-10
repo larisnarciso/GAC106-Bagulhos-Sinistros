@@ -5,16 +5,40 @@
 </div>
 
 <p align=center>
-  <a href="#sobre" style="font-weight: 600; color: #D90B0B">Sobre o Jogo</a> • 
-  <a href="#mapa" style="font-weight: 600; color: #D90B0B">Mapa</a> • 
-  <a href="#jogabilidade" style="font-weight: 600; color: #D90B0B">Jogabilidade</a> • 
-  <a href="#trabalho" style="font-weight: 600; color: #D90B0B">Trabalho</a> • 
-  <a href="#tecnologia" style="font-weight: 600; color: #D90B0B">Tecnologia</a> • 
-  <a href="#autores" style="font-weight: 600; color: #D90B0B">Autores</a> • 
-  <a href="#licenca" style="font-weight: 600; color: #D90B0B">Licença</a> 
+  <a href="#trabalho" style="font-weight: 600; color: #A60D1A">Trabalho</a> • 
+  <a href="#sobre" style="font-weight: 600; color: #A60D1A">Sobre o Jogo</a> • 
+  <a href="#mapa" style="font-weight: 600; color: #A60D1A">Mapa</a> • 
+  <a href="#jogabilidade" style="font-weight: 600; color: #A60D1A">Jogabilidade</a> • 
+  <a href="#tecnologias" style="font-weight: 600; color: #A60D1A">Tecnologias</a> • 
+  <a href="#autores" style="font-weight: 600; color: #A60D1A">Autores</a> • 
+  <a href="#licenca" style="font-weight: 600; color: #A60D1A">Licença</a> 
 </p>
-
 <br>
+
+<h1 id="trabalho" style="font-weight: 600; color: #A60D1A">
+📚 Trabalho
+</h1>
+
+Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos da Universidade Federal de Lavras (UFLA), lecionada pelo professor Julio Cesar Alves.
+
+Baseado no jogo World of Zuul, um RPG por textos pelo terminal.
+
+Para o gerenciamento do projeto, fluxo de trabalho e monitoramento de tarefas, foi utilizado a ferramenta Trello. Planejamos o trabalho como um todo, elaborando um bom Design de Classes e dividindo as tarefas entre os membros do grupo.
+
+**Jogabilidade**
+Do ponto de vista do jogador, ele poderá andar em 7 direções nos 17 ambientes. Além disso, ele terá uma missão para concluir o jogo, que consiste em analisar e coletar itens para encontrar Will. Caso o jogador ultrapasse 70 movimentos, o jogo irá finalizar.
+
+Mais detalhes em <a href="#sobre">Sobre o Jogo</a> e <a href="#jogabilidade">Jogabilidade</a>.
+
+**Conceitos**
+Para a construção do trabalho foram utilizados os conceitos estudados de Orientação a Objetos:
+- Relacionamentos de composição, agregação e associação: entre as classes Ambiente, Item e Personagem.
+- Herança: Coletavel e Pista herdam de Item e Principal, NPC e Demogorgom herdam de Personagem.
+- Polimorfismo:
+  - Variável Polimórfica: itens na classe Ambiente que recebem tanto Item Coletavel quanto Item Pista.
+  - Polimorfismo de Método: sobrescrição do método getDescricao() da classe Item pela classe Pista, adicionando uma informação que é um item especial. 
+- Salvamento/carregamento de dados: será em um arquivo de texto, armazenando dados como, se ele venceu ou não, quantidade de movimentos, itens coletados e ambientes explorados.
+
 <h1 id="sobre" style="font-weight: 600; color: #A60D1A" > 🕹️ Sobre o Jogo </h1>
 
 ### História:
@@ -329,25 +353,14 @@ RPG Investigação Sobrenatural.
 
 ---
 
-<h1 id="trabalho" style="font-weight: 600; color: #A60D1A">
-📚 Trabalho
-</h1>
-
-Trabalho Prático da disciplina de Prática de Programação Orientada a Objetos da Universidade Federal de Lavras (UFLA), lecionada pelo professor Julio Cesar Alves.
-
-Baseado no jogo World of Zuul, um RPG por textos pelo terminal.
-
-Para o gerenciamento do projeto, fluxo de trabalho e monitoramento de tarefas, foi utilizado a ferramenta Trello. 
-
-
-<h1 id="tecnologia" style="font-weight: 600; color: #A60D1A">
+<h1 id="tecnologias" style="font-weight: 600; color: #A60D1A">
 🛠️ Tecnologias
 </h1>
 
 <table border-collapse=collapse>
   <tr>
     <td><img alt="Java" height="30" widht="40" src="https://raw.githubusercontent.com/vorillaz/devicons/ba75593fdf8d66496676a90cbf127d721f73e961/!SVG/java.svg" /></td>
-    <td><a href="https://docs.oracle.com/en/java/" target="_blank">Java</a></td>
+    <td><a href="https://docs.oracle.com/en/java/" target="_blank">Java 11</a></td>
   </tr>
   <tr>
     <td><img alt="VSCode" height="30" widht="40" src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" /></td>
