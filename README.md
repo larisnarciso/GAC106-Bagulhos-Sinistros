@@ -26,11 +26,13 @@ Baseado no jogo World of Zuul, um RPG por textos pelo terminal.
 Para o gerenciamento do projeto, fluxo de trabalho e monitoramento de tarefas, foi utilizado a ferramenta Trello. Planejamos o trabalho como um todo, elaborando um bom Design de Classes e dividindo as tarefas entre os membros do grupo.
 
 **Jogabilidade**
+
 Do ponto de vista do jogador, ele poderá andar em 7 direções nos 17 ambientes. Além disso, ele terá uma missão para concluir o jogo, que consiste em analisar e coletar itens para encontrar Will. Caso o jogador ultrapasse 70 movimentos, o jogo irá finalizar.
 
 Mais detalhes em <a href="#sobre">Sobre o Jogo</a> e <a href="#jogabilidade">Jogabilidade</a>.
 
 **Conceitos**
+
 Para a construção do trabalho foram utilizados os conceitos estudados de Orientação a Objetos:
 - Relacionamentos de composição, agregação e associação: entre as classes Ambiente, Item e Personagem.
 - Herança: Coletavel e Pista herdam de Item e Principal, NPC e Demogorgom herdam de Personagem.
