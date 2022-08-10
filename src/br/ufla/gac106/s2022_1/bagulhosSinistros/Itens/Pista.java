@@ -33,4 +33,13 @@ public class Pista extends Item {
     public Pista(String nome, String descricao) {
         super(nome, descricao, null, false);
     }
+
+    /**
+     * @return A descrição do item da classe Item e a informação que o item é
+     *         especial.
+     */
+    @Override
+    public String getDescricao() {
+        return super.getDescricao() + "... este item te chamou atenção...";
+    }
 }
