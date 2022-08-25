@@ -1,6 +1,6 @@
 <div align=center>
 
-![Bagulhos Sinistros](./src/img/logo/bagulhos_sinistros.png)
+![Bagulhos Sinistros](./img/logo/bagulhos_sinistros.png)
 
 </div>
 
@@ -101,7 +101,7 @@ RPG Investigação Sobrenatural.
 <br>
 <div align=center>
 
-![Mapa](./src/img/documento/mapa.png "Mapa de Hawkins")
+![Mapa](./img/documento/mapa.png "Mapa de Hawkins")
 
 </div>
 
