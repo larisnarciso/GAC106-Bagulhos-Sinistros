@@ -20,7 +20,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
  *         César Alves)
  */
 
-public class Item {
+public abstract class Item {
     private String nome;
     private String descricao;
     private String acao;
