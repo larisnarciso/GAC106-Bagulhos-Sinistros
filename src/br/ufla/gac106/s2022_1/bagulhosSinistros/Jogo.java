@@ -401,8 +401,6 @@ public class Jogo {
                 ambienteAtual.adicionarItem(itemEncontrado);
 
                 System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
-            } else {
-                System.out.println("Nao eh possivel largar esse item");
             }
         } else {
             System.out.println("Voce nao possui esse item");
