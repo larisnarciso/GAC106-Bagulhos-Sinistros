@@ -65,7 +65,7 @@ Na investigação, deverá ser analisado alguns itens para descobrir onde está 
 
 1. O desenho irá ser uma pista de onde o Will está
 2. A bicicleta irá mostrar que o Will estava perto do Laboratório
-3. As luzes do pisca-pisca na casa da Joyce irá indicar que eles está no Mundo Invertido
+3. O pisca-pisca na casa da Joyce irá indicar que ele está no Mundo Invertido
 
 Com a análise dessas 3 pistas, será liberado a passagem para o mundo invertido.
 
