@@ -118,7 +118,7 @@ public class Jogo {
         nancy.adicionarMensagem("Ele era grande e parecia não ter um rosto");
 
         dustin = new NPC("Dustin", "um amigo do Will e estes são Mike e Lucas");
-        dustin.adicionarMensagem("Vimos homens armados no laboratório");
+        dustin.adicionarMensagem("Nós vimos homens armados no laboratório");
         dustin.adicionarMensagem("Mas não conseguimos passar pelas grades");
 
         eleven = new NPC("Eleven", "uma garota escondida em um forte de travesseiros");
@@ -127,7 +127,7 @@ public class Jogo {
 
         joyce = new NPC("Joyce", "uma mãe preocupada com o sumiço de meu filho");
         joyce.adicionarMensagem("Meu filho falou que está aqui");
-        joyce.adicionarMensagem("Ele me contou pelas luzes");
+        joyce.adicionarMensagem("Ele me mostrou através das luzes");
 
         will = new NPC("Will", "o garoto perdido");
 
@@ -255,6 +255,8 @@ public class Jogo {
             usar(comando);
         } else if (palavraDeComando.equals("largar")) {
             largar(comando);
+        } else if (palavraDeComando.equals("interagir")) {
+            interagir(comando);
         }
 
         return querSair;
@@ -439,5 +441,31 @@ public class Jogo {
         } else {
             System.out.println("Voce nao possui esse item");
         }
+    }
+
+    /**
+     * "Interagir" foi digitado.
+     * Verifica se tem uma segunda palavra indicando qual NPC quer interagir
+     * e tenta interagir com ele.
+     * 
+     * @param comando O comando digitado.
+     */
+    private void interagir(Comando comando) {
+        // se não há segunda palavra, não sabemos com quem interagir...
+        if (!comando.temSegundaPalavra()) {
+            System.out.println("Interagir com quem?");
+            return;
+        }
+
+        // a segunda palavra representa o NPC
+        String npc = comando.getSegundaPalavra();
+
+        try {
+            String mensagem = ambienteAtual.interagirComNpc(npc);
+            System.out.println(mensagem);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

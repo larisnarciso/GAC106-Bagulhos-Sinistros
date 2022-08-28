@@ -81,10 +81,10 @@ public class Ambiente {
     public String getDescricaoLonga() {
         String textoDescricao = "";
 
-        textoDescricao += "Você está " + descricao + "\n"; // ambiente atual
+        textoDescricao += "Você está " + descricao; // ambiente atual
+        textoDescricao += listarNpcs(); // npcs no ambiente
         textoDescricao += listarItens(); // itens no ambiente
         textoDescricao += listarMonstros(); // monstros no ambiente
-        textoDescricao += listarNpcs(); // monstros no ambiente
 
         return textoDescricao;
     }
@@ -128,7 +128,7 @@ public class Ambiente {
         String listaItens = "";
 
         if (temItem()) {
-            listaItens += "\nItem encontrado!\n";
+            listaItens += "\n\nItem encontrado!";
 
             for (Item item : itens) {
                 listaItens += "\n- " + item.getNome() + ": " + item.getDescricao();
@@ -215,17 +215,12 @@ public class Ambiente {
     private String listarNpcs() {
         String listaNpcs = "";
 
-        if (temNpc()) {            
+        if (temNpc()) {
+            listaNpcs += "\n";
+
             for (NPC npc : npcs) {
-                listaNpcs += npc.getNome() + " ";
+                listaNpcs += "\n" + npc.getNome() + " está aqui!";
             }
-
-            if (npcs.size() == 1) {
-                listaNpcs += " foi encontrado!";
-            } else if (npcs.size() > 1) {
-                listaNpcs += " foram encontrados!";
-            }
-
         }
 
         return listaNpcs;
@@ -236,13 +231,21 @@ public class Ambiente {
      * 
      * @return A mensagem do NPC.
      */
-    public String interagirComNpc (String nome) {
-        for (int i = 0; i < npcs.size(); i++) {
-            if (npcs.get(i).getNome().equals(nome)) {
-                return npcs.get(i).dizerMensagem();
+    public String interagirComNpc(String nome) {
+        String interacao = "";
+
+        // busca o npc para interagir, se encontra, retorna a mensagem 
+        if (npcs.size() > 0) {
+            for (NPC npc : npcs) {
+                if (npc.getNome().equals(nome)) {
+                    interacao += npc.dizerMensagem();
+                }
             }
+        } else {
+            throw new RuntimeException("Não há NPCs!");
         }
-        return null;
+
+        return interacao;
     }
 
     /**
