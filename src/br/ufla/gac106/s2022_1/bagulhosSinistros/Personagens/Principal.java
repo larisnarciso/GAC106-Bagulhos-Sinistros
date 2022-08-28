@@ -83,7 +83,7 @@ public class Principal extends Personagem {
      */
     public boolean procurarItemColdre(String nome) {
         for (Item item : coldre.keySet()) {
-            boolean itemEncontrado = temItem() && item.getNome().equals(nome);
+            boolean itemEncontrado = item.getNome().equals(nome);
 
             if (itemEncontrado) {
                 return true;
@@ -127,7 +127,7 @@ public class Principal extends Personagem {
         String acaoItem = "";
 
         for (Item item : coldre.keySet()) {
-            boolean itemEncontrado = temItem() && item.getNome().equals(nome);
+            boolean itemEncontrado = item.getNome().equals(nome);
 
             if (itemEncontrado) {
                 acaoItem += item.getAcao();
