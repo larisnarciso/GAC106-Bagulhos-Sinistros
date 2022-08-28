@@ -1,6 +1,9 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 
 /**
  * Classe Ambiente
@@ -32,6 +35,10 @@ public class Ambiente {
     private String descricao;
     // itens do ambiente
     private ArrayList<Item> itens;
+    // monstros do ambiente
+    private ArrayList<Monstro> monstros;
+    // NPCs do ambiente
+    private ArrayList<NPC> npcs;
     // ambientes visinhos de acordo com a direção
     private HashMap<String, Ambiente> saidas;
 
@@ -44,6 +51,8 @@ public class Ambiente {
     public Ambiente(String descricao) {
         this.descricao = descricao;
         itens = new ArrayList<>();
+        monstros = new ArrayList<>();
+        npcs = new ArrayList<>();
         saidas = new HashMap<String, Ambiente>();
     }
 
@@ -55,7 +64,7 @@ public class Ambiente {
      * @param direcao  A direção definida.
      * @param ambiente o ambiente definida.
      */
-    public void ajustarSaida(String direcao, Ambiente ambiente){
+    public void ajustarSaida(String direcao, Ambiente ambiente) {
         saidas.put(direcao, ambiente);
     }
 
@@ -72,8 +81,10 @@ public class Ambiente {
     public String getDescricaoLonga() {
         String textoDescricao = "";
 
-        textoDescricao += "Você está " + descricao + "\n"; // ambiente atual
+        textoDescricao += "Você está " + descricao; // ambiente atual
+        textoDescricao += listarNpcs(); // npcs no ambiente
         textoDescricao += listarItens(); // itens no ambiente
+        textoDescricao += listarMonstros(); // monstros no ambiente
 
         return textoDescricao;
     }
@@ -91,12 +102,10 @@ public class Ambiente {
      * @return true se há um item no ambiente.
      */
     private boolean temItem() {
-        for (Item item : itens) {
-            if (item != null) {
-                return true;
-            }
-        }
-        return false;
+        if (itens.size() > 0)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -105,7 +114,7 @@ public class Ambiente {
      */
     public boolean procurarItem(String nome) {
         for (Item item : itens) {
-            if (temItem() && item.getNome().equals(nome)) {
+            if (item.getNome().equals(nome)) {
                 return true;
             }
         }
@@ -119,12 +128,11 @@ public class Ambiente {
         String listaItens = "";
 
         if (temItem()) {
-            listaItens += "\nItens encontrado!\n";
+            listaItens += "\n\nItem encontrado!";
+
             for (Item item : itens) {
-                listaItens += "\n- " + item.getNome() + " - " + item.getDescricao();
+                listaItens += "\n- " + item.getNome() + ": " + item.getDescricao();
             }
-        } else {
-            listaItens += "\nNão há nada aqui";
         }
 
         return listaItens;
@@ -144,6 +152,100 @@ public class Ambiente {
             }
         }
         return null;
+    }
+
+    /**
+     * Adiciona um demogorgon no ambiente.
+     * 
+     * @param demogorgon O demogorgon a ser adicionado.
+     */
+    public void adicionarDemogorgon(Demogorgon demogorgon) {
+        monstros.add(demogorgon);
+    }
+
+    /**
+     * @return true se há um monstro no ambiente.
+     */
+    private boolean temMonstro() {
+        if (monstros.size() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * @return A lista de monstros no ambiente.
+     */
+    private String listarMonstros() {
+        String listaMonstros = "";
+
+        if (temMonstro()) {
+            listaMonstros += "\nMonstro encontrado!";
+
+            for (Monstro monstro : monstros) {
+                listaMonstros += "\n- " + monstro.getNome() + ": " + monstro.getDescricao();
+            }
+        }
+
+        return listaMonstros;
+    }
+
+    /**
+     * Adiciona um NPC no ambiente.
+     * 
+     * @param demogorgon O demogorgon a ser adicionado.
+     */
+    public void adicionarNpc(NPC npc) {
+        npcs.add(npc);
+    }
+
+    /**
+     * @return true se há um NPC no ambiente.
+     */
+    private boolean temNpc() {
+        if (npcs.size() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * @return A lista de NPCs no ambiente.
+     */
+    private String listarNpcs() {
+        String listaNpcs = "";
+
+        if (temNpc()) {
+            listaNpcs += "\n";
+
+            for (NPC npc : npcs) {
+                listaNpcs += "\n" + npc.getNome() + " está aqui!";
+            }
+        }
+
+        return listaNpcs;
+    }
+
+    /**
+     * Coleta a informação do NPC.
+     * 
+     * @return A mensagem do NPC.
+     */
+    public String interagirComNpc(String nome) {
+        String interacao = "";
+
+        // busca o npc para interagir, se encontra, retorna a mensagem 
+        if (npcs.size() > 0) {
+            for (NPC npc : npcs) {
+                if (npc.getNome().equals(nome)) {
+                    interacao += npc.dizerMensagem();
+                }
+            }
+        } else {
+            throw new RuntimeException("Não há NPCs!");
+        }
+
+        return interacao;
     }
 
     /**

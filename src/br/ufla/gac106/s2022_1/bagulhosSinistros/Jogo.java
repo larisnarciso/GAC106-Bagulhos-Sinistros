@@ -3,7 +3,9 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 
 /**
  * Classe Jogo
@@ -47,16 +49,14 @@ public class Jogo {
     public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
-        personagemPrincipal = new Principal("Jim Hopper");
+        personagemPrincipal = new Principal("Jim Hopper", "delegado da cidade de Hawkins");
     }
 
     /**
      * Cria todos os ambientes, adiciona os itens e liga as saidas deles
      */
     private void criarAmbientes() {
-        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim,
-                floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI,
-                florestaMI, casteloMI;
+        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // itens coletaveis dos ambientes
         Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
@@ -103,6 +103,40 @@ public class Jogo {
         trailerJim.adicionarItem(balaRevolver);
         floresta.adicionarItem(bicicleta);
         casaByers.adicionarItem(pisca);
+
+        // cria os monstros
+        Demogorgon demogorgon = new Demogorgon("um demônio associado com o submundo");
+
+        // adiciona monstros no ambiente
+        florestaMI.adicionarDemogorgon(demogorgon);
+
+        // cria os NPCs
+        NPC nancy, dustin, eleven, joyce, will;
+        
+        nancy = new NPC("Nancy", "a irmã do Mike este é meu amigo Jonathan");
+        nancy.adicionarMensagem("Encontramos um monstro na floresta e ele sumiu");
+        nancy.adicionarMensagem("Ele era grande e parecia não ter um rosto");
+
+        dustin = new NPC("Dustin", "um amigo do Will e estes são Mike e Lucas");
+        dustin.adicionarMensagem("Nós vimos homens armados no laboratório");
+        dustin.adicionarMensagem("Mas não conseguimos passar pelas grades");
+
+        eleven = new NPC("Eleven", "uma garota escondida em um forte de travesseiros");
+        eleven.adicionarMensagem("Laboratório é perigoso");
+        eleven.adicionarMensagem("Lá é muito escuro");
+
+        joyce = new NPC("Joyce", "uma mãe preocupada com o sumiço de meu filho");
+        joyce.adicionarMensagem("Meu filho falou que está aqui");
+        joyce.adicionarMensagem("Ele me mostrou através das luzes");
+
+        will = new NPC("Will", "o garoto perdido");
+
+        // adiciona NPCs no ambiente
+        escola.adicionarNpc(nancy);
+        ferroVelho.adicionarNpc(dustin);
+        poraoCasaMike.adicionarNpc(eleven);
+        casaByers.adicionarNpc(joyce);
+        casteloByers.adicionarNpc(will);
 
         // inicializa as saidas dos ambientes
         centro.ajustarSaida("esquerda", ferroVelho);
@@ -221,6 +255,8 @@ public class Jogo {
             usar(comando);
         } else if (palavraDeComando.equals("largar")) {
             largar(comando);
+        } else if (palavraDeComando.equals("interagir")) {
+            interagir(comando);
         }
 
         return querSair;
@@ -394,7 +430,7 @@ public class Jogo {
 
         // tenta largar o item do personagem principal
         if (encontrouItem) {
-            Item itemEncontrado = personagemPrincipal.largarItem(item);
+            Item itemEncontrado = personagemPrincipal.removerItem(item);
 
             // tenta adicionar item no ambiente
             if (itemEncontrado != null) {
@@ -405,5 +441,31 @@ public class Jogo {
         } else {
             System.out.println("Voce nao possui esse item");
         }
+    }
+
+    /**
+     * "Interagir" foi digitado.
+     * Verifica se tem uma segunda palavra indicando qual NPC quer interagir
+     * e tenta interagir com ele.
+     * 
+     * @param comando O comando digitado.
+     */
+    private void interagir(Comando comando) {
+        // se não há segunda palavra, não sabemos com quem interagir...
+        if (!comando.temSegundaPalavra()) {
+            System.out.println("Interagir com quem?");
+            return;
+        }
+
+        // a segunda palavra representa o NPC
+        String npc = comando.getSegundaPalavra();
+
+        try {
+            String mensagem = ambienteAtual.interagirComNpc(npc);
+            System.out.println(mensagem);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
