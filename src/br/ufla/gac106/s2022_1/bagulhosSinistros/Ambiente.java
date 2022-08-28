@@ -1,6 +1,8 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 
 /**
  * Classe Ambiente
@@ -32,6 +34,8 @@ public class Ambiente {
     private String descricao;
     // itens do ambiente
     private ArrayList<Item> itens;
+    // monstros do ambiente
+    private ArrayList<Monstro> monstros;
     // ambientes visinhos de acordo com a direção
     private HashMap<String, Ambiente> saidas;
 
@@ -44,6 +48,7 @@ public class Ambiente {
     public Ambiente(String descricao) {
         this.descricao = descricao;
         itens = new ArrayList<>();
+        monstros = new ArrayList<>();
         saidas = new HashMap<String, Ambiente>();
     }
 
@@ -74,6 +79,7 @@ public class Ambiente {
 
         textoDescricao += "Você está " + descricao + "\n"; // ambiente atual
         textoDescricao += listarItens(); // itens no ambiente
+        textoDescricao += listarMonstros(); // monstros no ambiente
 
         return textoDescricao;
     }
@@ -117,12 +123,11 @@ public class Ambiente {
         String listaItens = "";
 
         if (temItem()) {
-            listaItens += "\nItens encontrado!\n";
+            listaItens += "\nItem encontrado!\n";
+
             for (Item item : itens) {
-                listaItens += "\n- " + item.getNome() + " - " + item.getDescricao();
+                listaItens += "\n- " + item.getNome() + ": " + item.getDescricao();
             }
-        } else {
-            listaItens += "\nNão há nada aqui";
         }
 
         return listaItens;
@@ -142,6 +147,42 @@ public class Ambiente {
             }
         }
         return null;
+    }
+
+    /**
+     * Adiciona um demogorgon no ambiente.
+     * 
+     * @param demogorgon O demogorgon a ser adicionado.
+     */
+    public void adicionarDemogorgon(Demogorgon demogorgon) {
+        monstros.add(demogorgon);
+    }
+
+    /**
+     * @return true se há um monstro no ambiente.
+     */
+    private boolean temMonstro() {
+        if (monstros.size() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * @return A lista de monstros no ambiente.
+     */
+    private String listarMonstros() {
+        String listaMonstros = "";
+
+        if (temMonstro()) {
+            listaMonstros += "\nMonstro encontrado!";
+
+            for (Monstro monstro : monstros) {
+                listaMonstros += "\n- " + monstro.getNome() + ": " + monstro.getDescricao();
+            }
+        }
+
+        return listaMonstros;
     }
 
     /**

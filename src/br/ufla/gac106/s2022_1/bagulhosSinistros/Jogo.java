@@ -4,6 +4,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 
 /**
  * Classe Jogo
@@ -54,9 +55,7 @@ public class Jogo {
      * Cria todos os ambientes, adiciona os itens e liga as saidas deles
      */
     private void criarAmbientes() {
-        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim,
-                floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI,
-                florestaMI, casteloMI;
+        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
         // itens coletaveis dos ambientes
         Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
@@ -103,6 +102,12 @@ public class Jogo {
         trailerJim.adicionarItem(balaRevolver);
         floresta.adicionarItem(bicicleta);
         casaByers.adicionarItem(pisca);
+
+        // cria os monstros
+        Demogorgon demogorgon = new Demogorgon("um demônio associado com o submundo");
+
+        // adiciona monstros no ambiente
+        florestaMI.adicionarDemogorgon(demogorgon);
 
         // inicializa as saidas dos ambientes
         centro.ajustarSaida("esquerda", ferroVelho);
