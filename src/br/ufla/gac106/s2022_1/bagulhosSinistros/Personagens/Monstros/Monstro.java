@@ -22,17 +22,11 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Personagem;
  */
 
 public abstract class Monstro extends Personagem {
-    private String descricao;
     private int vida;
     
     public Monstro(String nome, String tipo, String descricao, int vida) {
-        super(nome, "Monstro");
-        this.descricao = descricao;
+        super(nome, "Monstro", descricao);
         this.vida = vida;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 
     public int getVida() {

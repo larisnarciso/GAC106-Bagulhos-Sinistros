@@ -36,10 +36,9 @@ public class Principal extends Personagem {
      * 
      * @param nome O nome do personagem principal.
      */
-    public Principal(String nome) {
-        super(nome, "Principal");
+    public Principal(String nome, String descricao) {
+        super(nome, "Principal", descricao);
         this.coldre = new HashMap<Item, Integer>();
-        ;
     }
 
     /**

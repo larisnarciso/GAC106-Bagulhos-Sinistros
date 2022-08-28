@@ -48,7 +48,7 @@ public class Jogo {
     public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
-        personagemPrincipal = new Principal("Jim Hopper");
+        personagemPrincipal = new Principal("Jim Hopper", "delegado da cidade de Hawkins");
     }
 
     /**
