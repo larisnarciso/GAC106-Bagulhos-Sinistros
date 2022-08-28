@@ -23,6 +23,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens;
 public class Personagem {
     private String nome;
     private String tipo;
+    private String descricao;
 
     /**
      * Cria o personagem o nome e o tipo.
@@ -33,9 +34,10 @@ public class Personagem {
      * @param nome O nome do personagem.
      * @param tipo O tipo do personagem.
      */
-    public Personagem(String nome, String tipo) {
+    public Personagem(String nome, String tipo, String descricao) {
         this.nome = nome;
         this.tipo = tipo;
+        this.descricao = descricao;
     }
 
     /**
@@ -50,5 +52,12 @@ public class Personagem {
      */
     public String getTipo() {
         return tipo;
+    }
+
+    /**
+     * @return A descricao do personagem.
+     */
+    public String getDescricao() {
+        return descricao;
     }
 }
