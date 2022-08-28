@@ -394,7 +394,7 @@ public class Jogo {
 
         // tenta largar o item do personagem principal
         if (encontrouItem) {
-            Item itemEncontrado = personagemPrincipal.largarItem(item);
+            Item itemEncontrado = personagemPrincipal.removerItem(item);
 
             // tenta adicionar item no ambiente
             if (itemEncontrado != null) {

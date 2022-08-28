@@ -48,16 +48,14 @@ public class Principal extends Personagem {
      * @return true se há um item no coldre.
      */
     private boolean temItem() {
-        for (Item item : coldre.keySet()) {
-            if (item != null) {
-                return true;
-            }
-        }
-        return false;
+        if (coldre.size() > 0)
+            return true;
+        else
+            return false;
     }
 
     /**
-     * Adiciona itens no coldre se o item ja existe, incrementa na quantidade,
+     * Adiciona itens no coldre se o tipo do item ja existe, incrementa na quantidade,
      * se não, adiciona o item no hashmap a quantidade de itens não pode exceder o
      * máximo
      * 
@@ -68,10 +66,12 @@ public class Principal extends Personagem {
         int qtdItens = 1;
         boolean jaExiste = procurarItemColdre(itemEncontrado.getNome());
 
+        // se já existe o tipo do item é adicionado mais um do mesmo tipo
         if (jaExiste)
             qtdItens = coldre.get(itemEncontrado) + 1;
+        // se não existe deve verificar a capacidade máxima de tipos de item
         else if (coldre.size() + 1 > maximoTipoItens)
-            return false; // se quantidade for excedida
+            return false; // se quantidade de tipos for excedida
 
         coldre.put(itemEncontrado, qtdItens);
         return true;
@@ -99,7 +99,7 @@ public class Principal extends Personagem {
      * @param nome O nome do item a ser removido.
      * @return o item a ser deixado no ambiente.
      */
-    public Item largarItem(String nome) {
+    public Item removerItem(String nome) {
         for (Item item : coldre.keySet()) {
             if (item.getNome().equals(nome)) {
                 Item meuItem = item;
