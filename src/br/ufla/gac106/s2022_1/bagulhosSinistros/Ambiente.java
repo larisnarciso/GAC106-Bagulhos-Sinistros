@@ -1,6 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 
@@ -36,6 +37,8 @@ public class Ambiente {
     private ArrayList<Item> itens;
     // monstros do ambiente
     private ArrayList<Monstro> monstros;
+    // NPCs do ambiente
+    private ArrayList<NPC> npcs;
     // ambientes visinhos de acordo com a direção
     private HashMap<String, Ambiente> saidas;
 
@@ -49,6 +52,7 @@ public class Ambiente {
         this.descricao = descricao;
         itens = new ArrayList<>();
         monstros = new ArrayList<>();
+        npcs = new ArrayList<>();
         saidas = new HashMap<String, Ambiente>();
     }
 
@@ -80,6 +84,7 @@ public class Ambiente {
         textoDescricao += "Você está " + descricao + "\n"; // ambiente atual
         textoDescricao += listarItens(); // itens no ambiente
         textoDescricao += listarMonstros(); // monstros no ambiente
+        textoDescricao += listarNpcs(); // monstros no ambiente
 
         return textoDescricao;
     }
@@ -183,6 +188,61 @@ public class Ambiente {
         }
 
         return listaMonstros;
+    }
+
+    /**
+     * Adiciona um NPC no ambiente.
+     * 
+     * @param demogorgon O demogorgon a ser adicionado.
+     */
+    public void adicionarNpc(NPC npc) {
+        npcs.add(npc);
+    }
+
+    /**
+     * @return true se há um NPC no ambiente.
+     */
+    private boolean temNpc() {
+        if (npcs.size() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * @return A lista de NPCs no ambiente.
+     */
+    private String listarNpcs() {
+        String listaNpcs = "";
+
+        if (temNpc()) {            
+            for (NPC npc : npcs) {
+                listaNpcs += npc.getNome() + " ";
+            }
+
+            if (npcs.size() == 1) {
+                listaNpcs += " foi encontrado!";
+            } else if (npcs.size() > 1) {
+                listaNpcs += " foram encontrados!";
+            }
+
+        }
+
+        return listaNpcs;
+    }
+
+    /**
+     * Coleta a informação do NPC.
+     * 
+     * @return A mensagem do NPC.
+     */
+    public String interagirComNpc (String nome) {
+        for (int i = 0; i < npcs.size(); i++) {
+            if (npcs.get(i).getNome().equals(nome)) {
+                return npcs.get(i).dizerMensagem();
+            }
+        }
+        return null;
     }
 
     /**

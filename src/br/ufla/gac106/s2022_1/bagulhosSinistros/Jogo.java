@@ -3,6 +3,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 
@@ -108,6 +109,34 @@ public class Jogo {
 
         // adiciona monstros no ambiente
         florestaMI.adicionarDemogorgon(demogorgon);
+
+        // cria os NPCs
+        NPC nancy, dustin, eleven, joyce, will;
+        
+        nancy = new NPC("Nancy", "a irmã do Mike este é meu amigo Jonathan");
+        nancy.adicionarMensagem("Encontramos um monstro na floresta e ele sumiu");
+        nancy.adicionarMensagem("Ele era grande e parecia não ter um rosto");
+
+        dustin = new NPC("Dustin", "um amigo do Will e estes são Mike e Lucas");
+        dustin.adicionarMensagem("Vimos homens armados no laboratório");
+        dustin.adicionarMensagem("Mas não conseguimos passar pelas grades");
+
+        eleven = new NPC("Eleven", "uma garota escondida em um forte de travesseiros");
+        eleven.adicionarMensagem("Laboratório é perigoso");
+        eleven.adicionarMensagem("Lá é muito escuro");
+
+        joyce = new NPC("Joyce", "uma mãe preocupada com o sumiço de meu filho");
+        joyce.adicionarMensagem("Meu filho falou que está aqui");
+        joyce.adicionarMensagem("Ele me contou pelas luzes");
+
+        will = new NPC("Will", "o garoto perdido");
+
+        // adiciona NPCs no ambiente
+        escola.adicionarNpc(nancy);
+        ferroVelho.adicionarNpc(dustin);
+        poraoCasaMike.adicionarNpc(eleven);
+        casaByers.adicionarNpc(joyce);
+        casteloByers.adicionarNpc(will);
 
         // inicializa as saidas dos ambientes
         centro.ajustarSaida("esquerda", ferroVelho);
