@@ -55,7 +55,7 @@ public class Ambiente {
      * @param direcao  A direção definida.
      * @param ambiente o ambiente definida.
      */
-    public void ajustarSaida(String direcao, Ambiente ambiente){
+    public void ajustarSaida(String direcao, Ambiente ambiente) {
         saidas.put(direcao, ambiente);
     }
 
@@ -91,12 +91,10 @@ public class Ambiente {
      * @return true se há um item no ambiente.
      */
     private boolean temItem() {
-        for (Item item : itens) {
-            if (item != null) {
-                return true;
-            }
-        }
-        return false;
+        if (itens.size() > 0)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -105,7 +103,7 @@ public class Ambiente {
      */
     public boolean procurarItem(String nome) {
         for (Item item : itens) {
-            if (temItem() && item.getNome().equals(nome)) {
+            if (item.getNome().equals(nome)) {
                 return true;
             }
         }
