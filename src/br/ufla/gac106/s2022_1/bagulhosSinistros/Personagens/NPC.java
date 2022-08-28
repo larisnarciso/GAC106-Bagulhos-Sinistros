@@ -1,5 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens;
 
+import java.util.ArrayList;
+
 /**
  * Classe NPC (Herda de Personagem)
  * 
@@ -22,23 +24,42 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens;
  */
 
 public class NPC extends Personagem {
-    private String mensagem;
+    private ArrayList<String> mensagens;
 
     /**
-     * Cria o NPN com seu nome e a mensagem.
+     * Cria o NPC com seu nome e a mensagem.
      * 
      * @param nome     O nome do NPC.
      * @param mensagem A mensagem no NPC.
      */
-    public NPC(String nome, String mensagem) {
-        super(nome, "NPC");
-        this.mensagem = mensagem;
+    public NPC(String nome, String descricao) {
+        super(nome, "NPC", descricao);
+        mensagens = new ArrayList<>();
     }
 
     /**
-     * @return A mensagem do NPC.
+     * Adiciona uma mensagem do NPC.
+     * 
+     * @param mensagem A mensagem a ser adicionada.
+     */
+    public void adicionarMensagem(String mensagem) {
+        mensagens.add(mensagem);
+    }
+
+    /**
+     * @return As mensagens do NPC.
      */
     public String dizerMensagem() {
-        return mensagem;
+        String msg = "";
+
+        msg += "Olá, meu nome é " + super.getNome() + ".\n\n";
+
+        msg += "Eu sou " + super.getDescricao() + " e tenho algumas informações para você.\n\n";
+
+        for (String mensagem : mensagens) {
+            msg += mensagem + "\n\n";
+        }
+
+        return msg;
     }
 }
