@@ -52,12 +52,15 @@ public class NPC extends Personagem {
     public String dizerMensagem() {
         String msg = "";
 
-        msg += "Olá, meu nome é " + super.getNome() + ".\n\n";
+        msg += "Olá, meu nome é " + super.getNome() + ".\n";
+        msg += "Eu sou " + super.getDescricao() + "\n\n";
 
-        msg += "Eu sou " + super.getDescricao() + " e tenho algumas informações para você.\n\n";
-
-        for (String mensagem : mensagens) {
-            msg += mensagem + "\n\n";
+        if (mensagens.size() > 0) {
+            msg += "Tenho algumas informações importantes para você.\n";
+    
+            for (String mensagem : mensagens) {
+                msg += mensagem + "\n";
+            }
         }
 
         return msg;
