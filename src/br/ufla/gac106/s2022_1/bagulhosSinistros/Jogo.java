@@ -42,6 +42,8 @@ public class Jogo {
     private Analisador analisador;
     // Ambiente onde se encontra o personagem principal
     private Ambiente ambienteAtual;
+    // Contagem da quantidade de movimentos do jogador
+    private int quantidadeMovimentos = 70;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -235,6 +237,12 @@ public class Jogo {
     private boolean processarComando(Comando comando) {
         boolean querSair = false;
 
+        // verifica se a quantidade de movimentos é maior que zero
+        if (quantidadeMovimentos == 0) {
+            System.out.println("Game over! Você atingiu o máximo de movimentos!");
+            return true;
+        }
+
         if (comando.ehDesconhecido()) {
             System.out.println("Eu nao entendi o que voce disse...");
             return false;
@@ -296,6 +304,7 @@ public class Jogo {
             System.out.println("Nao ha passagem!");
         } else {
             ambienteAtual = proximoAmbiente;
+            quantidadeMovimentos--;
 
             exibirAmbienteAtual();
         }
@@ -306,6 +315,7 @@ public class Jogo {
      * Imprime a localização atual e as possíveis saídas.
      */
     private void exibirAmbienteAtual() {
+        System.out.println("\nVoce possui " + quantidadeMovimentos + " movimentos");
         System.out.println("\nVoce esta " + ambienteAtual.getDescricao());
         System.out.println("Saidas: " + ambienteAtual.getSaidas());
     }
