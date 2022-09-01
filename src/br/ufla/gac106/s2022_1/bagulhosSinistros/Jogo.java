@@ -1,11 +1,8 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Principal;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Ambiente;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Cenarios;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
 
 /**
  * Classe Jogo
@@ -14,7 +11,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
  * "Bagulhos Sinistros" é um jogo de RPG investigação sobrenatural, baseado em
  * texto.
  * 
- * O personagem principal (Jim Hopper) pode caminhar pela cidade de Hawkins com
+ * O hopper principal (Jim Hopper) pode caminhar pela cidade de Hawkins com
  * o objetivo de encontrar Will Byers.
  * 
  * Para jogar esse jogo, crie uma instancia dessa classe e chame o método
@@ -36,163 +33,30 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
  */
 
 public class Jogo {
-    // Personagem principal: Jim Hopper
-    private Principal personagemPrincipal;
+    // Jogador: Jim Hopper
+    private Hopper hopper;
     // Analisador de comandos do jogo
     private Analisador analisador;
-    // Ambiente onde se encontra o personagem principal
-    private Ambiente ambienteAtual;
-    // Contagem da quantidade de movimentos do jogador
-    private int quantidadeMovimentos = 70;
+    // Cria todos os ambientes, adiciona os itens e liga as saidas deles
+    private Cenarios cenarios;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() {
-        criarAmbientes();
         analisador = new Analisador();
-        personagemPrincipal = new Principal("Jim Hopper", "delegado da cidade de Hawkins");
+        hopper = new Hopper();
+        cenarios = new Cenarios();
+
+        iniciar();
     }
 
     /**
-     * Cria todos os ambientes, adiciona os itens e liga as saidas deles
+     * Inicia o jogo criando os cenários e atribuindo o ambiente atual ao hopper
      */
-    private void criarAmbientes() {
-        Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta, casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
-
-        // itens coletaveis dos ambientes
-        Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
-
-        chaveEscritorio = new Coletavel("chave", "chave do escritório", "abre a porta");
-        balaRevolver = new Coletavel("bala", "bala de revolver", "coloca na arma");
-        alicate = new Coletavel("alicate", "alicate grande e enferrujado", "abre a grade");
-        lanterna = new Coletavel("lanterna", "lanterna tática potente", "ilumina o Mundo Invertido");
-        revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "atira no inimigo");
-
-        // pistas (item não coletaveis dos ambientes)
-        Item desenhoWill, bicicleta, pisca;
-
-        bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida");
-        pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
-        desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança");
-
-        // cria os ambientes
-        centro = new Ambiente("no centro da cidade de Hawkins");
-        delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
-        escritorioDelegacia = new Ambiente("no seu escritório na delegacia");
-        escola = new Ambiente("na Escola de Hawkins");
-        ferroVelho = new Ambiente("no ferro velho ao redor da cidade");
-        casaMike = new Ambiente("na casa da família Wheeler");
-        poraoCasaMike = new Ambiente("no porão da casa da família Wheeler");
-        trailerJim = new Ambiente("no seu trailer");
-        floresta = new Ambiente("na Floresta Sombria");
-        casaByers = new Ambiente("na casa da família Byers");
-        casteloByers = new Ambiente("no Castelo Byers, uma cabana do Will Byers");
-        florestaFundo = new Ambiente("no fundo da Floresta Sombria");
-        laboratorio = new Ambiente("no Laboratório Nacional de Hawkins");
-        salaLaboratorio = new Ambiente("na sala do Laboratório");
-        laboratorioMI = new Ambiente("no Laboratório do Mundo Invertido");
-        florestaMI = new Ambiente("na Floresta Sombria do Mundo Invertido");
-        casteloMI = new Ambiente("no Castelo Byers do Mundo Invertido");
-
-        // adiciona os itens nos ambientes
-        delegacia.adicionarItem(chaveEscritorio);
-        escritorioDelegacia.adicionarItem(balaRevolver);
-        escola.adicionarItem(desenhoWill);
-        ferroVelho.adicionarItem(alicate);
-        poraoCasaMike.adicionarItem(lanterna);
-        trailerJim.adicionarItem(revolver);
-        trailerJim.adicionarItem(balaRevolver);
-        floresta.adicionarItem(bicicleta);
-        casaByers.adicionarItem(pisca);
-
-        // cria os monstros
-        Demogorgon demogorgon = new Demogorgon("um demônio associado com o submundo");
-
-        // adiciona monstros no ambiente
-        florestaMI.adicionarDemogorgon(demogorgon);
-
-        // cria os NPCs
-        NPC nancy, dustin, eleven, joyce, will;
-        
-        nancy = new NPC("Nancy", "a irmã do Mike este é meu amigo Jonathan");
-        nancy.adicionarMensagem("Encontramos um monstro na floresta e ele sumiu");
-        nancy.adicionarMensagem("Ele era grande e parecia não ter um rosto");
-
-        dustin = new NPC("Dustin", "um amigo do Will e estes são Mike e Lucas");
-        dustin.adicionarMensagem("Nós vimos homens armados no laboratório");
-        dustin.adicionarMensagem("Mas não conseguimos passar pelas grades");
-
-        eleven = new NPC("Eleven", "uma garota escondida em um forte de travesseiros");
-        eleven.adicionarMensagem("Laboratório é perigoso");
-        eleven.adicionarMensagem("Lá é muito escuro");
-
-        joyce = new NPC("Joyce", "uma mãe preocupada com o sumiço de meu filho");
-        joyce.adicionarMensagem("Meu filho falou que está aqui");
-        joyce.adicionarMensagem("Ele me mostrou através das luzes");
-
-        will = new NPC("Will", "o garoto perdido");
-
-        // adiciona NPCs no ambiente
-        escola.adicionarNpc(nancy);
-        ferroVelho.adicionarNpc(dustin);
-        poraoCasaMike.adicionarNpc(eleven);
-        casaByers.adicionarNpc(joyce);
-        casteloByers.adicionarNpc(will);
-
-        // inicializa as saidas dos ambientes
-        centro.ajustarSaida("esquerda", ferroVelho);
-        centro.ajustarSaida("frente", escola);
-        centro.ajustarSaida("tras", delegacia);
-
-        delegacia.ajustarSaida("corredor", escritorioDelegacia);
-        delegacia.ajustarSaida("tras", casaMike);
-        delegacia.ajustarSaida("frente", centro);
-
-        escritorioDelegacia.ajustarSaida("corredor", delegacia);
-
-        escola.ajustarSaida("tras", centro);
-
-        ferroVelho.ajustarSaida("direita", centro);
-        ferroVelho.ajustarSaida("esquerda", trailerJim);
-
-        casaMike.ajustarSaida("frente", delegacia);
-        casaMike.ajustarSaida("escada", poraoCasaMike);
-
-        poraoCasaMike.ajustarSaida("escada", casaMike);
-
-        trailerJim.ajustarSaida("direita", ferroVelho);
-        trailerJim.ajustarSaida("esquerda", floresta);
-        trailerJim.ajustarSaida("frente", casaByers);
-
-        floresta.ajustarSaida("direita", trailerJim);
-        floresta.ajustarSaida("frente", casteloByers);
-
-        casaByers.ajustarSaida("tras", trailerJim);
-        casaByers.ajustarSaida("esquerda", casteloByers);
-
-        casteloByers.ajustarSaida("tras", floresta);
-        casteloByers.ajustarSaida("direita", casaByers);
-        casteloByers.ajustarSaida("frente", florestaFundo);
-
-        florestaFundo.ajustarSaida("tras", casteloByers);
-        florestaFundo.ajustarSaida("frente", laboratorio);
-
-        laboratorio.ajustarSaida("tras", floresta);
-        laboratorio.ajustarSaida("escada", salaLaboratorio);
-
-        salaLaboratorio.ajustarSaida("escada", laboratorio);
-        salaLaboratorio.ajustarSaida("portal", laboratorioMI);
-
-        laboratorioMI.ajustarSaida("portal", salaLaboratorio);
-        laboratorioMI.ajustarSaida("frente", florestaMI);
-
-        florestaMI.ajustarSaida("tras", laboratorioMI);
-        florestaMI.ajustarSaida("frente", casteloMI);
-
-        casteloMI.ajustarSaida("tras", florestaMI);
-
-        ambienteAtual = centro; // o jogo comeca no centro
+    public void iniciar() {
+        Ambiente ambiente = cenarios.criarCenarios();
+        hopper.setAmbienteAtual(ambiente);
     }
 
     /**
@@ -225,7 +89,7 @@ public class Jogo {
         System.out.println("\nSeu objetivo é achar o Will Byers!");
         System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
 
-        exibirAmbienteAtual();
+        hopper.exibirAmbienteAtual();
     }
 
     /**
@@ -236,12 +100,6 @@ public class Jogo {
      */
     private boolean processarComando(Comando comando) {
         boolean querSair = false;
-
-        // verifica se a quantidade de movimentos é maior que zero
-        if (quantidadeMovimentos == 0) {
-            System.out.println("Game over! Você atingiu o máximo de movimentos!");
-            return true;
-        }
 
         if (comando.ehDesconhecido()) {
             System.out.println("Eu nao entendi o que voce disse...");
@@ -287,7 +145,7 @@ public class Jogo {
      * 
      * @param comando O comando digitado.
      */
-    private void irParaAmbiente(Comando comando) {
+    public void irParaAmbiente(Comando comando) {
         // se não há segunda palavra, não sabemos pra onde ir...
         if (!comando.temSegundaPalavra()) {
             System.out.println("Ir pra onde?");
@@ -295,29 +153,7 @@ public class Jogo {
         }
 
         String direcao = comando.getSegundaPalavra();
-
-        // tenta sair do ambiente atual
-        Ambiente proximoAmbiente = null;
-        proximoAmbiente = ambienteAtual.getAmbiente(direcao);
-
-        if (proximoAmbiente == null) {
-            System.out.println("Nao ha passagem!");
-        } else {
-            ambienteAtual = proximoAmbiente;
-            quantidadeMovimentos--;
-
-            exibirAmbienteAtual();
-        }
-    }
-
-    /**
-     * Exibe informações do ambiente atual.
-     * Imprime a localização atual e as possíveis saídas.
-     */
-    private void exibirAmbienteAtual() {
-        System.out.println("\nVoce possui " + quantidadeMovimentos + " movimentos");
-        System.out.println("\nVoce esta " + ambienteAtual.getDescricao());
-        System.out.println("Saidas: " + ambienteAtual.getSaidas());
+        hopper.irParaAmbiente(direcao);
     }
 
     /**
@@ -339,24 +175,15 @@ public class Jogo {
 
     /**
      * "Observar" foi digitado.
-     * Exibe a descrição longa do ambiente atual e, se o personagem principal
-     * possuir
-     * itens, eles também são exibidos.
+     * hopper observa o ambiente atual.
      */
     private void observar() {
-        System.out.println(ambienteAtual.getDescricaoLonga());
-        System.out.println();
-        String itensColdre = personagemPrincipal.listarItensColdre();
-        if (itensColdre != "") {
-            System.out.println(itensColdre);
-        }
+        hopper.observar();
     }
 
     /**
      * "Pegar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item coletar
-     * e tenta coletar o item, removendo do ambiente e adicionando no personagem
-     * principal.
+     * Verifica se tem uma segunda palavra indicando qual item coletar.
      * 
      * @param comando O comando digitado.
      */
@@ -367,36 +194,14 @@ public class Jogo {
             return;
         }
 
+        // hopper recebe nome do item para pegar
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = ambienteAtual.procurarItem(item);
-
-        // ambiente tenta encontrar o item
-        if (encontrouItem) {
-            Item itemEncontrado = ambienteAtual.coletarItem(item);
-
-            // personagem principal tenta coletar o item se encontrado
-            if (itemEncontrado != null) {
-                boolean pegouItem = personagemPrincipal.adicionarItemColdre(itemEncontrado);
-
-                // verifica se atingiu o máximo de tipos de itens coletados
-                if (pegouItem) {
-                    System.out.println("Você coletou o item " + item);
-                } else {
-                    ambienteAtual.adicionarItem(itemEncontrado);
-                    System.out.println("Limite máximo de tipos de itens atingido!");
-                }
-            } else {
-                System.out.println("Este item não é coletavel");
-            }
-        } else {
-            System.out.println("Não há esse item no ambiente");
-        }
+        hopper.pegar(item);
     }
 
     /**
      * "Usar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item quer usar
-     * e tenta usar o item no ambiente atual.
+     * Verifica se tem uma segunda palavra indicando qual item quer usar.
      * 
      * @param comando O comando digitado.
      */
@@ -407,23 +212,14 @@ public class Jogo {
             return;
         }
 
-        // tenta encontrar o item
+        // hopper recebe nome do item para usar
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = personagemPrincipal.procurarItemColdre(item);
-
-        // tenta usar o item se encontrado
-        if (encontrouItem) {
-            String acao = personagemPrincipal.usarItem(item);
-            System.out.println("Voce usa o item " + item + " e " + acao);
-        } else {
-            System.out.println("Voce nao possui esse item");
-        }
+        hopper.usar(item);
     }
 
     /**
      * "Largar" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual item quer descartar
-     * e tenta largar o item, removendo do jogador e devolvendo no ambiente
+     * Verifica se tem uma segunda palavra indicando qual item quer descartar.
      * 
      * @param comando O comando digitado.
      */
@@ -434,29 +230,14 @@ public class Jogo {
             return;
         }
 
-        // tenta encontrar o item
+        // hopper recebe nome do item para largar
         String item = comando.getSegundaPalavra();
-        boolean encontrouItem = personagemPrincipal.procurarItemColdre(item);
-
-        // tenta largar o item do personagem principal
-        if (encontrouItem) {
-            Item itemEncontrado = personagemPrincipal.removerItem(item);
-
-            // tenta adicionar item no ambiente
-            if (itemEncontrado != null) {
-                ambienteAtual.adicionarItem(itemEncontrado);
-
-                System.out.println("Voce largou o item " + item + " " + ambienteAtual.getDescricao());
-            }
-        } else {
-            System.out.println("Voce nao possui esse item");
-        }
+        hopper.largar(item);
     }
 
     /**
      * "Interagir" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual NPC quer interagir
-     * e tenta interagir com ele.
+     * Verifica se tem uma segunda palavra indicando qual NPC quer interagir.
      * 
      * @param comando O comando digitado.
      */
@@ -467,15 +248,8 @@ public class Jogo {
             return;
         }
 
-        // a segunda palavra representa o NPC
+        // hopper recebe nome do item para interagir
         String npc = comando.getSegundaPalavra();
-
-        try {
-            String mensagem = ambienteAtual.interagirComNpc(npc);
-            System.out.println(mensagem);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+        hopper.interagir(npc);
     }
 }

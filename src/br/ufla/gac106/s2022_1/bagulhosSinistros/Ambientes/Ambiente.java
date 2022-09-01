@@ -1,4 +1,4 @@
-package br.ufla.gac106.s2022_1.bagulhosSinistros;
+package br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
