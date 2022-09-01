@@ -135,8 +135,10 @@ public class Jogador extends Personagem {
     Ambiente proximoAmbiente = null;
     proximoAmbiente = ambienteAtual.getAmbiente(direcao);
 
-    if (proximoAmbiente == null) {
-      System.out.println("Nao ha passagem!");
+    Boolean saidaBloqueada = ambienteAtual.saidaBloqueada(direcao);
+
+    if (saidaBloqueada) {
+      System.out.println("Saída bloqueada!");
     } else {
       ambienteAtual = proximoAmbiente;
       exibirAmbienteAtual();
@@ -218,8 +220,14 @@ public class Jogador extends Personagem {
 
     // tenta usar o item se encontrado
     if (encontrouItem) {
-      String acao = usarItem(item);
-      System.out.println("Voce usa o item " + item + " e " + acao);
+      try {
+        ambienteAtual.usarItem(item);
+
+        String acao = usarItem(item);
+        System.out.println("Voce usa o item " + item + " e " + acao);
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
     } else {
       System.out.println("Voce nao possui esse item");
     }

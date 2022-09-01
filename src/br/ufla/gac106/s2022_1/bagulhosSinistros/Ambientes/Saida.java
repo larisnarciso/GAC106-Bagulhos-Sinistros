@@ -42,14 +42,23 @@ public class Saida {
    * 
    * @param direcao   A direção da saída.
    * @param ambiente  O ambiente a ser direcionado.
-   * @param bloqueado se saída está bloqueada.
    * @param item      O item para desbloquear a saída.
    */
-  public Saida(String direcao, Ambiente ambiente, Boolean bloqueado, Item item) {
+  public Saida(String direcao, Ambiente ambiente, Item item) {
     this.direcao = direcao;
     this.ambiente = ambiente;
-    this.bloqueado = bloqueado;
     this.item = item;
+    this.bloqueado = true;
+  }
+
+  /* 
+   * Sobrecarga do construtor para quando não há saídas bloqueadas
+   */
+  public Saida(String direcao, Ambiente ambiente) {
+    this.direcao = direcao;
+    this.ambiente = ambiente;
+    this.item = null;
+    this.bloqueado = false;
   }
 
   /**
@@ -74,10 +83,21 @@ public class Saida {
   }
 
   /**
+   * @return se saída está bloqueada.
+   */
+  public String getItem() {
+    try {
+      return item.getNome();
+    } catch (Exception e) {
+      return e.getMessage();
+    }
+  }
+
+  /**
    * Desbloquear a saída.
    */
   private void desbloquear() {
-    bloqueado = true;
+    bloqueado = false;
   }
 
   /**
@@ -86,13 +106,12 @@ public class Saida {
    * @param item O item para desbloquear a saída
    * @return se conseguiu desbloquear ou não.
    */
-  public String desbloquear(String item) {
+  public boolean desbloquearSaida(String item) {
     if (item.equals(this.item.getNome())) {
       desbloquear();
-      return "Passagem desbloqueada!";
-    } else {
-      throw new RuntimeException("Esse item não foi útil");
+      return true;
     }
+    return false;
   }
 
 }

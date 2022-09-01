@@ -40,7 +40,7 @@ public class Ambiente {
     // NPCs do ambiente
     private ArrayList<NPC> npcs;
     // ambientes visinhos de acordo com a direção
-    private HashMap<String, Ambiente> saidas;
+    private ArrayList<Saida> saidas;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele não tem saidas.
@@ -53,7 +53,7 @@ public class Ambiente {
         itens = new ArrayList<>();
         monstros = new ArrayList<>();
         npcs = new ArrayList<>();
-        saidas = new HashMap<String, Ambiente>();
+        saidas = new ArrayList<>();
     }
 
     /**
@@ -64,8 +64,17 @@ public class Ambiente {
      * @param direcao  A direção definida.
      * @param ambiente o ambiente definida.
      */
+    public void ajustarSaida(String direcao, Ambiente ambiente, Item item) {
+        Saida saida = new Saida(direcao, ambiente, item);
+        saidas.add(saida);
+    }
+
+    /*
+     * Sobrecarga do método ajustar saídas quando não há saidas bloqueadas
+     */
     public void ajustarSaida(String direcao, Ambiente ambiente) {
-        saidas.put(direcao, ambiente);
+        Saida saida = new Saida(direcao, ambiente);
+        saidas.add(saida);
     }
 
     /**
@@ -234,7 +243,7 @@ public class Ambiente {
     public String interagirComNpc(String nome) {
         String interacao = "";
 
-        // busca o npc para interagir, se encontra, retorna a mensagem 
+        // busca o npc para interagir, se encontra, retorna a mensagem
         if (npcs.size() > 0) {
             for (NPC npc : npcs) {
                 if (npc.getNome().equals(nome)) {
@@ -253,7 +262,28 @@ public class Ambiente {
      * @return O ambiente atual.
      */
     public Ambiente getAmbiente(String direcao) {
-        return saidas.get(direcao);
+        for (Saida saida : saidas) {
+            if (saida.getDirecao().equals(direcao)) {
+                return saida.getAmbiente();
+            }
+        }
+        throw new RuntimeException("Direção não encontrada!");
+    }
+
+    public Boolean saidaBloqueada(String direcao) {
+        for (Saida saida : saidas) {
+            if (saida.getDirecao().equals(direcao)) {
+                return saida.getBloqueado();
+            }
+        }
+        return false;
+    }
+
+    public boolean usarItem(String item) {
+        for (Saida saida : saidas) {
+            return saida.desbloquearSaida(item);
+        }
+        throw new RuntimeException("Esse item não foi útil...");
     }
 
     /**
@@ -261,9 +291,10 @@ public class Ambiente {
      */
     public String getSaidas() {
         String textoSaidas = "";
-        for (String direcao : saidas.keySet()) {
-            textoSaidas += direcao + " ";
+        for (Saida saida : saidas) {
+            textoSaidas += saida.getDirecao() + " ";
         }
         return textoSaidas;
     }
+
 }
