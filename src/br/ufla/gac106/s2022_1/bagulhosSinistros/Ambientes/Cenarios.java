@@ -56,58 +56,6 @@ public class Cenarios {
     florestaMI = new Ambiente("na Floresta Sombria do Mundo Invertido");
     casteloMI = new Ambiente("no Castelo Byers do Mundo Invertido");
 
-    // inicializa as saidas dos ambientes
-    centro.ajustarSaida("esquerda", ferroVelho);
-    centro.ajustarSaida("frente", escola);
-    centro.ajustarSaida("tras", delegacia);
-
-    delegacia.ajustarSaida("corredor", escritorioDelegacia);
-    delegacia.ajustarSaida("tras", casaMike);
-    delegacia.ajustarSaida("frente", centro);
-
-    escritorioDelegacia.ajustarSaida("corredor", delegacia);
-
-    escola.ajustarSaida("tras", centro);
-
-    ferroVelho.ajustarSaida("direita", centro);
-    ferroVelho.ajustarSaida("esquerda", trailerJim);
-
-    casaMike.ajustarSaida("frente", delegacia);
-    casaMike.ajustarSaida("escada", poraoCasaMike);
-
-    poraoCasaMike.ajustarSaida("escada", casaMike);
-
-    trailerJim.ajustarSaida("direita", ferroVelho);
-    trailerJim.ajustarSaida("esquerda", floresta);
-    trailerJim.ajustarSaida("frente", casaByers);
-
-    floresta.ajustarSaida("direita", trailerJim);
-    floresta.ajustarSaida("frente", casteloByers);
-
-    casaByers.ajustarSaida("tras", trailerJim);
-    casaByers.ajustarSaida("esquerda", casteloByers);
-
-    casteloByers.ajustarSaida("tras", floresta);
-    casteloByers.ajustarSaida("direita", casaByers);
-    casteloByers.ajustarSaida("frente", florestaFundo);
-
-    florestaFundo.ajustarSaida("tras", casteloByers);
-    florestaFundo.ajustarSaida("frente", laboratorio);
-
-    laboratorio.ajustarSaida("tras", floresta);
-    laboratorio.ajustarSaida("escada", salaLaboratorio);
-
-    salaLaboratorio.ajustarSaida("escada", laboratorio);
-    salaLaboratorio.ajustarSaida("portal", laboratorioMI);
-
-    laboratorioMI.ajustarSaida("portal", salaLaboratorio);
-    laboratorioMI.ajustarSaida("frente", florestaMI);
-
-    florestaMI.ajustarSaida("tras", laboratorioMI);
-    florestaMI.ajustarSaida("frente", casteloMI);
-
-    casteloMI.ajustarSaida("tras", florestaMI);
-
 
     /*---------- ITENS ----------*/
     // cria os itens
@@ -178,6 +126,59 @@ public class Cenarios {
     poraoCasaMike.adicionarNpc(eleven);
     casaByers.adicionarNpc(joyce);
     casteloByers.adicionarNpc(will);
+
+    
+    /*---------- SAÍDAS ----------*/
+    centro.ajustarSaida("esquerda", ferroVelho);
+    centro.ajustarSaida("frente", escola);
+    centro.ajustarSaida("tras", delegacia);
+
+    delegacia.ajustarSaida("corredor", escritorioDelegacia, chaveEscritorio); // saída bloqueada
+    delegacia.ajustarSaida("tras", casaMike);
+    delegacia.ajustarSaida("frente", centro);
+
+    escritorioDelegacia.ajustarSaida("corredor", delegacia);
+
+    escola.ajustarSaida("tras", centro);
+
+    ferroVelho.ajustarSaida("direita", centro);
+    ferroVelho.ajustarSaida("esquerda", trailerJim);
+
+    casaMike.ajustarSaida("frente", delegacia);
+    casaMike.ajustarSaida("escada", poraoCasaMike);
+
+    poraoCasaMike.ajustarSaida("escada", casaMike);
+
+    trailerJim.ajustarSaida("direita", ferroVelho);
+    trailerJim.ajustarSaida("esquerda", floresta);
+    trailerJim.ajustarSaida("frente", casaByers);
+
+    floresta.ajustarSaida("direita", trailerJim);
+    floresta.ajustarSaida("frente", casteloByers);
+
+    casaByers.ajustarSaida("tras", trailerJim);
+    casaByers.ajustarSaida("esquerda", casteloByers);
+
+    casteloByers.ajustarSaida("tras", floresta);
+    casteloByers.ajustarSaida("direita", casaByers);
+    casteloByers.ajustarSaida("frente", florestaFundo);
+
+    florestaFundo.ajustarSaida("tras", casteloByers);
+    florestaFundo.ajustarSaida("frente", laboratorio, alicate); // saída bloqueada
+
+    laboratorio.ajustarSaida("tras", floresta);
+    laboratorio.ajustarSaida("escada", salaLaboratorio);
+
+    salaLaboratorio.ajustarSaida("escada", laboratorio);
+    salaLaboratorio.ajustarSaida("portal", laboratorioMI, lanterna); // saída bloqueada
+
+    laboratorioMI.ajustarSaida("portal", salaLaboratorio);
+    laboratorioMI.ajustarSaida("frente", florestaMI);
+
+    florestaMI.ajustarSaida("tras", laboratorioMI);
+    florestaMI.ajustarSaida("frente", casteloMI);
+
+    casteloMI.ajustarSaida("tras", florestaMI);
 
     return centro;
   }
