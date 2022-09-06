@@ -2,7 +2,10 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Ambiente;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Cenarios;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Jogador;
+import br.ufla.gac106.s2022_1.baseJogo.InterfaceUsuario;
 
 /**
  * Classe Jogo
@@ -11,7 +14,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
  * "Bagulhos Sinistros" é um jogo de RPG investigação sobrenatural, baseado em
  * texto.
  * 
- * O hopper principal (Jim Hopper) pode caminhar pela cidade de Hawkins com
+ * O jogador principal (Jim Hopper) pode caminhar pela cidade de Hawkins com
  * o objetivo de encontrar Will Byers.
  * 
  * Para jogar esse jogo, crie uma instancia dessa classe e chame o método
@@ -33,8 +36,10 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
  */
 
 public class Jogo {
+    // Interface do usuário (tela ou terminal)
+    private InterfaceUsuario iu;
     // Jogador: Jim Hopper
-    private Hopper hopper;
+    private Jogador jogador;
     // Analisador de comandos do jogo
     private Analisador analisador;
     // Cria todos os ambientes, adiciona os itens e liga as saidas deles
@@ -43,20 +48,22 @@ public class Jogo {
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
-    public Jogo() {
+    public Jogo(InterfaceUsuario iu) {
+        this.iu = iu;
+
         analisador = new Analisador();
-        hopper = new Hopper();
+        jogador = new Hopper();
         cenarios = new Cenarios();
 
         iniciar();
     }
 
     /**
-     * Inicia o jogo criando os cenários e atribuindo o ambiente atual ao hopper
+     * Inicia o jogo criando os cenários e atribuindo o ambiente atual ao jogador
      */
     public void iniciar() {
         Ambiente ambiente = cenarios.criarCenarios();
-        hopper.setAmbienteAtual(ambiente);
+        jogador.setAmbienteAtual(ambiente);
     }
 
     /**
@@ -89,7 +96,7 @@ public class Jogo {
         System.out.println("\nSeu objetivo é achar o Will Byers!");
         System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
 
-        hopper.exibirAmbienteAtual();
+        exibirAmbienteAtual();
     }
 
     /**
@@ -140,6 +147,16 @@ public class Jogo {
     }
 
     /**
+     * Exibe informações do ambiente atual.
+     * Imprime a localização atual e as possíveis saídas.
+     */
+    public void exibirAmbienteAtual() {
+        System.out.println("\nVoce possui " + jogador.getQuantidadeMovimentos() + " movimentos");
+        System.out.println("\nVoce esta " + jogador.getAmbienteAtual().getDescricao());
+        System.out.println("Saidas: " + jogador.getAmbienteAtual().getSaidas());
+    }
+
+    /**
      * Tenta ir em uma direcao. Se existe uma saída para lá entra no novo ambiente,
      * caso contrário imprime mensagem de erro.
      * 
@@ -153,7 +170,19 @@ public class Jogo {
         }
 
         String direcao = comando.getSegundaPalavra();
-        hopper.irParaAmbiente(direcao);
+
+        // tenta sair do ambiente atual
+        Ambiente proximoAmbiente = null;
+        proximoAmbiente = jogador.getAmbienteAtual().getAmbiente(direcao);
+
+        Boolean saidaBloqueada = jogador.getAmbienteAtual().saidaBloqueada(direcao);
+
+        if (saidaBloqueada) {
+            System.out.println("Saída bloqueada!");
+        } else {
+            jogador.setAmbienteAtual(proximoAmbiente);
+            exibirAmbienteAtual();
+        }
     }
 
     /**
@@ -175,10 +204,16 @@ public class Jogo {
 
     /**
      * "Observar" foi digitado.
-     * hopper observa o ambiente atual.
+     * jogador observa o ambiente atual.
      */
     private void observar() {
-        hopper.observar();
+        System.out.println(jogador.getAmbienteAtual().getDescricao());
+        System.out.println();
+
+        String itensObjeto = jogador.listarItensObjeto();
+        if (itensObjeto != "") {
+            System.out.println(itensObjeto);
+        }
     }
 
     /**
@@ -194,9 +229,32 @@ public class Jogo {
             return;
         }
 
-        // hopper recebe nome do item para pegar
+        // jogador recebe nome do item para pegar
         String item = comando.getSegundaPalavra();
-        hopper.pegar(item);
+
+        boolean encontrouItem = jogador.getAmbienteAtual().procurarItem(item);
+
+        // ambiente tenta encontrar o item
+        if (encontrouItem) {
+            Item itemEncontrado = jogador.getAmbienteAtual().coletarItem(item);
+
+            // jogador tenta coletar o item se encontrado
+            if (itemEncontrado != null) {
+                boolean pegouItem = jogador.adicionarItem(itemEncontrado);
+
+                // verifica se atingiu o máximo de tipos de itens coletados
+                if (pegouItem) {
+                    System.out.println("Você coletou o item " + item);
+                } else {
+                    jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
+                    System.out.println("Limite máximo de tipos de itens atingido!");
+                }
+            } else {
+                System.out.println("Este item não é coletavel");
+            }
+        } else {
+            System.out.println("Não há esse item no ambiente");
+        }
     }
 
     /**
@@ -212,9 +270,24 @@ public class Jogo {
             return;
         }
 
-        // hopper recebe nome do item para usar
+        // jogador recebe nome do item para usar
         String item = comando.getSegundaPalavra();
-        hopper.usar(item);
+
+        boolean encontrouItem = jogador.procurarItem(item);
+
+        // tenta usar o item se encontrado
+        if (encontrouItem) {
+            try {
+                jogador.getAmbienteAtual().usarItem(item);
+
+                String acao = jogador.usarItem(item);
+                System.out.println("Voce usa o item " + item + " e " + acao);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Voce nao possui esse item");
+        }
     }
 
     /**
@@ -230,9 +303,24 @@ public class Jogo {
             return;
         }
 
-        // hopper recebe nome do item para largar
+        // jogador recebe nome do item para largar
         String item = comando.getSegundaPalavra();
-        hopper.largar(item);
+
+        boolean encontrouItem = jogador.procurarItem(item);
+
+        // tenta largar o item do jogador
+        if (encontrouItem) {
+            Item itemEncontrado = jogador.removerItem(item);
+
+            // tenta adicionar item no ambiente
+            if (itemEncontrado != null) {
+                jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
+
+                System.out.println("Voce largou o item " + item + " " + jogador.getAmbienteAtual().getDescricao());
+            }
+        } else {
+            System.out.println("Voce nao possui esse item");
+        }
     }
 
     /**
@@ -248,8 +336,14 @@ public class Jogo {
             return;
         }
 
-        // hopper recebe nome do item para interagir
+        // jogador recebe nome do item para interagir
         String npc = comando.getSegundaPalavra();
-        hopper.interagir(npc);
+        
+        try {
+            String mensagem = jogador.getAmbienteAtual().interagirComNpc(npc);
+            System.out.println(mensagem);
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
+          }
     }
 }
