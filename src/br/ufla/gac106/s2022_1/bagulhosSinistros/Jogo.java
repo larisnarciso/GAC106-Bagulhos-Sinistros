@@ -210,7 +210,7 @@ public class Jogo {
      * jogador observa o ambiente atual.
      */
     private void observar() {
-        iu.exibirMensagem("Você está " + jogador.getAmbienteAtual().getDescricao() + '\n');
+        iu.exibirMensagem("Você está " + jogador.getAmbienteAtual().getDescricaoLonga() + '\n');
 
         String itensObjeto = jogador.listarItensObjeto();
         if (itensObjeto != "") {
