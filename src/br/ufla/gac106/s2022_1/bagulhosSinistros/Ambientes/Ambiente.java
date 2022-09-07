@@ -1,6 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
@@ -295,6 +296,16 @@ public class Ambiente {
             textoSaidas += saida.getDirecao() + " ";
         }
         return textoSaidas;
+    }
+
+    public String getPistaDescricao(String nomeItem) {
+
+        for (Item item:itens){
+            if(!item.getEhColetavel() && item.getNome().equals(nomeItem)){
+                return ((Pista)item).getPistaDescricao();
+            }
+        }
+        return null;
     }
 
 }
