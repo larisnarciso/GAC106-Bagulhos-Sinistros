@@ -134,7 +134,7 @@ public class Jogo {
         } else if (palavraDeComando.equals("interagir")) {
             interagir(comando);
         }else if (palavraDeComando.equals("analisar")){
-            analisar(comando); 
+            analisar(comando);
         }
         return querSair;
     }
@@ -176,15 +176,20 @@ public class Jogo {
 
         // tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        proximoAmbiente = jogador.getAmbienteAtual().getAmbiente(direcao);
 
-        Boolean saidaBloqueada = jogador.getAmbienteAtual().saidaBloqueada(direcao);
+        try {
+            proximoAmbiente = jogador.getAmbienteAtual().getAmbiente(direcao);
 
-        if (saidaBloqueada) {
-            iu.continuarMensagem("Saída bloqueada!");
-        } else {
-            jogador.setAmbienteAtual(proximoAmbiente);
-            exibirAmbienteAtual();
+            Boolean saidaBloqueada = jogador.getAmbienteAtual().saidaBloqueada(direcao);
+
+            if (saidaBloqueada) {
+                iu.continuarMensagem("Saída bloqueada!");
+            } else {
+                jogador.setAmbienteAtual(proximoAmbiente);
+                exibirAmbienteAtual();
+            }
+        } catch (Exception e) {
+            iu.continuarMensagem(e.getMessage());
         }
     }
 
@@ -366,5 +371,5 @@ public class Jogo {
             System.out.println("O ambiente nao possui esse item");
         }
     }
-    
+
 }
