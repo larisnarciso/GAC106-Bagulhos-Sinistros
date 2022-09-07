@@ -13,20 +13,18 @@ import br.ufla.gac106.s2022_1.baseJogo.InterfaceUsuario;
  */
 
 /**
- * Classe que cria e exibe uma janela gráfica para Interface com o Usuário em um jogo do tipo Adventure.
+ * Classe que cria e exibe uma janela gráfica para Interface com o Usuário em um
+ * jogo do tipo Adventure.
  * 
  * @author Julio César Alves
  */
-public class Terminal implements InterfaceUsuario
-{
-    // origem da entrada de comandos
-    private Scanner entrada;
-    
+public class Terminal implements InterfaceUsuario {
     /**
      * Exibe uma nova mensagem para o jogador
      * 
-     * @param mensagem Mensagem a ser exibida para o usuário.
-     * @param apagarAnteriroes Indica se as mensagens anteriores devem ser apagadas antes de 
+     * @param mensagem         Mensagem a ser exibida para o usuário.
+     * @param apagarAnteriroes Indica se as mensagens anteriores devem ser apagadas
+     *                         antes de
      *                         exibir a nova mensagem.
      */
     @Override
@@ -34,45 +32,42 @@ public class Terminal implements InterfaceUsuario
         // exibe a mensagem
         System.out.println(mensagem);
     }
-        
+
     /**
      * Acrescenta informação à uma mensagem anterior
      * 
      * @param mensagem Informação a ser acrecentada na mensagem anterior
      */
     @Override
-    public void continuarMensagem(String mensagem)  {
+    public void continuarMensagem(String mensagem) {
         // exibe a mensagem
         System.out.println(mensagem);
     }
-        
+
     /**
      * Obtém um comando do jogador.
      * 
-     * O código abaixo tem o efeito da tela ficar aguardando o jogador digitar um comando 
+     * O código abaixo tem o efeito da tela ficar aguardando o jogador digitar um
+     * comando
      * e apertar ENTER ou clicar em enviar.
      */
     @Override
     public String obterComando() {
-        // guardará uma linha inteira
-        String comando;
+        // origem da entrada de comandos
+        Scanner entrada = new Scanner(System.in);
 
-        // imprime o prompt
-        System.out.print("> ");
-
-        // obtém uma linha de comando do usuário
-        comando = entrada.nextLine();
-        
         // O método retorna o comando digitado pelo usuário
-        return comando;
+        return entrada.nextLine();
     }
-    
+
     /**
-     * Obtém uma informação do usuário como String. 
+     * Obtém uma informação do usuário como String.
      * 
-     * Obs.: não deve ser usado para comandos. No caso de comandos use 'obterComando'.
+     * Obs.: não deve ser usado para comandos. No caso de comandos use
+     * 'obterComando'.
      * 
-     * @param instrucao Mensagem de instrução para o usuário (diz qual informação está sendo solicitada)
+     * @param instrucao Mensagem de instrução para o usuário (diz qual informação
+     *                  está sendo solicitada)
      */
     @Override
     public String obterInformacao(String instrucao) {
@@ -81,7 +76,7 @@ public class Terminal implements InterfaceUsuario
 
         return obterComando();
     }
-    
+
     /**
      * Informa a Interface do Usuário que o jogador mudou de ambiente.
      * 
@@ -93,7 +88,7 @@ public class Terminal implements InterfaceUsuario
     public void ambienteAtualMudou(EntidadeGrafica ambiente) {
         // comandos
     }
-    
+
     /**
      * Informa a Interface do Usuário que o jogador pegou um item (ou similar).
      * 
@@ -107,7 +102,8 @@ public class Terminal implements InterfaceUsuario
     }
 
     /**
-     * Informa a Interface do Usuário que o jogador não tem mais um item (ou similar).
+     * Informa a Interface do Usuário que o jogador não tem mais um item (ou
+     * similar).
      * 
      * Tem o efeito de não mostrar mais o item na barra lateral do jogo.
      * 
