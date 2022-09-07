@@ -130,8 +130,9 @@ public class Jogo {
             largar(comando);
         } else if (palavraDeComando.equals("interagir")) {
             interagir(comando);
+        }else if (palavraDeComando.equals("analisar")){
+            analisar(comando); 
         }
-
         return querSair;
     }
 
@@ -346,4 +347,23 @@ public class Jogo {
             System.out.println(e.getMessage());
           }
     }
+    private void analisar(Comando comando) {
+        // se não há segunda palavra, não sabemos o que analisar...
+        if (!comando.temSegundaPalavra()) {
+            System.out.println("");
+            return;
+        }
+
+        // tenta encontrar o item
+        String item = comando.getSegundaPalavra();
+        String pistaDesc = jogador.getAmbienteAtual().getPistaDescricao(item);
+
+        // tenta usar o item se encontrado
+        if (pistaDesc != null) {
+            System.out.println("Voce analisa o item " + item + " e encontra uma pista: " + pistaDesc);
+        } else {
+            System.out.println("O ambiente nao possui esse item");
+        }
+    }
+    
 }

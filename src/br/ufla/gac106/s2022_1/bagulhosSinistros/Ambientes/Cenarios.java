@@ -80,9 +80,9 @@ public class Cenarios {
     // cria as pistas
     Item desenhoWill, bicicleta, pisca;
 
-    bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida");
-    pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede");
-    desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança");
+    bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida", "é a bicicleta do Will");
+    pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede", "esta escrito Me Ajuda" );
+    desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança", "O desenho é do demogorgon");
 
     // adiciona as pistas nos ambientes
     escola.adicionarItem(desenhoWill);

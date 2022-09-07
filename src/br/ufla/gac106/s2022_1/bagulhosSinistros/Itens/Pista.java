@@ -20,6 +20,8 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
  */
 
 public class Pista extends Item {
+
+    private String pistaDescricao;
     /**
      * Cria um item Coletavel com nome e descricao.
      * Como padrão acao é null e ehColetável é false.
@@ -30,8 +32,9 @@ public class Pista extends Item {
      * @param nome      O nome do item.
      * @param descricao A descricao do item.
      */
-    public Pista(String nome, String descricao) {
+    public Pista(String nome, String descricao, String pistaDescricao) {
         super(nome, descricao, null, false);
+        this.pistaDescricao = pistaDescricao;
     }
 
     /**
@@ -41,5 +44,8 @@ public class Pista extends Item {
     @Override
     public String getDescricao() {
         return super.getDescricao() + "... este item te chamou atenção...";
+    }
+    public String getPistaDescricao(){
+        return pistaDescricao;
     }
 }
