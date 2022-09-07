@@ -49,24 +49,13 @@ public class Jogador extends Personagem {
    */
   public Jogador(String nome, String descricao, String nomeObjeto) {
     super(nome, "Jogador", descricao);
+    this.nomeObjeto = nomeObjeto;
 
-    this.objeto = new HashMap<Item, Integer>();
+    objeto = new HashMap<Item, Integer>();
   }
 
   public int getQuantidadeMovimentos() {
     return quantidadeMovimentos;
-  }
-
-  /**
-   * Retorna se há itens no objeto do jogador.
-   * 
-   * @return true se há um item no objeto.
-   */
-  private boolean temItem() {
-    if (objeto.size() > 0)
-      return true;
-    else
-      return false;
   }
 
   /**
@@ -93,13 +82,15 @@ public class Jogador extends Personagem {
    */
   public String listarItensObjeto() {
     String listagemItens = "";
-    if (temItem()) {
+
+    if (objeto.size() > 0) {
       listagemItens += "Itens no " + nomeObjeto + " (" + objeto.size() + "/3): ";
 
       for (Item item : objeto.keySet()) {
         listagemItens += "\n+ " + objeto.get(item) + " " + item.getDescricao();
       }
     }
+
     return listagemItens;
   }
 

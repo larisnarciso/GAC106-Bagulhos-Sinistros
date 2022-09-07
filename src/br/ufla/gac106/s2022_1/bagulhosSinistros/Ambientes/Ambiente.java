@@ -29,7 +29,6 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Ambiente {
     // descrição do ambiente
