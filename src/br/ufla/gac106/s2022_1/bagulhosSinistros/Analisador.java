@@ -1,6 +1,6 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
-import java.util.Scanner;
+import br.ufla.gac106.s2022_1.baseJogo.InterfaceUsuario;
 
 /**
  * Classe Analisador
@@ -31,17 +31,18 @@ import java.util.Scanner;
  */
 
 public class Analisador {
+    // Interface do usuário (tela ou terminal)
+    private InterfaceUsuario iu;
     // guarda todas as palavras de comando validas
     private PalavrasComando palavrasDeComando;
-    // origem da entrada de comandos
-    private Scanner entrada;
 
     /**
      * Cria um analisador para ler do terminal.
      */
-    public Analisador() {
+    public Analisador(InterfaceUsuario iu) {
+        this.iu = iu;
+        
         palavrasDeComando = new PalavrasComando();
-        entrada = new Scanner(System.in);
     }
 
     /**
@@ -58,7 +59,7 @@ public class Analisador {
         System.out.print("> ");
 
         // obtém uma linha de comando do usuário
-        linha = entrada.nextLine();
+        linha = iu.obterComando();
 
         // quebra o comando do usuário em várias palavras, usando espaços em branco como
         // separadores.
