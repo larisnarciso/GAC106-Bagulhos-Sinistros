@@ -251,7 +251,7 @@ public class Ambiente {
                 }
             }
         } else {
-            throw new RuntimeException("Não há NPCs!");
+            throw new RuntimeException("Parece que você está sozinho aqui");
         }
 
         return interacao;
@@ -267,7 +267,7 @@ public class Ambiente {
                 return saida.getAmbiente();
             }
         }
-        throw new RuntimeException("Direção não encontrada!");
+        throw new RuntimeException("Tente outra saída!");
     }
 
     public Boolean saidaBloqueada(String direcao) {
