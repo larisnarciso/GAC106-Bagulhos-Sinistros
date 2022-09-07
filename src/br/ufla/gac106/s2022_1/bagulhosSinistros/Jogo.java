@@ -51,7 +51,7 @@ public class Jogo {
     public Jogo(InterfaceUsuario iu) {
         this.iu = iu;
 
-        analisador = new Analisador();
+        analisador = new Analisador(iu);
         jogador = new Hopper();
         cenarios = new Cenarios();
 
@@ -80,21 +80,20 @@ public class Jogo {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
         }
-        System.out.println("Obrigado por jogar. Até mais!");
+        iu.exibirMensagem("Obrigado por jogar. Até mais!");
     }
 
     /**
      * Imprime a mensagem de abertura o usuário.
      */
     private void imprimirBoasVindas() {
-        System.out.println();
-        System.out.println("Bem-vindo a Bagulhos Sinistros!");
-        System.out.println("Este é um jogo de RPG investigativo sobrenatural.");
-        System.out.println(
+        iu.exibirMensagem("Bem-vindo a Bagulhos Sinistros!");
+        iu.continuarMensagem("Este é um jogo de RPG investigativo sobrenatural.");
+        iu.continuarMensagem(
                 "\nApós o sumiço de um menino de 12 anos, o delegado Jim Hopper inicia uma investigação para encontra-lo na cidade de Hawkins.");
-        System.out.println("Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
-        System.out.println("\nSeu objetivo é achar o Will Byers!");
-        System.out.println("\nDigite 'ajuda' se voce precisar de ajuda.");
+        iu.continuarMensagem("Ele irá desvendar misterios, com criaturas monstruosas e dimensões paralelas.");
+        iu.continuarMensagem("\nSeu objetivo é achar o Will Byers!");
+        iu.continuarMensagem("\nDigite 'ajuda' se voce precisar de ajuda.");
 
         exibirAmbienteAtual();
     }
@@ -109,7 +108,7 @@ public class Jogo {
         boolean querSair = false;
 
         if (comando.ehDesconhecido()) {
-            System.out.println("Eu nao entendi o que voce disse...");
+            iu.continuarMensagem("Eu nao entendi o que voce disse...");
             return false;
         }
 
@@ -140,10 +139,9 @@ public class Jogo {
      * Imprime o objetivo do jogo e os possíveis comandos.
      */
     private void imprimirAjuda() {
-        System.out.println("Voce está em Hawkins e seu objetivo é encontrar Will Byers");
-        System.out.println();
-        System.out.println("Suas palavras de comando sao:");
-        System.out.println("  " + analisador.getComandos());
+        iu.exibirMensagem("Voce está em Hawkins e seu objetivo é encontrar Will Byers");
+        iu.continuarMensagem("Suas palavras de comando sao:");
+        iu.continuarMensagem("  " + analisador.getComandos());
     }
 
     /**
@@ -151,9 +149,9 @@ public class Jogo {
      * Imprime a localização atual e as possíveis saídas.
      */
     public void exibirAmbienteAtual() {
-        System.out.println("\nVoce possui " + jogador.getQuantidadeMovimentos() + " movimentos");
-        System.out.println("\nVoce esta " + jogador.getAmbienteAtual().getDescricao());
-        System.out.println("Saidas: " + jogador.getAmbienteAtual().getSaidas());
+        iu.continuarMensagem("\nVoce possui " + jogador.getQuantidadeMovimentos() + " movimentos");
+        iu.continuarMensagem("\nVoce esta " + jogador.getAmbienteAtual().getDescricao());
+        iu.continuarMensagem("Saidas: " + jogador.getAmbienteAtual().getSaidas());
     }
 
     /**
@@ -165,7 +163,7 @@ public class Jogo {
     public void irParaAmbiente(Comando comando) {
         // se não há segunda palavra, não sabemos pra onde ir...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Ir pra onde?");
+            iu.continuarMensagem("Ir pra onde?");
             return;
         }
 
@@ -178,7 +176,7 @@ public class Jogo {
         Boolean saidaBloqueada = jogador.getAmbienteAtual().saidaBloqueada(direcao);
 
         if (saidaBloqueada) {
-            System.out.println("Saída bloqueada!");
+            iu.continuarMensagem("Saída bloqueada!");
         } else {
             jogador.setAmbienteAtual(proximoAmbiente);
             exibirAmbienteAtual();
@@ -195,7 +193,7 @@ public class Jogo {
      */
     private boolean sair(Comando comando) {
         if (comando.temSegundaPalavra()) {
-            System.out.println("Sair o que?");
+            iu.continuarMensagem("Sair o que?");
             return false;
         } else {
             return true; // sinaliza que nós realmente queremos sair
@@ -207,12 +205,11 @@ public class Jogo {
      * jogador observa o ambiente atual.
      */
     private void observar() {
-        System.out.println(jogador.getAmbienteAtual().getDescricao());
-        System.out.println();
+        iu.exibirMensagem("Você está " + jogador.getAmbienteAtual().getDescricao() + '\n');
 
         String itensObjeto = jogador.listarItensObjeto();
         if (itensObjeto != "") {
-            System.out.println(itensObjeto);
+            iu.continuarMensagem(itensObjeto);
         }
     }
 
@@ -225,7 +222,7 @@ public class Jogo {
     private void pegar(Comando comando) {
         // se não há segunda palavra, não sabemos o que coletar...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Pegar o que?");
+            iu.continuarMensagem("Pegar o que?");
             return;
         }
 
@@ -244,16 +241,16 @@ public class Jogo {
 
                 // verifica se atingiu o máximo de tipos de itens coletados
                 if (pegouItem) {
-                    System.out.println("Você coletou o item " + item);
+                    iu.continuarMensagem("Você coletou o item " + item);
                 } else {
                     jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
-                    System.out.println("Limite máximo de tipos de itens atingido!");
+                    iu.continuarMensagem("Limite máximo de tipos de itens atingido!");
                 }
             } else {
-                System.out.println("Este item não é coletavel");
+                iu.continuarMensagem("Este item não é coletavel");
             }
         } else {
-            System.out.println("Não há esse item no ambiente");
+            iu.continuarMensagem("Não há esse item no ambiente");
         }
     }
 
@@ -266,7 +263,7 @@ public class Jogo {
     private void usar(Comando comando) {
         // se não há segunda palavra, não sabemos o que usar...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Usar o que?");
+            iu.continuarMensagem("Usar o que?");
             return;
         }
 
@@ -281,12 +278,12 @@ public class Jogo {
                 jogador.getAmbienteAtual().usarItem(item);
 
                 String acao = jogador.usarItem(item);
-                System.out.println("Voce usa o item " + item + " e " + acao);
+                iu.continuarMensagem("Voce usa o item " + item + " e " + acao);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                iu.continuarMensagem(e.getMessage());
             }
         } else {
-            System.out.println("Voce nao possui esse item");
+            iu.continuarMensagem("Voce nao possui esse item");
         }
     }
 
@@ -299,7 +296,7 @@ public class Jogo {
     private void largar(Comando comando) {
         // se não há segunda palavra, não sabemos o que largar...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Largar o que?");
+            iu.continuarMensagem("Largar o que?");
             return;
         }
 
@@ -316,10 +313,10 @@ public class Jogo {
             if (itemEncontrado != null) {
                 jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
 
-                System.out.println("Voce largou o item " + item + " " + jogador.getAmbienteAtual().getDescricao());
+                iu.continuarMensagem("Voce largou o item " + item + " " + jogador.getAmbienteAtual().getDescricao());
             }
         } else {
-            System.out.println("Voce nao possui esse item");
+            iu.continuarMensagem("Voce nao possui esse item");
         }
     }
 
@@ -332,18 +329,18 @@ public class Jogo {
     private void interagir(Comando comando) {
         // se não há segunda palavra, não sabemos com quem interagir...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Interagir com quem?");
+            iu.continuarMensagem("Interagir com quem?");
             return;
         }
 
         // jogador recebe nome do item para interagir
         String npc = comando.getSegundaPalavra();
-        
+
         try {
             String mensagem = jogador.getAmbienteAtual().interagirComNpc(npc);
-            System.out.println(mensagem);
-          } catch (Exception e) {
-            System.out.println(e.getMessage());
-          }
+            iu.continuarMensagem(mensagem);
+        } catch (Exception e) {
+            iu.continuarMensagem(e.getMessage());
+        }
     }
 }
