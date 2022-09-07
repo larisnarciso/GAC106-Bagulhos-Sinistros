@@ -38,34 +38,34 @@ public class Cenarios {
     Ambiente centro, delegacia, escritorioDelegacia, escola, ferroVelho, casaMike, poraoCasaMike, trailerJim, floresta,
         casaByers, casteloByers, florestaFundo, laboratorio, salaLaboratorio, laboratorioMI, florestaMI, casteloMI;
 
-    centro = new Ambiente("no centro da cidade de Hawkins");
-    delegacia = new Ambiente("na delegacia de Polícia de Hawkins");
-    escritorioDelegacia = new Ambiente("no seu escritório na delegacia");
-    escola = new Ambiente("na Escola de Hawkins");
-    ferroVelho = new Ambiente("no ferro velho ao redor da cidade");
-    casaMike = new Ambiente("na casa da família Wheeler");
-    poraoCasaMike = new Ambiente("no porão da casa da família Wheeler");
-    trailerJim = new Ambiente("no seu trailer");
-    floresta = new Ambiente("na Floresta Sombria");
-    casaByers = new Ambiente("na casa da família Byers");
-    casteloByers = new Ambiente("no Castelo Byers, uma cabana do Will Byers");
-    florestaFundo = new Ambiente("no fundo da Floresta Sombria");
-    laboratorio = new Ambiente("no Laboratório Nacional de Hawkins");
-    salaLaboratorio = new Ambiente("na sala do Laboratório");
-    laboratorioMI = new Ambiente("no Laboratório do Mundo Invertido");
-    florestaMI = new Ambiente("na Floresta Sombria do Mundo Invertido");
-    casteloMI = new Ambiente("no Castelo Byers do Mundo Invertido");
+    centro = new Ambiente("Centro", "no centro da cidade de Hawkins", "img/ambiente/centro.jpg");
+    delegacia = new Ambiente("Delegacia", "na delegacia de Polícia de Hawkins", "img/ambiente/delegacia.jpg");
+    escritorioDelegacia = new Ambiente("Escritório da Delegacia", "no seu escritório na delegacia", "img/ambiente/escritorio.jpg");
+    escola = new Ambiente("Escola", "na Escola de Hawkins", "img/ambiente/escola.jpg");
+    ferroVelho = new Ambiente("Ferro Velho", "no ferro velho ao redor da cidade", "img/ambiente/ferroVelho.jpg");
+    casaMike = new Ambiente("Casa do Mike", "na casa da família Wheeler", "img/ambiente/casaWheeler.jpg");
+    poraoCasaMike = new Ambiente("Porão da Casa do Mike", "no porão da casa da família Wheeler", "img/ambiente/porao.jpg");
+    trailerJim = new Ambiente("Trailer do Jim", "no seu trailer", "img/ambiente/trailer.jpg");
+    floresta = new Ambiente("Floresta Sombria", "na Floresta Sombria", "img/ambiente/florestaSombria.jpg");
+    casaByers = new Ambiente("Casa dos Byers", "na casa da família Byers", "img/ambiente/casaByers.jpg");
+    casteloByers = new Ambiente("Castelo Byers", "no Castelo Byers, uma cabana do Will Byers", "img/ambiente/castelo.jpg");
+    florestaFundo = new Ambiente("Floresta Sombria Fundo", "no fundo da Floresta Sombria", "img/ambiente/floresta.jpg");
+    laboratorio = new Ambiente("Laboratório", "no Laboratório Nacional de Hawkins", "img/ambiente/laboratorio.jpg");
+    salaLaboratorio = new Ambiente("Sala Laboratório", "na sala do Laboratório", "img/ambiente/sala.jpg");
+    laboratorioMI = new Ambiente("Laboratório do Mundo Invertido", "no Laboratório do Mundo Invertido", "img/ambiente/laboratorioMI.jpg");
+    florestaMI = new Ambiente("Floresta do Mundo Invertido", "na Floresta Sombria do Mundo Invertido", "img/ambiente/florestaMI.jpg");
+    casteloMI = new Ambiente("Castelo Byers do Mundo Invertido", "no Castelo Byers do Mundo Invertido", "img/ambiente/casteloMI.jpg");
 
 
     /*---------- ITENS ----------*/
     // cria os itens
     Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
 
-    chaveEscritorio = new Coletavel("chave", "chave do escritório", "abre a porta");
-    balaRevolver = new Coletavel("bala", "bala de revolver", "coloca na arma");
-    alicate = new Coletavel("alicate", "alicate grande e enferrujado", "abre a grade");
-    lanterna = new Coletavel("lanterna", "lanterna tática potente", "ilumina o Mundo Invertido");
-    revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "atira no inimigo");
+    chaveEscritorio = new Coletavel("chave", "chave do escritório", "img/itens/chave.png", "abre a porta");
+    balaRevolver = new Coletavel("bala", "bala de revolver", "img/itens/bala.png", "coloca na arma");
+    alicate = new Coletavel("alicate", "alicate grande e enferrujado", "img/itens/alicate.png", "abre a grade");
+    lanterna = new Coletavel("lanterna", "lanterna tática potente", "img/itens/lanterna.png", "ilumina o Mundo Invertido");
+    revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "img/itens/revolver.png", "atira no inimigo");
     
     // adiciona os itens nos ambientes
     delegacia.adicionarItem(chaveEscritorio);
@@ -80,9 +80,9 @@ public class Cenarios {
     // cria as pistas
     Item desenhoWill, bicicleta, pisca;
 
-    bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida", "é a bicicleta do Will");
-    pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede", "esta escrito Me Ajuda" );
-    desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança", "O desenho é do demogorgon");
+    bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida", "img/itens/bicicleta.png", "é a bicicleta do Will");
+    pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede", "img/itens/pisca.png", "esta escrito Me Ajuda" );
+    desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança", "img/itens/desenho.png", "O desenho é do demogorgon");
 
     // adiciona as pistas nos ambientes
     escola.adicionarItem(desenhoWill);

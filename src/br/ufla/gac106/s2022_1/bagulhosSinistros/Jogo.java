@@ -66,6 +66,7 @@ public class Jogo {
     public void iniciar() {
         Ambiente ambiente = cenarios.criarCenarios();
         jogador.setAmbienteAtual(ambiente);
+        iu.ambienteAtualMudou(ambiente);
     }
 
     /**
@@ -186,6 +187,7 @@ public class Jogo {
                 iu.continuarMensagem("Saída bloqueada!");
             } else {
                 jogador.setAmbienteAtual(proximoAmbiente);
+                iu.ambienteAtualMudou(proximoAmbiente);
                 exibirAmbienteAtual();
             }
         } catch (Exception e) {
@@ -215,7 +217,7 @@ public class Jogo {
      * jogador observa o ambiente atual.
      */
     private void observar() {
-        iu.exibirMensagem("Você está " + jogador.getAmbienteAtual().getDescricaoLonga() + '\n');
+        iu.exibirMensagem(jogador.getAmbienteAtual().getDescricaoLonga() + '\n');
 
         String itensObjeto = jogador.listarItensObjeto();
         if (itensObjeto != "") {
@@ -252,6 +254,7 @@ public class Jogo {
                 // verifica se atingiu o máximo de tipos de itens coletados
                 if (pegouItem) {
                     iu.continuarMensagem("Você coletou o item " + item);
+                    iu.jogadorPegouItem(itemEncontrado);
                 } else {
                     jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
                     iu.continuarMensagem("Limite máximo de tipos de itens atingido!");
@@ -324,6 +327,7 @@ public class Jogo {
                 jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
 
                 iu.continuarMensagem("Voce largou o item " + item + " " + jogador.getAmbienteAtual().getDescricao());
+                iu.jogadorDescartouItem(itemEncontrado);
             }
         } else {
             iu.continuarMensagem("Voce nao possui esse item");

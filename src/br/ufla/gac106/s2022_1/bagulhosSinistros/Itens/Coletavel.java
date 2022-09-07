@@ -32,7 +32,7 @@ public class Coletavel extends Item {
      * @param descricao A descricao do item.
      * @param acao      A acao do item.
      */
-    public Coletavel(String nome, String descricao, String acao) {
-        super(nome, descricao, acao, true);
+    public Coletavel(String nome, String descricao, String caminhoImagem, String acao) {
+        super(nome, descricao, caminhoImagem, acao, true);
     }
 }
