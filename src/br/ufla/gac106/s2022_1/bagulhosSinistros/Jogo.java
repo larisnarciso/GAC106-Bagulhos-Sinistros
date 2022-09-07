@@ -44,6 +44,8 @@ public class Jogo {
     private Analisador analisador;
     // Cria todos os ambientes, adiciona os itens e liga as saidas deles
     private Cenarios cenarios;
+    // Responsável por armazenar informações do Jogador
+    private ManipularArquivo arq;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -54,7 +56,7 @@ public class Jogo {
         analisador = new Analisador(iu);
         jogador = new Hopper();
         cenarios = new Cenarios();
-
+        arq = new ManipularArquivo();
         iniciar();
     }
 
@@ -80,7 +82,9 @@ public class Jogo {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
         }
+        arq.salvarDados(jogador.getNome(), jogador.getQuantidadeMovimentos(), false);
         iu.exibirMensagem("Obrigado por jogar. Até mais!");
+        arq.carregarResultados();
     }
 
     /**
