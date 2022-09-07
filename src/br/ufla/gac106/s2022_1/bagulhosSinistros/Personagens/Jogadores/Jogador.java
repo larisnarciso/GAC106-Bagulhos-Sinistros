@@ -30,7 +30,7 @@ public class Jogador extends Personagem {
   // Ambiente onde se encontra o jogador
   private Ambiente ambienteAtual;
   // Contagem da quantidade de movimentos do jogador
-  private int quantidadeMovimentos = 70;
+  private int quantidadeMovimentos = 71;
   // Objeto em que se guardados os itens do jogador
   private HashMap<Item, Integer> objeto;
   // Nome do objeto onde os itens serão guardados
@@ -54,8 +54,26 @@ public class Jogador extends Personagem {
     objeto = new HashMap<Item, Integer>();
   }
 
+  /**
+   * @return A quantidade de movimentos restantes.
+   */
   public int getQuantidadeMovimentos() {
     return quantidadeMovimentos;
+  }
+
+  /**
+   * @param ambiente O ambiente atual.
+   */
+  public void setAmbienteAtual(Ambiente ambiente) {
+    ambienteAtual = ambiente;
+    quantidadeMovimentos --;
+  }
+
+  /**
+   * @return O ambiente atual.
+   */
+  public Ambiente getAmbienteAtual() {
+    return ambienteAtual;
   }
 
   /**
@@ -92,14 +110,6 @@ public class Jogador extends Personagem {
     }
 
     return listagemItens;
-  }
-
-  public void setAmbienteAtual(Ambiente ambiente) {
-    ambienteAtual = ambiente;
-  }
-
-  public Ambiente getAmbienteAtual() {
-    return ambienteAtual;
   }
 
   /**
@@ -163,9 +173,11 @@ public class Jogador extends Personagem {
         else {
           objeto.remove(item);
         }
+
         return meuItem;
       }
     }
+
     return null;
   }
 }
