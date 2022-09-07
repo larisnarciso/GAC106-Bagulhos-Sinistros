@@ -29,7 +29,6 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Ambiente {
     // descrição do ambiente
@@ -252,7 +251,7 @@ public class Ambiente {
                 }
             }
         } else {
-            throw new RuntimeException("Não há NPCs!");
+            throw new RuntimeException("Parece que você está sozinho aqui");
         }
 
         return interacao;
@@ -268,7 +267,7 @@ public class Ambiente {
                 return saida.getAmbiente();
             }
         }
-        throw new RuntimeException("Direção não encontrada!");
+        throw new RuntimeException("Tente outra saída!");
     }
 
     public Boolean saidaBloqueada(String direcao) {

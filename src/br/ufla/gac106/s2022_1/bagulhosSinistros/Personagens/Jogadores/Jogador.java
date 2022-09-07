@@ -30,7 +30,7 @@ public class Jogador extends Personagem {
   // Ambiente onde se encontra o jogador
   private Ambiente ambienteAtual;
   // Contagem da quantidade de movimentos do jogador
-  private int quantidadeMovimentos = 70;
+  private int quantidadeMovimentos = 71;
   // Objeto em que se guardados os itens do jogador
   private HashMap<Item, Integer> objeto;
   // Nome do objeto onde os itens serão guardados
@@ -49,24 +49,31 @@ public class Jogador extends Personagem {
    */
   public Jogador(String nome, String descricao, String nomeObjeto) {
     super(nome, "Jogador", descricao);
+    this.nomeObjeto = nomeObjeto;
 
-    this.objeto = new HashMap<Item, Integer>();
+    objeto = new HashMap<Item, Integer>();
   }
 
+  /**
+   * @return A quantidade de movimentos restantes.
+   */
   public int getQuantidadeMovimentos() {
     return quantidadeMovimentos;
   }
 
   /**
-   * Retorna se há itens no objeto do jogador.
-   * 
-   * @return true se há um item no objeto.
+   * @param ambiente O ambiente atual.
    */
-  private boolean temItem() {
-    if (objeto.size() > 0)
-      return true;
-    else
-      return false;
+  public void setAmbienteAtual(Ambiente ambiente) {
+    ambienteAtual = ambiente;
+    quantidadeMovimentos --;
+  }
+
+  /**
+   * @return O ambiente atual.
+   */
+  public Ambiente getAmbienteAtual() {
+    return ambienteAtual;
   }
 
   /**
@@ -93,22 +100,16 @@ public class Jogador extends Personagem {
    */
   public String listarItensObjeto() {
     String listagemItens = "";
-    if (temItem()) {
+
+    if (objeto.size() > 0) {
       listagemItens += "Itens no " + nomeObjeto + " (" + objeto.size() + "/3): ";
 
       for (Item item : objeto.keySet()) {
         listagemItens += "\n+ " + objeto.get(item) + " " + item.getDescricao();
       }
     }
+
     return listagemItens;
-  }
-
-  public void setAmbienteAtual(Ambiente ambiente) {
-    ambienteAtual = ambiente;
-  }
-
-  public Ambiente getAmbienteAtual() {
-    return ambienteAtual;
   }
 
   /**
@@ -172,9 +173,11 @@ public class Jogador extends Personagem {
         else {
           objeto.remove(item);
         }
+
         return meuItem;
       }
     }
+
     return null;
   }
 }
