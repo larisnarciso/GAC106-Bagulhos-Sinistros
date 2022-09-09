@@ -135,7 +135,10 @@ public class Jogo {
             interagir(comando);
         }else if (palavraDeComando.equals("analisar")){
             analisar(comando);
+        }else if (palavraDeComando.equals("atacar")){
+            atacar(comando);
         }
+
         return querSair;
     }
 
@@ -356,7 +359,7 @@ public class Jogo {
     private void analisar(Comando comando) {
         // se não há segunda palavra, não sabemos o que analisar...
         if (!comando.temSegundaPalavra()) {
-            System.out.println("");
+            iu.continuarMensagem("");
             return;
         }
 
@@ -366,10 +369,22 @@ public class Jogo {
 
         // tenta usar o item se encontrado
         if (pistaDesc != null) {
-            System.out.println("Voce analisa o item " + item + " e encontra uma pista: " + pistaDesc);
+            iu.continuarMensagem("Voce analisa o item " + item + " e encontra uma pista: " + pistaDesc);
         } else {
-            System.out.println("O ambiente nao possui esse item");
+            iu.continuarMensagem("O ambiente nao possui esse item");
         }
+    }
+
+    private void atacar(Comando comando) {
+        // se não há segunda palavra, não sabemos o que analisar...
+        if (!comando.temSegundaPalavra()) {
+            iu.continuarMensagem("");
+            return;
+        }
+
+        // tenta encontrar o item
+        String nomeMonstro = comando.getSegundaPalavra();
+        iu.continuarMensagem(jogador.getAmbienteAtual().atacarMonstro(nomeMonstro));
     }
 
 }
