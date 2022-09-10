@@ -356,6 +356,14 @@ public class Jogo {
             iu.continuarMensagem(e.getMessage());
         }
     }
+
+    /**
+     * "Analisar" foi digitado.
+     * Verifica se tem uma segunda palavra indicando qual item analisar.
+     * 
+     * @param comando O comando digitado.
+     */
+
     private void analisar(Comando comando) {
         // se não há segunda palavra, não sabemos o que analisar...
         if (!comando.temSegundaPalavra()) {
@@ -367,7 +375,7 @@ public class Jogo {
         String item = comando.getSegundaPalavra();
         String pistaDesc = jogador.getAmbienteAtual().getPistaDescricao(item);
 
-        // tenta usar o item se encontrado
+        // tenta analisar o item se encontrado
         if (pistaDesc != null) {
             iu.continuarMensagem("Voce analisa o item " + item + " e encontra uma pista: " + pistaDesc);
         } else {
@@ -375,14 +383,21 @@ public class Jogo {
         }
     }
 
+    /**
+     * "Atacar" foi digitado.
+     * Verifica se tem uma segunda palavra indicando qual monstro atacar.
+     * 
+     * @param comando O comando digitado.
+     */
+
     private void atacar(Comando comando) {
-        // se não há segunda palavra, não sabemos o que analisar...
+        // se não há segunda palavra, não sabemos o que atacar...
         if (!comando.temSegundaPalavra()) {
             iu.continuarMensagem("");
             return;
         }
 
-        // tenta encontrar o item
+        // tenta encontrar o monstro
         String nomeMonstro = comando.getSegundaPalavra();
         iu.continuarMensagem(jogador.getAmbienteAtual().atacarMonstro(nomeMonstro));
     }

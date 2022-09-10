@@ -199,6 +199,9 @@ public class Ambiente {
         return listaMonstros;
     }
 
+    /**
+     * Metodo onde o Monstro eh atacado e morto.
+     */
     public String atacarMonstro(String nomeMonstro){
 
         if(temMonstro()){
@@ -317,6 +320,11 @@ public class Ambiente {
         return textoSaidas;
     }
 
+        /**
+     * Coleta a descricao da pista.
+     * 
+     * @return true se existe pista no item nao coletavel.
+     */
     public String getPistaDescricao(String nomeItem) {
 
         for (Item item:itens){
