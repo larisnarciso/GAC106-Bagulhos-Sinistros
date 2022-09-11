@@ -1,5 +1,7 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
 
+import br.ufla.gac106.s2022_1.baseJogo.EntidadeGrafica;
+
 /**
  * Classe Item
  * 
@@ -20,10 +22,14 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
  *         César Alves)
  */
 
-public abstract class Item {
+public abstract class Item extends EntidadeGrafica {
+    // nome do item
     private String nome;
+    // descrição do item
     private String descricao;
+    // ação com o item
     private String acao;
+    // se é coletável ou não
     private boolean ehColetavel;
 
     /**
@@ -39,7 +45,8 @@ public abstract class Item {
      * @param acao        A acao do item.
      * @param ehColetavel Se item é coletável.
      */
-    public Item(String nome, String descricao, String acao, boolean ehColetavel) {
+    public Item(String nome, String descricao, String caminhoImagem, String acao, boolean ehColetavel) {
+        super(caminhoImagem);
         this.nome = nome;
         this.descricao = descricao;
         this.acao = acao;
@@ -47,8 +54,11 @@ public abstract class Item {
     }
 
     /**
+     * Método da classe EntidadeGrafica
+     * 
      * @return O nome do item.
      */
+    @Override
     public String getNome() {
         return nome;
     }

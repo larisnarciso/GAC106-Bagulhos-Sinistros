@@ -5,6 +5,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
+import br.ufla.gac106.s2022_1.baseJogo.EntidadeGrafica;
 
 /**
  * Classe Ambiente
@@ -30,7 +31,9 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 
 import java.util.ArrayList;
 
-public class Ambiente {
+public class Ambiente extends EntidadeGrafica {
+    // nome do ambiente
+    private String nome;
     // descrição do ambiente
     private String descricao;
     // itens do ambiente
@@ -48,13 +51,25 @@ public class Ambiente {
      * 
      * @param descricao A descrição do ambiente.
      */
-    public Ambiente(String descricao) {
+    public Ambiente(String nome, String descricao, String caminhoImagem) {
+        super(caminhoImagem);
         this.descricao = descricao;
+
         itens = new ArrayList<>();
         monstros = new ArrayList<>();
         npcs = new ArrayList<>();
         saidas = new ArrayList<>();
     }
+
+    /**
+     * Método da classe EntidadeGrafica
+     * 
+     * @return O nome do ambiente.
+     */
+     @Override
+     public String getNome() {
+        return nome;
+     };
 
     /**
      * Define as saídas do ambiente.

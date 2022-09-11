@@ -32,8 +32,8 @@ public class Pista extends Item {
      * @param nome      O nome do item.
      * @param descricao A descricao do item.
      */
-    public Pista(String nome, String descricao, String pistaDescricao) {
-        super(nome, descricao, null, false);
+    public Pista(String nome, String descricao, String caminhoImagem, String pistaDescricao) {
+        super(nome, descricao, caminhoImagem, null, false);
         this.pistaDescricao = pistaDescricao;
     }
 
