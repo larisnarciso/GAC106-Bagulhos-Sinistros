@@ -346,7 +346,9 @@ public class Ambiente extends EntidadeGrafica {
      */
     public boolean usarItem(String item) {
         for (Saida saida : saidas) {
-            return saida.desbloquearSaida(item);
+            if (saida.getBloqueado()) {
+                return saida.desbloquearSaida(item);
+            }
         }
         throw new RuntimeException("Esse item não foi útil...");
     }

@@ -36,7 +36,7 @@ public class Jogador extends Personagem {
   // Nome do objeto onde os itens serão guardados
   private String nomeObjeto;
   // Variavel que armazena o máximo de tipo de itens
-  private static int maximoTipoItens = 3;
+  private int maximoTipoItens = 3;
 
   /**
    * Cria o jogador com o nome e descrição.
@@ -66,7 +66,7 @@ public class Jogador extends Personagem {
    */
   public void setAmbienteAtual(Ambiente ambiente) {
     ambienteAtual = ambiente;
-    quantidadeMovimentos --;
+    quantidadeMovimentos--;
   }
 
   /**
@@ -102,7 +102,7 @@ public class Jogador extends Personagem {
     String listagemItens = "";
 
     if (objeto.size() > 0) {
-      listagemItens += "Itens no " + nomeObjeto + " (" + objeto.size() + "/3): ";
+      listagemItens += "Itens no " + nomeObjeto + " (" + objeto.size() + "/" + maximoTipoItens + "): ";
 
       for (Coletavel item : objeto.keySet()) {
         listagemItens += "\n+ " + objeto.get(item) + " " + item.getDescricao();
@@ -136,6 +136,10 @@ public class Jogador extends Personagem {
     return true;
   }
 
+  public void aumentarMaximoTipoItens() {
+    maximoTipoItens++;
+  }
+
   /**
    * Usa um item do jogador
    * 
@@ -144,6 +148,8 @@ public class Jogador extends Personagem {
    */
   public String usarItem(String nome) {
     String acaoItem = "";
+
+    ambienteAtual.usarItem(nome);
 
     for (Coletavel item : objeto.keySet()) {
       boolean itemEncontrado = item.getNome().equals(nome);

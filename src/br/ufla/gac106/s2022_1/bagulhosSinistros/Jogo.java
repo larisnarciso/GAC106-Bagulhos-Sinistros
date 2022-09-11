@@ -248,7 +248,7 @@ public class Jogo {
         // jogador recebe nome do item para pegar
         String item = comando.getSegundaPalavra();
 
-       Coletavel encontrouItem = jogador.getAmbienteAtual().procurarItem(item);
+        Coletavel encontrouItem = jogador.getAmbienteAtual().procurarItem(item);
 
         // ambiente tenta encontrar o item
         if (encontrouItem != null) {
@@ -295,9 +295,8 @@ public class Jogo {
         // tenta usar o item se encontrado
         if (encontrouItem) {
             try {
-                jogador.getAmbienteAtual().usarItem(item);
-
                 String acao = jogador.usarItem(item);
+
                 iu.continuarMensagem("Voce usa o item " + item + " e " + acao);
             } catch (Exception e) {
                 iu.continuarMensagem(e.getMessage());
@@ -390,9 +389,25 @@ public class Jogo {
             iu.continuarMensagem(pistaDesc);
             
             missao.addPista(encontrouItem);
-            iu.continuarMensagem(missao.verificarPistas());
+            verificarMissao();
         } else {
             iu.continuarMensagem("O ambiente não possui esse item");
+        }
+    }
+
+    private void verificarMissao() {
+        iu.continuarMensagem(missao.verificarPistas());
+
+        // se completou a missão ele recebe o item lanterna para passar pelo mundo invertido
+        if(missao.completouMissao()) {
+
+            Coletavel lanterna = new Coletavel("lanterna", "lanterna tática potente", "img/itens/lanterna.png", "ilumina o Mundo Invertido");
+    
+            jogador.aumentarMaximoTipoItens();
+            jogador.adicionarItem(lanterna);
+
+            iu.continuarMensagem("Você recebeu um item especial!");
+            iu.continuarMensagem("Agora consegue enxergar no Mundo Invertido!");
         }
     }
 

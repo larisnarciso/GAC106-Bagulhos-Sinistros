@@ -70,7 +70,6 @@ public class Cenarios {
     delegacia.adicionarColetavel(chaveEscritorio);
     escritorioDelegacia.adicionarColetavel(balaRevolver);
     ferroVelho.adicionarColetavel(alicate);
-    poraoCasaMike.adicionarColetavel(lanterna);
     trailerJim.adicionarColetavel(revolver);
     trailerJim.adicionarColetavel(balaRevolver);
 
