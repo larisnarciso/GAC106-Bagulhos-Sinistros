@@ -215,6 +215,29 @@ public class Ambiente extends EntidadeGrafica {
     }
 
     /**
+     * Metodo onde o Monstro eh atacado e morto.
+     */
+    public String atacarMonstro(String nomeMonstro){
+
+        if(temMonstro()){
+            for(Monstro monstro : monstros){
+                if(monstro.getNome().equals(nomeMonstro)){
+                    monstro.defender();
+                    int vidaAtual = monstro.getVida();
+                    if(vidaAtual > 0){
+                        return "Monstro Atacado \nVida Restante: " + vidaAtual; 
+                    }else{
+                        monstros.remove(monstro);
+                        return monstro.getNome() + " foi morto";
+                    }
+        
+                }
+            }
+        }
+        return "Monstro nao encontrado";
+    }
+
+    /**
      * Adiciona um NPC no ambiente.
      * 
      * @param demogorgon O demogorgon a ser adicionado.
@@ -312,6 +335,11 @@ public class Ambiente extends EntidadeGrafica {
         return textoSaidas;
     }
 
+        /**
+     * Coleta a descricao da pista.
+     * 
+     * @return true se existe pista no item nao coletavel.
+     */
     public String getPistaDescricao(String nomeItem) {
 
         for (Item item:itens){
