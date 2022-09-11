@@ -2,7 +2,8 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Ambiente;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Cenarios;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Jogador;
 import br.ufla.gac106.s2022_1.baseJogo.InterfaceUsuario;
@@ -40,6 +41,8 @@ public class Jogo {
     private InterfaceUsuario iu;
     // Jogador: Jim Hopper
     private Jogador jogador;
+    // Responsável pela missão do jogo
+    private Missao missao;
     // Analisador de comandos do jogo
     private Analisador analisador;
     // Cria todos os ambientes, adiciona os itens e liga as saidas deles
@@ -55,6 +58,7 @@ public class Jogo {
 
         analisador = new Analisador(iu);
         jogador = new Hopper();
+        missao = new Missao();
         cenarios = new Cenarios();
         arq = new ManipularArquivo();
         iniciar();
@@ -113,7 +117,7 @@ public class Jogo {
         boolean querSair = false;
 
         if (comando.ehDesconhecido()) {
-            iu.continuarMensagem("Eu nao entendi o que voce disse...");
+            iu.continuarMensagem("Eu não entendi o que voce disse...");
             return false;
         }
 
@@ -132,8 +136,8 @@ public class Jogo {
             usar(comando);
         } else if (palavraDeComando.equals("largar")) {
             largar(comando);
-        } else if (palavraDeComando.equals("interagir")) {
-            interagir(comando);
+        } else if (palavraDeComando.equals("conversar")) {
+            conversar(comando);
         }else if (palavraDeComando.equals("analisar")){
             analisar(comando);
         }else if (palavraDeComando.equals("atacar")){
@@ -244,11 +248,11 @@ public class Jogo {
         // jogador recebe nome do item para pegar
         String item = comando.getSegundaPalavra();
 
-        boolean encontrouItem = jogador.getAmbienteAtual().procurarItem(item);
+        Coletavel encontrouItem = jogador.getAmbienteAtual().procurarItem(item);
 
         // ambiente tenta encontrar o item
-        if (encontrouItem) {
-            Item itemEncontrado = jogador.getAmbienteAtual().coletarItem(item);
+        if (encontrouItem != null) {
+           Coletavel itemEncontrado = jogador.getAmbienteAtual().coletarItem(item);
 
             // jogador tenta coletar o item se encontrado
             if (itemEncontrado != null) {
@@ -259,7 +263,7 @@ public class Jogo {
                     iu.continuarMensagem("Você coletou o item " + item);
                     iu.jogadorPegouItem(itemEncontrado);
                 } else {
-                    jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
+                    jogador.getAmbienteAtual().adicionarColetavel(itemEncontrado);
                     iu.continuarMensagem("Limite máximo de tipos de itens atingido!");
                 }
             } else {
@@ -291,15 +295,14 @@ public class Jogo {
         // tenta usar o item se encontrado
         if (encontrouItem) {
             try {
-                jogador.getAmbienteAtual().usarItem(item);
-
                 String acao = jogador.usarItem(item);
+
                 iu.continuarMensagem("Voce usa o item " + item + " e " + acao);
             } catch (Exception e) {
                 iu.continuarMensagem(e.getMessage());
             }
         } else {
-            iu.continuarMensagem("Voce nao possui esse item");
+            iu.continuarMensagem("Voce não possui esse item");
         }
     }
 
@@ -323,38 +326,38 @@ public class Jogo {
 
         // tenta largar o item do jogador
         if (encontrouItem) {
-            Item itemEncontrado = jogador.removerItem(item);
+            Coletavel itemEncontrado = jogador.removerItem(item);
 
             // tenta adicionar item no ambiente
             if (itemEncontrado != null) {
-                jogador.getAmbienteAtual().adicionarItem(itemEncontrado);
+                jogador.getAmbienteAtual().adicionarColetavel(itemEncontrado);
 
                 iu.continuarMensagem("Voce largou o item " + item + " " + jogador.getAmbienteAtual().getDescricao());
                 iu.jogadorDescartouItem(itemEncontrado);
             }
         } else {
-            iu.continuarMensagem("Voce nao possui esse item");
+            iu.continuarMensagem("Voce não possui esse item");
         }
     }
 
     /**
      * "Interagir" foi digitado.
-     * Verifica se tem uma segunda palavra indicando qual NPC quer interagir.
+     * Verifica se tem uma segunda palavra indicando qual NPC quer conversar.
      * 
      * @param comando O comando digitado.
      */
-    private void interagir(Comando comando) {
-        // se não há segunda palavra, não sabemos com quem interagir...
+    private void conversar(Comando comando) {
+        // se não há segunda palavra, não sabemos com quem conversar...
         if (!comando.temSegundaPalavra()) {
             iu.continuarMensagem("Interagir com quem?");
             return;
         }
 
-        // jogador recebe nome do item para interagir
+        // jogador recebe nome do item para conversar
         String npc = comando.getSegundaPalavra();
 
         try {
-            String mensagem = jogador.getAmbienteAtual().interagirComNpc(npc);
+            String mensagem = jogador.getAmbienteAtual().conversarComNpc(npc);
             iu.continuarMensagem(mensagem);
         } catch (Exception e) {
             iu.continuarMensagem(e.getMessage());
@@ -377,13 +380,34 @@ public class Jogo {
 
         // tenta encontrar o item
         String item = comando.getSegundaPalavra();
-        String pistaDesc = jogador.getAmbienteAtual().getPistaDescricao(item);
-
+        Pista encontrouItem = jogador.getAmbienteAtual().procurarPista(item);
+        
+        
         // tenta analisar o item se encontrado
-        if (pistaDesc != null) {
-            iu.continuarMensagem("Voce analisa o item " + item + " e encontra uma pista: " + pistaDesc);
+        if (encontrouItem != null) {
+            String pistaDesc = encontrouItem.getAnalise();
+            iu.continuarMensagem(pistaDesc);
+            
+            missao.addPista(encontrouItem);
+            verificarMissao();
         } else {
-            iu.continuarMensagem("O ambiente nao possui esse item");
+            iu.continuarMensagem("O ambiente não possui esse item");
+        }
+    }
+
+    private void verificarMissao() {
+        iu.continuarMensagem(missao.verificarPistas());
+
+        // se completou a missão ele recebe o item lanterna para passar pelo mundo invertido
+        if(missao.completouMissao()) {
+
+            Coletavel lanterna = new Coletavel("lanterna", "lanterna tática potente", "img/itens/lanterna.png", "ilumina o Mundo Invertido");
+    
+            jogador.aumentarMaximoTipoItens();
+            jogador.adicionarItem(lanterna);
+
+            iu.continuarMensagem("Você recebeu um item especial!");
+            iu.continuarMensagem("Agora consegue enxergar no Mundo Invertido!");
         }
     }
 

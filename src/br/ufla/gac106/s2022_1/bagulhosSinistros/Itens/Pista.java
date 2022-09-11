@@ -21,7 +21,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
 
 public class Pista extends Item {
 
-    private String pistaDescricao;
+    private String analise;
     /**
      * Cria um item Coletavel com nome e descricao.
      * Como padrão acao é null e ehColetável é false.
@@ -34,7 +34,7 @@ public class Pista extends Item {
      */
     public Pista(String nome, String descricao, String caminhoImagem, String pistaDescricao) {
         super(nome, descricao, caminhoImagem, null, false);
-        this.pistaDescricao = pistaDescricao;
+        this.analise = pistaDescricao;
     }
 
     /**
@@ -45,7 +45,11 @@ public class Pista extends Item {
     public String getDescricao() {
         return super.getDescricao() + "... este item te chamou atenção...";
     }
-    public String getPistaDescricao(){
-        return pistaDescricao;
+
+    /**
+     * @return A análise da pista
+     */
+    public String getAnalise() {
+        return analise;
     }
 }

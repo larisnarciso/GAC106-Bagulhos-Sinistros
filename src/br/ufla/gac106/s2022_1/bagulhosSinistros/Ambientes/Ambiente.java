@@ -1,5 +1,6 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes;
 
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
@@ -37,7 +38,9 @@ public class Ambiente extends EntidadeGrafica {
     // descrição do ambiente
     private String descricao;
     // itens do ambiente
-    private ArrayList<Item> itens;
+    private ArrayList<Coletavel> coletaveis;
+    // pistas do ambiente
+    private ArrayList<Pista> pistas;
     // monstros do ambiente
     private ArrayList<Monstro> monstros;
     // NPCs do ambiente
@@ -55,7 +58,8 @@ public class Ambiente extends EntidadeGrafica {
         super(caminhoImagem);
         this.descricao = descricao;
 
-        itens = new ArrayList<>();
+        coletaveis = new ArrayList<>();
+        pistas = new ArrayList<>();
         monstros = new ArrayList<>();
         npcs = new ArrayList<>();
         saidas = new ArrayList<>();
@@ -114,35 +118,47 @@ public class Ambiente extends EntidadeGrafica {
     }
 
     /**
-     * Adiciona um item no ambiente.
+     * Adiciona um item coletável no ambiente.
      * 
-     * @param item O item a ser adicionado.
+     * @param item O item coletável a ser adicionado.
      */
-    public void adicionarItem(Item item) {
-        itens.add(item);
+    public void adicionarColetavel(Coletavel item) {
+        coletaveis.add(item);
     }
 
     /**
-     * @return true se há um item no ambiente.
+     * Adiciona uma pista no ambiente.
+     * 
+     * @param item A pista a ser adicionada.
      */
-    private boolean temItem() {
-        if (itens.size() > 0)
-            return true;
-        else
-            return false;
+    public void adicionarPista(Pista item) {
+        pistas.add(item);
     }
 
     /**
      * @param nome O nome do item.
      * @return se tem o item procurado.
      */
-    public boolean procurarItem(String nome) {
-        for (Item item : itens) {
+    public Coletavel procurarItem(String nome) {
+        for (Coletavel item : coletaveis) {
             if (item.getNome().equals(nome)) {
-                return true;
+                return item;
             }
         }
-        return false;
+        return null;
+    }
+
+    /**
+     * @param nome O nome do item.
+     * @return se tem o item procurado.
+     */
+    public Pista procurarPista(String nome) {
+        for (Pista item : pistas) {
+            if (item.getNome().equals(nome)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
@@ -151,10 +167,13 @@ public class Ambiente extends EntidadeGrafica {
     private String listarItens() {
         String listaItens = "";
 
-        if (temItem()) {
+        if (coletaveis.size() > 0 || pistas.size() > 0) {
             listaItens += "\n\nItem encontrado!";
 
-            for (Item item : itens) {
+            for (Item item : coletaveis) {
+                listaItens += "\n- " + item.getNome() + ": " + item.getDescricao();
+            }
+            for (Item item : pistas) {
                 listaItens += "\n- " + item.getNome() + ": " + item.getDescricao();
             }
         }
@@ -167,11 +186,11 @@ public class Ambiente extends EntidadeGrafica {
      * 
      * @return O objeto item coletado.
      */
-    public Item coletarItem(String nome) {
-        for (int i = 0; i < itens.size(); i++) {
-            if (itens.get(i).getNome().equals(nome) && itens.get(i).getEhColetavel()) {
-                Item meuItem = itens.get(i);
-                itens.remove(i);
+    public Coletavel coletarItem(String nome) {
+        for (int i = 0; i < coletaveis.size(); i++) {
+            if (coletaveis.get(i).getNome().equals(nome)) {
+                Coletavel meuItem = coletaveis.get(i);
+                coletaveis.remove(i);
                 return meuItem;
             }
         }
@@ -234,7 +253,7 @@ public class Ambiente extends EntidadeGrafica {
                 }
             }
         }
-        return "Monstro nao encontrado";
+        return "Monstro não encontrado";
     }
 
     /**
@@ -278,10 +297,10 @@ public class Ambiente extends EntidadeGrafica {
      * 
      * @return A mensagem do NPC.
      */
-    public String interagirComNpc(String nome) {
+    public String conversarComNpc(String nome) {
         String interacao = "";
 
-        // busca o npc para interagir, se encontra, retorna a mensagem
+        // busca o npc para conversar, se encontra, retorna a mensagem
         if (npcs.size() > 0) {
             for (NPC npc : npcs) {
                 if (npc.getNome().equals(nome)) {
@@ -308,6 +327,10 @@ public class Ambiente extends EntidadeGrafica {
         throw new RuntimeException("Tente outra saída!");
     }
 
+    /**
+     * @param direcao A direção definida.
+     * @return se a saída está bloqueada.
+     */
     public Boolean saidaBloqueada(String direcao) {
         for (Saida saida : saidas) {
             if (saida.getDirecao().equals(direcao)) {
@@ -317,9 +340,15 @@ public class Ambiente extends EntidadeGrafica {
         return false;
     }
 
+    /**
+     * @param item O item a ser usado para liberar a saída.
+     * @return se saída foi liberada.
+     */
     public boolean usarItem(String item) {
         for (Saida saida : saidas) {
-            return saida.desbloquearSaida(item);
+            if (saida.getBloqueado()) {
+                return saida.desbloquearSaida(item);
+            }
         }
         throw new RuntimeException("Esse item não foi útil...");
     }
@@ -338,13 +367,12 @@ public class Ambiente extends EntidadeGrafica {
         /**
      * Coleta a descricao da pista.
      * 
-     * @return true se existe pista no item nao coletavel.
+     * @return true se existe pista no item não coletavel.
      */
-    public String getPistaDescricao(String nomeItem) {
-
-        for (Item item:itens){
+    public String getAnalise(String nomeItem) {
+        for (Pista item : pistas){
             if(!item.getEhColetavel() && item.getNome().equals(nomeItem)){
-                return ((Pista)item).getPistaDescricao();
+                return item.getAnalise();
             }
         }
         return null;

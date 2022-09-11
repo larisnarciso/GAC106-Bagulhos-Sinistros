@@ -3,7 +3,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores;
 import java.util.HashMap;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Ambiente;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Personagem;
 
 /**
@@ -32,11 +32,11 @@ public class Jogador extends Personagem {
   // Contagem da quantidade de movimentos do jogador
   private int quantidadeMovimentos = 71;
   // Objeto em que se guardados os itens do jogador
-  private HashMap<Item, Integer> objeto;
+  private HashMap<Coletavel, Integer> objeto;
   // Nome do objeto onde os itens serão guardados
   private String nomeObjeto;
   // Variavel que armazena o máximo de tipo de itens
-  private static int maximoTipoItens = 3;
+  private int maximoTipoItens = 3;
 
   /**
    * Cria o jogador com o nome e descrição.
@@ -51,7 +51,7 @@ public class Jogador extends Personagem {
     super(nome, "Jogador", descricao);
     this.nomeObjeto = nomeObjeto;
 
-    objeto = new HashMap<Item, Integer>();
+    objeto = new HashMap<Coletavel, Integer>();
   }
 
   /**
@@ -66,7 +66,7 @@ public class Jogador extends Personagem {
    */
   public void setAmbienteAtual(Ambiente ambiente) {
     ambienteAtual = ambiente;
-    quantidadeMovimentos --;
+    quantidadeMovimentos--;
   }
 
   /**
@@ -81,7 +81,7 @@ public class Jogador extends Personagem {
    * @return se tem o item procurado.
    */
   public boolean procurarItem(String nome) {
-    for (Item item : objeto.keySet()) {
+    for (Coletavel item : objeto.keySet()) {
       boolean itemEncontrado = item.getNome().equals(nome);
 
       if (itemEncontrado) {
@@ -102,9 +102,9 @@ public class Jogador extends Personagem {
     String listagemItens = "";
 
     if (objeto.size() > 0) {
-      listagemItens += "Itens no " + nomeObjeto + " (" + objeto.size() + "/3): ";
+      listagemItens += "Itens no " + nomeObjeto + " (" + objeto.size() + "/" + maximoTipoItens + "): ";
 
-      for (Item item : objeto.keySet()) {
+      for (Coletavel item : objeto.keySet()) {
         listagemItens += "\n+ " + objeto.get(item) + " " + item.getDescricao();
       }
     }
@@ -121,7 +121,7 @@ public class Jogador extends Personagem {
    * @param itemEncontrado recebe um item para ser guardado
    * @return true se foi adicionado com sucesso
    */
-  public boolean adicionarItem(Item itemEncontrado) {
+  public boolean adicionarItem(Coletavel itemEncontrado) {
     int qtdItens = 1;
     boolean jaExiste = procurarItem(itemEncontrado.getNome());
 
@@ -136,6 +136,10 @@ public class Jogador extends Personagem {
     return true;
   }
 
+  public void aumentarMaximoTipoItens() {
+    maximoTipoItens++;
+  }
+
   /**
    * Usa um item do jogador
    * 
@@ -145,7 +149,9 @@ public class Jogador extends Personagem {
   public String usarItem(String nome) {
     String acaoItem = "";
 
-    for (Item item : objeto.keySet()) {
+    ambienteAtual.usarItem(nome);
+
+    for (Coletavel item : objeto.keySet()) {
       boolean itemEncontrado = item.getNome().equals(nome);
 
       if (itemEncontrado) {
@@ -162,10 +168,10 @@ public class Jogador extends Personagem {
    * @param nome O nome do item a ser removido.
    * @return o item a ser deixado no ambiente.
    */
-  public Item removerItem(String nome) {
-    for (Item item : objeto.keySet()) {
+  public Coletavel removerItem(String nome) {
+    for (Coletavel item : objeto.keySet()) {
       if (item.getNome().equals(nome)) {
-        Item meuItem = item;
+        Coletavel meuItem = item;
         // se tem mais de uma quantidade do mesmo item
         if (objeto.get(meuItem) > 1) {
           objeto.put(meuItem, objeto.get(meuItem) - 1);
