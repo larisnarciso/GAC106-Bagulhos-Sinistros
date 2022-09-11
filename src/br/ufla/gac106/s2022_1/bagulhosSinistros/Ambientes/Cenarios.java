@@ -1,7 +1,6 @@
 package br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes;
 
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
@@ -42,7 +41,7 @@ public class Cenarios {
     delegacia = new Ambiente("Delegacia", "na delegacia de Polícia de Hawkins", "img/ambiente/delegacia.jpg");
     escritorioDelegacia = new Ambiente("Escritório da Delegacia", "no seu escritório na delegacia", "img/ambiente/escritorio.jpg");
     escola = new Ambiente("Escola", "na Escola de Hawkins", "img/ambiente/escola.jpg");
-    ferroVelho = new Ambiente("Ferro Velho", "no ferro velho ao redor da cidade", "img/ambiente/ferroVelho.jpg");
+    ferroVelho = new Ambiente("Ferro Velho", "no ferro velho ao redor da cidade", "img/ambiente/ferrovelho.jpg");
     casaMike = new Ambiente("Casa do Mike", "na casa da família Wheeler", "img/ambiente/casaWheeler.jpg");
     poraoCasaMike = new Ambiente("Porão da Casa do Mike", "no porão da casa da família Wheeler", "img/ambiente/porao.jpg");
     trailerJim = new Ambiente("Trailer do Jim", "no seu trailer", "img/ambiente/trailer.jpg");
@@ -59,7 +58,7 @@ public class Cenarios {
 
     /*---------- ITENS ----------*/
     // cria os itens
-    Item chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
+    Coletavel chaveEscritorio, balaRevolver, alicate, lanterna, revolver;
 
     chaveEscritorio = new Coletavel("chave", "chave do escritório", "img/itens/chave.png", "abre a porta");
     balaRevolver = new Coletavel("bala", "bala de revolver", "img/itens/bala.png", "coloca na arma");
@@ -68,31 +67,35 @@ public class Cenarios {
     revolver = new Coletavel("revolver", "revolver modelo 66 em bom estado", "img/itens/revolver.png", "atira no inimigo");
     
     // adiciona os itens nos ambientes
-    delegacia.adicionarItem(chaveEscritorio);
-    escritorioDelegacia.adicionarItem(balaRevolver);
-    ferroVelho.adicionarItem(alicate);
-    poraoCasaMike.adicionarItem(lanterna);
-    trailerJim.adicionarItem(revolver);
-    trailerJim.adicionarItem(balaRevolver);
+    delegacia.adicionarColetavel(chaveEscritorio);
+    escritorioDelegacia.adicionarColetavel(balaRevolver);
+    ferroVelho.adicionarColetavel(alicate);
+    poraoCasaMike.adicionarColetavel(lanterna);
+    trailerJim.adicionarColetavel(revolver);
+    trailerJim.adicionarColetavel(balaRevolver);
 
 
     /*---------- PISTAS ----------*/
     // cria as pistas
-    Item desenhoWill, bicicleta, pisca;
+    Pista desenhoWill, bicicleta, pisca;
 
-    bicicleta = new Pista("bicicleta", "uma bicicleta vermelha caida", "img/itens/bicicleta.png", "é a bicicleta do Will");
-    pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede", "img/itens/pisca.png", "esta escrito Me Ajuda" );
-    desenhoWill = new Pista("desenho", "desenho infantil aparentemente feito por uma criança", "img/itens/desenho.png", "O desenho é do demogorgon");
+    bicicleta = new Pista("bicicleta", "uma bicicleta vermelha", "img/itens/bicicleta.png", "Você encontrou uma bicicleta infantil caída próximo ao laboratório");
+
+    pisca = new Pista("pisca-pisca", "luzes pisca-pisca de Natal pendurados na parede", "img/itens/pisca.png", "As luzes piscam nas letra A-Q-U-I" );
+
+    desenhoWill = new Pista("desenho", "desenho de um castelo", "img/itens/desenho.png", "O desenho é feito pelo Will, uma imagem do Castelo Byers");
 
     // adiciona as pistas nos ambientes
-    escola.adicionarItem(desenhoWill);
-    floresta.adicionarItem(bicicleta);
-    casaByers.adicionarItem(pisca);
+    escola.adicionarPista(desenhoWill);
+    floresta.adicionarPista(bicicleta);
+    casaByers.adicionarPista(pisca);
 
 
     /*---------- MONSTROS ----------*/
     // cria os monstros
-    Demogorgon demogorgon = new Demogorgon("um demônio associado com o submundo");
+    Demogorgon demogorgon;
+    
+    demogorgon = new Demogorgon("um demônio associado com o submundo");
 
     // adiciona monstros no ambiente
     florestaMI.adicionarDemogorgon(demogorgon);
@@ -115,8 +118,8 @@ public class Cenarios {
     eleven.adicionarMensagem("Lá é muito escuro");
 
     joyce = new NPC("Joyce", "uma mãe preocupada com o sumiço de meu filho");
-    joyce.adicionarMensagem("Meu filho falou que está aqui");
-    joyce.adicionarMensagem("Ele me mostrou através das luzes");
+    joyce.adicionarMensagem("Will está tentando comunicar comigo");
+    joyce.adicionarMensagem("Ele se mostra através das luzes");
 
     will = new NPC("Will", "o garoto perdido");
 
