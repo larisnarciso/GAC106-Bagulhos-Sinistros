@@ -20,7 +20,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
  */
 
 public class Pista extends Item {
-
+    // a análise da pista
     private String analise;
 
     /**
@@ -55,10 +55,11 @@ public class Pista extends Item {
         return analise;
     }
 
-    /* 
-     * Sobrescrita do método equals para Pistas
+    /**
+     * Sobrescrita do método equals.
+     * 
+     * @return se é igual.
      */
-    @Override
     public boolean equals(Object objeto) {
         if (this == objeto) {
             return true;

@@ -44,8 +44,10 @@ public class Coletavel extends Item {
         return super.getDescricao();
     };
 
-    /* 
-     * Sobrescrita do método equals para Coletavel
+    /**
+     * Sobrescrita do método equals.
+     * 
+     * @return se é igual.
      */
     @Override
     public boolean equals(Object objeto) {
@@ -56,7 +58,7 @@ public class Coletavel extends Item {
         else if (!(objeto instanceof Coletavel)) {
             return false;
         } else {
-            Coletavel outro = (Coletavel) objeto; 
+            Coletavel outro = (Coletavel) objeto;
             return super.getNome().equals(outro.getNome());
         }
     }
