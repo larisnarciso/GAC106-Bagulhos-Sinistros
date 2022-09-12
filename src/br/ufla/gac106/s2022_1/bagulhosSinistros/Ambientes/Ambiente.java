@@ -378,4 +378,17 @@ public class Ambiente extends EntidadeGrafica {
         return null;
     }
 
+    public boolean verificaWillEstah(){
+        if(temNpc()){
+            if (npcs.size() > 0) {
+                for (NPC npc : npcs) {
+                    if (npc.getNome().equals("Will")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

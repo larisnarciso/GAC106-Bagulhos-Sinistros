@@ -127,8 +127,8 @@ public class Cenarios {
     ferroVelho.adicionarNpc(dustin);
     poraoCasaMike.adicionarNpc(eleven);
     casaByers.adicionarNpc(joyce);
-    casteloMI.adicionarNpc(will);
-
+//    casteloMI.adicionarNpc(will);
+trailerJim.adicionarNpc(will);
     
     /*---------- SAÍDAS ----------*/
     centro.ajustarSaida("esquerda", ferroVelho);
