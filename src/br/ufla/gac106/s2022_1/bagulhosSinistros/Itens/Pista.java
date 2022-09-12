@@ -22,6 +22,7 @@ package br.ufla.gac106.s2022_1.bagulhosSinistros.Itens;
 public class Pista extends Item {
 
     private String analise;
+
     /**
      * Cria um item Coletavel com nome e descricao.
      * Como padrão acao é null e ehColetável é false.
@@ -49,7 +50,25 @@ public class Pista extends Item {
     /**
      * @return A análise da pista
      */
+    @Override
     public String getAnalise() {
         return analise;
+    }
+
+    /* 
+     * Sobrescrita do método equals para Pistas
+     */
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto) {
+            return true;
+        }
+        // se o objeto passado não é do mesmo tipo, eles não são iguais
+        else if (!(objeto instanceof Pista)) {
+            return false;
+        } else {
+            Pista outro = (Pista) objeto;
+            return super.getNome().equals(outro.getNome());
+        }
     }
 }

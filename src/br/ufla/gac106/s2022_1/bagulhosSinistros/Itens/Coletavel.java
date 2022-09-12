@@ -35,4 +35,29 @@ public class Coletavel extends Item {
     public Coletavel(String nome, String descricao, String caminhoImagem, String acao) {
         super(nome, descricao, caminhoImagem, acao, true);
     }
+
+    /**
+     * @return A analise do item.
+     */
+    @Override
+    public String getAnalise() {
+        return super.getDescricao();
+    };
+
+    /* 
+     * Sobrescrita do método equals para Coletavel
+     */
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto) {
+            return true;
+        }
+        // se o objeto passado não é do mesmo tipo, eles não são iguais
+        else if (!(objeto instanceof Coletavel)) {
+            return false;
+        } else {
+            Coletavel outro = (Coletavel) objeto; 
+            return super.getNome().equals(outro.getNome());
+        }
+    }
 }
