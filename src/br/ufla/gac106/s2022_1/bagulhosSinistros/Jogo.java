@@ -58,7 +58,7 @@ public class Jogo {
 
         analisador = new Analisador(iu);
         jogador = new Hopper();
-        missao = new Missao();
+        missao = Missao.getInstancia();
         cenarios = new Cenarios();
         arq = new ManipularArquivo();
 

@@ -27,12 +27,26 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 public class Missao {
     // as pistas a serem encontradas
     private ArrayList<Pista> pistas;
+    // instancia unica
+    private static Missao instanciaUnica;
 
     /**
      * Cria uma missão e inicializa as pistas.
      */
-    public Missao() {
+    private Missao() {
         pistas = new ArrayList<Pista>();
+    }
+
+    /**
+     * Aplicando o padrão de projeto singleton para que missao seja instanciada apenas uma vez.
+     * 
+     * @return missao do jogo.
+     */
+    public static Missao getInstancia() {
+        if (instanciaUnica == null) {
+            instanciaUnica = new Missao();
+        }
+        return instanciaUnica;
     }
 
     /**
