@@ -61,6 +61,7 @@ public class Jogo {
         missao = new Missao();
         cenarios = new Cenarios();
         arq = new ManipularArquivo();
+        
         iniciar();
     }
 

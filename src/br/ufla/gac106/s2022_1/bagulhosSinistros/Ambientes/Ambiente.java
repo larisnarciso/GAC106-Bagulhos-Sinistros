@@ -202,8 +202,8 @@ public class Ambiente extends EntidadeGrafica {
      * 
      * @param demogorgon O demogorgon a ser adicionado.
      */
-    public void adicionarDemogorgon(Demogorgon demogorgon) {
-        monstros.add(demogorgon);
+    public void adicionarMonstro(Monstro monstro) {
+        monstros.add(monstro);
     }
 
     /**
