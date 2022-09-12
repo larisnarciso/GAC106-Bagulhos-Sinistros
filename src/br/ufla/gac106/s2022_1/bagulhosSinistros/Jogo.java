@@ -7,6 +7,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Jogador;
 import br.ufla.gac106.s2022_1.baseJogo.InterfaceUsuario;
+import java.lang.Thread;
 
 /**
  * Classe Jogo
@@ -88,7 +89,7 @@ public class Jogo {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
         }
-        arq.salvarDados(jogador.getNome(), jogador.getQuantidadeMovimentos(), false);
+        arq.salvarDados(jogador.getNome(), jogador.getQuantidadeMovimentos());
         iu.exibirMensagem("Obrigado por jogar. Até mais!");
         arq.carregarResultados();
     }
@@ -130,7 +131,7 @@ public class Jogo {
         } else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
         } else if (palavraDeComando.equals("observar")) {
-            observar();
+            querSair = observar();
         } else if (palavraDeComando.equals("pegar")) {
             pegar(comando);
         } else if (palavraDeComando.equals("usar")) {
@@ -224,13 +225,28 @@ public class Jogo {
      * "Observar" foi digitado.
      * jogador observa o ambiente atual.
      */
-    private void observar() {
+    private boolean observar() {
+
+
         iu.exibirMensagem(jogador.getAmbienteAtual().getDescricaoLonga() + '\n');
 
         String itensObjeto = jogador.listarItensObjeto();
         if (itensObjeto != "") {
             iu.continuarMensagem(itensObjeto);
         }
+
+        if(jogador.getAmbienteAtual().verificaWillEstah()){
+            iu.continuarMensagem("Você venceu!!!");
+            try{
+                Thread.sleep(2000);
+            }
+            catch(Exception e){
+
+            }
+            
+            return true;
+        }
+        return false;
     }
 
     /**

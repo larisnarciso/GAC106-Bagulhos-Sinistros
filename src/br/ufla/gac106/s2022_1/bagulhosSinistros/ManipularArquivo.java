@@ -38,6 +38,7 @@ public class ManipularArquivo {
         return FormatoData.format(date);
     }
 
+
     /**
      * Salva os dados em arquivo de texto
      * 
@@ -45,9 +46,10 @@ public class ManipularArquivo {
      * @param qtdMovimentos A quantidade de movimentos.
      * @param venceu        Se jogador venceu o jogo.
      */
-    public void salvarDados(String nome, int qtdMovimentos, boolean venceu) {
+            
+    public void salvarDados(String nome, int qtdMovimentos) {
         String resultado;
-        if (venceu == true) {
+        if (qtdMovimentos < 70) {
             resultado = "Ganhou!";
         } else {
             resultado = "Perdeu";
@@ -56,7 +58,7 @@ public class ManipularArquivo {
             FileWriter arq = new FileWriter("dadosJogador.txt");
             arq.write("\nResultado: " + resultado);
             arq.write("\nNome do Jogador: " + nome);
-            arq.write("\nQuantidade de movimentos: " + qtdMovimentos);
+            arq.write("\nQuantidade de movimentos: " + (70-qtdMovimentos));
             arq.write("\nÚltimo jogo: " + getDataAtual());
             arq.close();
         } catch (Exception e) {
@@ -76,6 +78,7 @@ public class ManipularArquivo {
                 resultado += linha + "\n";
                 linha = arq.readLine();
             }
+            arq.close();
             System.out.println(resultado);
         } catch (Exception e) {
             System.out.println("Impossível carregar dados salvos anteriormente");
