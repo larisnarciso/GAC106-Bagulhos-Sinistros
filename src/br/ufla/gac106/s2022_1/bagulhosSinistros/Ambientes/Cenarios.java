@@ -4,6 +4,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 
 /**
  * Classe Cenarios
@@ -92,12 +93,12 @@ public class Cenarios {
 
     /*---------- MONSTROS ----------*/
     // cria os monstros
-    Demogorgon demogorgon;
+    Monstro demogorgon;
     
     demogorgon = new Demogorgon("um demônio associado com o submundo");
 
     // adiciona monstros no ambiente
-    florestaMI.adicionarDemogorgon(demogorgon);
+    florestaMI.adicionarMonstro(demogorgon);
 
 
     /*---------- NPCS ----------*/

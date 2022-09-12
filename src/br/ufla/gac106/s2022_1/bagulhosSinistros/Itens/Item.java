@@ -83,4 +83,9 @@ public abstract class Item extends EntidadeGrafica {
     public boolean getEhColetavel() {
         return ehColetavel;
     }
+
+    /**
+     * @return A analise do item.
+     */
+    public abstract String getAnalise();
 }

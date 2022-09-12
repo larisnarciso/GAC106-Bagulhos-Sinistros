@@ -4,7 +4,6 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Coletavel;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Pista;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.NPC;
-import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Demogorgon;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 import br.ufla.gac106.s2022_1.baseJogo.EntidadeGrafica;
 
@@ -70,10 +69,10 @@ public class Ambiente extends EntidadeGrafica {
      * 
      * @return O nome do ambiente.
      */
-     @Override
-     public String getNome() {
+    @Override
+    public String getNome() {
         return nome;
-     };
+    };
 
     /**
      * Define as saídas do ambiente.
@@ -202,8 +201,8 @@ public class Ambiente extends EntidadeGrafica {
      * 
      * @param demogorgon O demogorgon a ser adicionado.
      */
-    public void adicionarDemogorgon(Demogorgon demogorgon) {
-        monstros.add(demogorgon);
+    public void adicionarMonstro(Monstro monstro) {
+        monstros.add(monstro);
     }
 
     /**
@@ -236,20 +235,20 @@ public class Ambiente extends EntidadeGrafica {
     /**
      * Metodo onde o Monstro eh atacado e morto.
      */
-    public String atacarMonstro(String nomeMonstro){
+    public String atacarMonstro(String nomeMonstro) {
 
-        if(temMonstro()){
-            for(Monstro monstro : monstros){
-                if(monstro.getNome().equals(nomeMonstro)){
+        if (temMonstro()) {
+            for (Monstro monstro : monstros) {
+                if (monstro.getNome().equals(nomeMonstro)) {
                     monstro.defender();
                     int vidaAtual = monstro.getVida();
-                    if(vidaAtual > 0){
-                        return "Monstro Atacado \nVida Restante: " + vidaAtual; 
-                    }else{
+                    if (vidaAtual > 0) {
+                        return "Monstro Atacado \nVida Restante: " + vidaAtual;
+                    } else {
                         monstros.remove(monstro);
                         return monstro.getNome() + " foi morto";
                     }
-        
+
                 }
             }
         }
@@ -364,14 +363,14 @@ public class Ambiente extends EntidadeGrafica {
         return textoSaidas;
     }
 
-        /**
+    /**
      * Coleta a descricao da pista.
      * 
      * @return true se existe pista no item não coletavel.
      */
     public String getAnalise(String nomeItem) {
-        for (Pista item : pistas){
-            if(!item.getEhColetavel() && item.getNome().equals(nomeItem)){
+        for (Pista item : pistas) {
+            if (!item.getEhColetavel() && item.getNome().equals(nomeItem)) {
                 return item.getAnalise();
             }
         }

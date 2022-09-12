@@ -5,6 +5,7 @@
 </div>
 
 <p align=center>
+  <a href="#entregafinal" style="font-weight: 600; color: #A60D1A">Entrega Final</a> • 
   <a href="#trabalho" style="font-weight: 600; color: #A60D1A">Trabalho</a> • 
   <a href="#sobre" style="font-weight: 600; color: #A60D1A">Sobre o Jogo</a> • 
   <a href="#mapa" style="font-weight: 600; color: #A60D1A">Mapa</a> • 
@@ -14,6 +15,43 @@
   <a href="#licenca" style="font-weight: 600; color: #A60D1A">Licença</a> 
 </p>
 <br>
+
+<h1 id="entregafinal" style="font-weight: 600; color: #A60D1A">
+☑ Entrega Final
+</h1>
+
+**Nomes completos** dos integrantes do grupo que realmente fizeram o trabalho:
+
+- Ana Beatriz Rodrigues Torres
+- Ingrid de Falchi
+- Larissa Narciso Oliveira
+- Samuel Luiz Freitas Ferreira
+
+### Tabela de Requisitos
+
+|  Id |  Descrição                                              | Respostas    | 
+|-----|---------------------------------------------------------|--------------|
+| 3.1 | Número de ambientes                                     | (17) |
+| 3.2 | Número de direções                                      | (7) |
+| 3.3 | Trata itens e há itens que jogador não consegue pegar?  | (**sim**/não)    |
+| 3.4 | Tem máximo de itens que jogador não consegue carregar?  | (**sim**/não)    |
+| 3.5 | Jogador consegue usar itens?                            | (**sim**/não)    |
+| 3.6 | Jogador consegue largar itens?                          | (**sim**/não)    |
+| 3.7 | Jogo tem personagens (além do jogador)?                 | (**sim**/não)    |
+| 3.8 | As duas funcionalidades adicionais implementadas foram: | (Limite de tempo: 70 movimentos) (Ambientes com mais saídas bloqueadas: 3 saídas (Sala Delegacia - Laboratório - Mundo Invertido))  |
+| 3.9 | As duas palavras de comando adicionais são:             | (**Analisar** pistas nos ambientes)(**Atacar Inimigo**))  |
+| 3.10| Os três passos (resumidos) de missão são:               | (A missão é uma investigação para encontrar o Will, deverá ser encontrado 3 pistas, sendo elas: **1- o desenho que está na escola, 2- a bicicleta que esta na floresta, e o 3- pisca-pisca que está na casa dos Byers.** Após realizar a analise de todas as pistas, o jogador ganhará a laterna que irá liberar o acesso ao Mundo Invertido, no castelo Byers do Mundo Invertido ele irá encontrar o Will.)  |
+| 3.11| Jogo funciona no terminal e na interface gráfica        | (**sim**/não)    |
+| 4.1 | Atende passos obrigatórios do Exercício World of Zuul   | (**sim**/não)    |
+| 4.5 | Só há interação com usuário nas classes Terminal e Tela | (**sim**/não)    |
+| 4.7 | Código usa polimorfismo de método                       | (sim/**não** (apenas em coisas simples, como mudar Descrição))    |
+| 4.8 | A alteração de funcionalidade na interface gráfica foi: | (texto de resposta)    |
+| 4.9 | Jogo usa arquivos para:                                 | (Exibir resultado, nome, quantidade de movimentos e data do jogo)    |
+| 4.10| Código possui tratamento de exceção                     | (**sim**/não)    |
+| 4.11| Padrão de projeto implementado:                         | (Singleton em Missão)    |
+| 4.12| Diagrama de classes UML atualizado está na pasta doc?   | (**sim**/não)    |
+
+
 
 <h1 id="trabalho" style="font-weight: 600; color: #A60D1A">
 📚 Trabalho
@@ -35,11 +73,14 @@ Mais detalhes em <a href="#sobre">Sobre o Jogo</a> e <a href="#jogabilidade">Jog
 
 Para a construção do trabalho foram utilizados os conceitos estudados de Orientação a Objetos:
 - Relacionamentos de composição, agregação e associação: entre as classes Ambiente, Item e Personagem.
-- Herança: Coletavel e Pista herdam de Item e Principal, NPC e Demogorgom herdam de Personagem.
+- Herança: Coletavel e Pista herdam de Item e Principal, NPC e Monstro herdam de Personagem.
 - Polimorfismo:
   - Variável Polimórfica: itens na classe Ambiente que recebem tanto Item Coletavel quanto Item Pista.
   - Polimorfismo de Método: sobrescrição do método getDescricao() da classe Item pela classe Pista, adicionando uma informação que é um item especial. 
-- Salvamento/carregamento de dados: será em um arquivo de texto, armazenando dados como, se ele venceu ou não, quantidade de movimentos, itens coletados e ambientes explorados.
+- Salvamento/carregamento de dados: será em um arquivo de texto, armazenando os dados: 
+  - Se ele ganhou ou perdeu;
+  - Quantidade de movimentos; 
+  - Data que jogou.
 
 <h1 id="sobre" style="font-weight: 600; color: #A60D1A" > 🕹️ Sobre o Jogo </h1>
 
@@ -55,9 +96,9 @@ Encontrar Will Byers no Mundo Invertido.
 
 Jim Hopper.
 
-### Personagem Secundários:
+### Personagem Secundários (NPC):
 
-Joyce Byers, Will Byers, Eleven, Crianças (Mike, Lucas, Dustin), Adolescentes (Nancy, Jonathan, Steve).
+Joyce Byers, Will Byers, Eleven, Dustin , Nancy.
 
 ### Missão:
 
@@ -67,15 +108,15 @@ Na investigação, deverá ser analisado alguns itens para descobrir onde está 
 2. A bicicleta irá mostrar que o Will estava perto do Laboratório
 3. O pisca-pisca na casa da Joyce irá indicar que ele está no Mundo Invertido
 
-Com a análise dessas 3 pistas, será liberado a passagem para o mundo invertido.
+Com a análise dessas 3 pistas, o jogador ganhará um item adicional (Lanterna), que irá liberar o acesso ao Mundo Invertido.
 
-Será necessário alguns itens essenciais no Mundo Invertido:
+Alguns itens que ajudará no Mundo Invertido:
 
 1. Arma
 2. Balas
 3. Lanterna
 
-No Mundo invertido, o jogador irá encontrar o Demogorgon, ao derrota-lo utilizando o revolver, a passagem para o Castelo Byers será liberada, e lá irá encontar o Will.
+No Mundo invertido, o jogador irá encontrar o Demogorgon, ele poderá derrota-lo, andando para frente ele irá chegar ao Castelo Byers do Mundo Invertido, e lá irá encontar o Will.
 
 ### Game Over:
 
@@ -87,7 +128,7 @@ Coldre do Jim Hopper.
 
 ### Limite do armazenamento:
 
-3 tipos de itens.
+3 tipos de itens. (Extra: Lanterna)
 
 ### Gênero:
 
@@ -179,8 +220,8 @@ RPG Investigação Sobrenatural.
   </tr>
    <tr>
     <td>Porão</td>
-    <td>Lanterna</td>
-    <td>Pegar lanterna</td>
+    <td>-</td>
+    <td>-</td>
     <td>Eleven</td>
     <td>Escada: Casa Mike</td>
   </tr>
@@ -321,8 +362,8 @@ RPG Investigação Sobrenatural.
 ### Funcionalidades:
 
 - Limite de tempo ao jogo.
-- Inimigos e forma de derrota-lo.
 - Ambientes com mais saídas bloqueadas.
+- Extra: Inimigos e forma de derrota-lo.
 
 ### Palavras de Comando:
 
