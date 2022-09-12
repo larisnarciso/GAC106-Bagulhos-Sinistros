@@ -87,7 +87,7 @@ public class Jogo {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
         }
-        arq.salvarDados(jogador.getNome(), jogador.getQuantidadeMovimentos(), false);
+        arq.salvarDados(jogador.getNome(), jogador.getQuantidadeMovimentos());
         iu.exibirMensagem("Obrigado por jogar. Até mais!");
         arq.carregarResultados();
     }
