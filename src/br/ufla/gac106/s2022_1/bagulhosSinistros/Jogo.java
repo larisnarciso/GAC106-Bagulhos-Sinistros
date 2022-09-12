@@ -5,6 +5,7 @@ import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Cenarios;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Hopper;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Jogadores.Jogador;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 import br.ufla.gac106.s2022_1.baseJogo.InterfaceUsuario;
 
 /**
@@ -399,7 +400,8 @@ public class Jogo {
 
         // tenta encontrar o monstro
         String nomeMonstro = comando.getSegundaPalavra();
-        iu.continuarMensagem(jogador.getAmbienteAtual().atacarMonstro(nomeMonstro));
+        Monstro monstro = jogador.getAmbienteAtual().getMonstro(nomeMonstro);
+        iu.continuarMensagem(jogador.atacarMonstro(monstro));
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Ambientes.Ambiente;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Itens.Item;
 import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Personagem;
+import br.ufla.gac106.s2022_1.bagulhosSinistros.Personagens.Monstros.Monstro;
 
 /**
  * Classe Jogador (Herda de Personagem)
@@ -179,5 +180,19 @@ public class Jogador extends Personagem {
     }
 
     return null;
+  }
+
+      /**
+     * Metodo onde o Monstro eh atacado e morto.
+     */
+    public String atacarMonstro(Monstro monstro){
+
+      monstro.defender();
+      int vidaAtual = monstro.getVida();
+      if(vidaAtual > 0){
+          return "Monstro Atacado \nVida Restante: " + vidaAtual; 
+      }else{
+          return monstro.getNome() + " foi morto";
+      }
   }
 }

@@ -200,29 +200,6 @@ public class Ambiente {
     }
 
     /**
-     * Metodo onde o Monstro eh atacado e morto.
-     */
-    public String atacarMonstro(String nomeMonstro){
-
-        if(temMonstro()){
-            for(Monstro monstro : monstros){
-                if(monstro.getNome().equals(nomeMonstro)){
-                    monstro.defender();
-                    int vidaAtual = monstro.getVida();
-                    if(vidaAtual > 0){
-                        return "Monstro Atacado \nVida Restante: " + vidaAtual; 
-                    }else{
-                        monstros.remove(monstro);
-                        return monstro.getNome() + " foi morto";
-                    }
-        
-                }
-            }
-        }
-        return "Monstro nao encontrado";
-    }
-
-    /**
      * Adiciona um NPC no ambiente.
      * 
      * @param demogorgon O demogorgon a ser adicionado.
@@ -330,6 +307,19 @@ public class Ambiente {
         for (Item item:itens){
             if(!item.getEhColetavel() && item.getNome().equals(nomeItem)){
                 return ((Pista)item).getPistaDescricao();
+            }
+        }
+        return null;
+    }
+
+    public Monstro getMonstro (String nomeMonstro){
+        if(temMonstro()){
+            for(Monstro monstro : monstros){
+                if(monstro.getNome().equals(nomeMonstro)){
+
+                    return monstro;
+    
+                }
             }
         }
         return null;
