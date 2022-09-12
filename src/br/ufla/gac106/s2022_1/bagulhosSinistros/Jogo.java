@@ -58,10 +58,10 @@ public class Jogo {
 
         analisador = new Analisador(iu);
         jogador = new Hopper();
-        missao = new Missao();
+        missao = Missao.getInstancia();
         cenarios = new Cenarios();
         arq = new ManipularArquivo();
-        
+
         iniciar();
     }
 
@@ -139,9 +139,9 @@ public class Jogo {
             largar(comando);
         } else if (palavraDeComando.equals("conversar")) {
             conversar(comando);
-        }else if (palavraDeComando.equals("analisar")){
+        } else if (palavraDeComando.equals("analisar")) {
             analisar(comando);
-        }else if (palavraDeComando.equals("atacar")){
+        } else if (palavraDeComando.equals("atacar")) {
             atacar(comando);
         }
 
@@ -253,7 +253,7 @@ public class Jogo {
 
         // ambiente tenta encontrar o item
         if (encontrouItem != null) {
-           Coletavel itemEncontrado = jogador.getAmbienteAtual().coletarItem(item);
+            Coletavel itemEncontrado = jogador.getAmbienteAtual().coletarItem(item);
 
             // jogador tenta coletar o item se encontrado
             if (itemEncontrado != null) {
@@ -371,7 +371,6 @@ public class Jogo {
      * 
      * @param comando O comando digitado.
      */
-
     private void analisar(Comando comando) {
         // se não há segunda palavra, não sabemos o que analisar...
         if (!comando.temSegundaPalavra()) {
@@ -382,13 +381,12 @@ public class Jogo {
         // tenta encontrar o item
         String item = comando.getSegundaPalavra();
         Pista encontrouItem = jogador.getAmbienteAtual().procurarPista(item);
-        
-        
+
         // tenta analisar o item se encontrado
         if (encontrouItem != null) {
             String pistaDesc = encontrouItem.getAnalise();
             iu.continuarMensagem(pistaDesc);
-            
+
             missao.addPista(encontrouItem);
             verificarMissao();
         } else {
@@ -396,14 +394,21 @@ public class Jogo {
         }
     }
 
+    /**
+     * Verifica se completou a missão do jogo, se encontrou todas as pistas recebe
+     * uma dica e ganha uma lanterna, aumentando numero limite de tipos de itens.
+     */
     private void verificarMissao() {
         iu.continuarMensagem(missao.verificarPistas());
 
-        // se completou a missão ele recebe o item lanterna para passar pelo mundo invertido
-        if(missao.completouMissao()) {
+        // se completou a missão ele recebe o item lanterna para passar pelo mundo
+        // invertido
+        if (missao.completouMissao()) {
+            // cria o item a ser adicionado
+            Coletavel lanterna = new Coletavel("lanterna", "lanterna tática potente", "img/itens/lanterna.png",
+                    "ilumina o Mundo Invertido");
 
-            Coletavel lanterna = new Coletavel("lanterna", "lanterna tática potente", "img/itens/lanterna.png", "ilumina o Mundo Invertido");
-    
+            // aumenta o maximo de tipos e adiciona
             jogador.aumentarMaximoTipoItens();
             jogador.adicionarItem(lanterna);
 
@@ -418,7 +423,6 @@ public class Jogo {
      * 
      * @param comando O comando digitado.
      */
-
     private void atacar(Comando comando) {
         // se não há segunda palavra, não sabemos o que atacar...
         if (!comando.temSegundaPalavra()) {
