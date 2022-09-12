@@ -40,7 +40,7 @@
 | 3.7 | Jogo tem personagens (além do jogador)?                 | (**sim**/não)    |
 | 3.8 | As duas funcionalidades adicionais implementadas foram: | (Limite de tempo: 70 movimentos) (Ambientes com mais saídas bloqueadas: 3 saídas (Sala Delegacia - Laboratório - Mundo Invertido))  |
 | 3.9 | As duas palavras de comando adicionais são:             | (**Analisar** pistas nos ambientes)(**Atacar Inimigo**))  |
-| 3.10| Os três passos (resumidos) de missão são:               | (A missão é uma investigação para encontrar o Will, deverá ser encontrado 3 pistas, sendo elas: **1- o desenho que está na escola, 2- a bicicleta que esta na floresta, e o 3- pisca-pisca que está na casa dos Byers.** Após realizar a analise de todas as pistas, o jogador ganhará a laterna que irá liberar o acesso ao Mundo Invertido, no castelo Byers do Mundo Invertido ele irá encontrar o Will.)  |
+| 3.10| Os três passos (resumidos) de missão são:               | (A missão é uma investigação para encontrar o Will, deverá ser encontrado 3 pistas, sendo elas: **1- o desenho que está na escola, 2- a bicicleta que esta na floresta, e o 3- pisca-pisca que está na casa dos Byers.** Após realizar a analise de todas as pistas, o jogador ganhará a laterna, onde ao usar ela na sala do Laboratorio, irá liberar o acesso ao Mundo Invertido, no castelo Byers do Mundo Invertido ele irá encontrar o Will.)  |
 | 3.11| Jogo funciona no terminal e na interface gráfica        | (**sim**/não)    |
 | 4.1 | Atende passos obrigatórios do Exercício World of Zuul   | (**sim**/não)    |
 | 4.5 | Só há interação com usuário nas classes Terminal e Tela | (**sim**/não)    |
@@ -296,7 +296,7 @@ RPG Investigação Sobrenatural.
   <tr>
     <td>Sala</td>
     <td>-</td>
-    <td>-</td>
+    <td>Usar lanterna</td>
     <td>-</td>
     <td>
       Escada: Laboratório <br>
@@ -306,7 +306,7 @@ RPG Investigação Sobrenatural.
   <tr>
     <td>Laboratório - Mundo Invertido</td>
     <td>-</td>
-    <td>Usar lanterna</td>
+    <td></td>
     <td>-</td>
     <td>
       Portal: Sala <br> 
@@ -316,7 +316,7 @@ RPG Investigação Sobrenatural.
   <tr>
     <td>Floresta Sombria - Mundo Invertido</td>
     <td>-</td>
-    <td>Usar lanterna</td>
+    <td></td>
     <td>Demogorgon</td>
     <td>
       Trás: Laboratório - Mundo Invertido  <br> 
@@ -326,7 +326,7 @@ RPG Investigação Sobrenatural.
   <tr>
     <td>Castelo Byers - Mundo Invertido</td>
     <td>-</td>
-    <td>Usar lanterna</td>
+    <td></td>
     <td>Will Byers</td>
     <td>Trás: Laboratório - Mundo Invertido</td>
   </tr>
